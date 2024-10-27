@@ -16,6 +16,7 @@ public class Appointment
         this.doctorName = doctorName;
         this.date = date;
         this.time = time;
+        this.consultationStatus = Status.PENDING;
     }
     
     public int getPatientId()
@@ -43,7 +44,7 @@ public class Appointment
         return time;
     }
 
-     public Status getStatus()
+    public Status getStatus()
     {
         return consultationStatus;
     }
