@@ -1,15 +1,10 @@
 public class Patient {
     private int id;
     private String name;
-    private String[] pastDiagnoses;
-    private String[] pastTreatments;
 
-
-    public Patient(int id, String name, String[] pastDiagnoses, String[] pastTreatments) {
+    public Patient(int id, String name) {
         this.id = id;
         this.name = name;
-        this.pastDiagnoses = pastDiagnoses;
-        this.pastTreatments = pastTreatments;
     }
 
     public int getId() {

@@ -5,12 +5,13 @@ public class Staff {
     private int age;
     private int staffId;
 
-    public Staff(String name, String role, String gender, int age, int staffId) {
+    static int staffCount = 0;
+    public Staff(String name, String role, String gender, int age) {
         this.name = name;
         this.role = role;
         this.gender = gender;
         this.age = age;
-        this.staffId = staffId;
+        this.staffId = ++staffCount;
     }
 
     public String getName() {

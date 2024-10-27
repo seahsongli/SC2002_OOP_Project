@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 public class MedicalRecord
 {
     private int patientId;
@@ -7,13 +9,14 @@ public class MedicalRecord
     private String bloodType;
     private String contactNumber;
     private String email;
-    private String[] pastDiagnoses;
-    private String[] pastTreatments;
-    private String[] currentDiagonoses;
-    private String[] currentTreatments;
-    private String[] prescriptions;
-    
-    public MedicalRecord(int patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email, String[] pastDiagnoses, String[] pastTreatments, String[] currentDiagonoses, String[] currentTreatments, String[] prescriptions)
+    private List<String> pastDiagnosis;
+    private List<String> pastTreatments;
+    private List<String> currentDiagnosis;
+    private List<String> currentTreatments;
+    private List<String> prescriptions;
+
+
+    public MedicalRecord(int patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions)
     {
         this.patientId = patientId;
         this.patientName = patientName;
@@ -22,11 +25,18 @@ public class MedicalRecord
         this.bloodType = bloodType;
         this.contactNumber = contactNumber;
         this.email = email;
-        this.pastDiagnoses = pastDiagnoses;
+        this.pastDiagnosis = pastDiagnosis;
         this.pastTreatments = pastTreatments;
-        this.currentDiagonoses = currentDiagonoses;
+        this.currentDiagnosis = currentDiagnosis;
         this.currentTreatments = currentTreatments;
         this.prescriptions = prescriptions;
+    }
+
+
+    // Overload the MedicalRecord constructor to allow for creation of a MedicalRecord object without any past diagnoses, past treatments, current diagnoses, current treatments, or prescriptions.
+    // This is useful when creating a new MedicalRecord object for a new patient, especially when the new patient has no medical history.
+    public MedicalRecord(int patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email) {
+        this(patientId, patientName, dateOfBirth, gender, bloodType, contactNumber, email, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     public int getPatientId()
@@ -60,28 +70,42 @@ public class MedicalRecord
     }
     
     // The following protected methods are used for doctor class to update the medical record
-    protected void setPastDiagnoses(String[] pastDiagnoses)
+    protected void setPastDiagnoses(List<String> pastDiagnosis)
     {
-        this.pastDiagnoses = pastDiagnoses;
+        this.pastDiagnosis = pastDiagnosis;
     }
     
-    protected void setPastTreatments(String[] pastTreatments)
+    protected void setPastTreatments(List<String> pastTreatments)
     {
         this.pastTreatments = pastTreatments;
     }
     
-    protected String[] getPastDiagnoses()
+    protected void addCurrentTreatment(String treatment)
     {
-        return pastDiagnoses;
+        this.currentTreatments.add(treatment);
+    }
+
+    protected void addCurrentDiagnosis(String diagnosis)
+    {
+        this.currentDiagnosis.add(diagnosis);
+    }
+
+    protected void addPrescription(String prescription)
+    {
+        this.prescriptions.add(prescription);
     }
     
-    protected String[] getPastTreatments()
+    protected List<String> getPastDiagnoses()
+    {
+        return pastDiagnosis;
+    }
+    
+    protected List<String>  getPastTreatments()
     {
         return pastTreatments;
     }
 
-    public void viewMedicalRecord()
-    {
+    public void viewMedicalRecord() {
         System.out.println("Patient ID: " + patientId);
         System.out.println("Patient Name: " + patientName);
         System.out.println("Patient Date of Birth: " + dateOfBirth);
@@ -90,14 +114,12 @@ public class MedicalRecord
         System.out.println("Email: " + email);
         System.out.println("Blood Type: " + bloodType);
         System.out.println("Past Diagnoses: ");
-        for (int i = 0; i < pastDiagnoses.length; i++)
-        {
-            System.out.println(pastDiagnoses[i]);
+        for (int i = 0; i < pastDiagnosis.size(); i++) {
+            System.out.println(pastDiagnosis.get(i));
         }
         System.out.println("Past Treatments: ");
-        for (int i = 0; i < pastTreatments.length; i++)
-        {
-            System.out.println(pastTreatments[i]);
+        for (int i = 0; i < pastTreatments.size(); i++) {
+            System.out.println(pastTreatments.get(i));
         }
     }
 }

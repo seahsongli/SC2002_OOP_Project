@@ -9,9 +9,9 @@ public class PatientMenu
         this.appointmentManagement = appointmentManagement;
     }
 
-    public void updateContactNumber(int patientId, String patientName, String phoneNumber)
+    public void updateContactNumber(int patientId, String patientName, String contactNumber)
     {
-        medicalRecordManagement.updateContactNumber(patientId, patientName, phoneNumber);
+        medicalRecordManagement.updateContactNumber(patientId, patientName, contactNumber);
     }
 
     public void updateEmail(int patientId, String patientName, String email)
@@ -23,6 +23,8 @@ public class PatientMenu
     {
         medicalRecordManagement.viewPersonalMedicalRecord(patientId, patientName);
     }
+
+    //Implement viewAvailableAppointmentSlots method here.
 
     public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time)
     {
@@ -48,6 +50,5 @@ public class PatientMenu
     {
         appointmentManagement.displayPastAppointmentRecords(patientId, patientName);
     }
-
 
 }
