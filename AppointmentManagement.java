@@ -1,9 +1,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 public class AppointmentManagement
 {
@@ -190,7 +190,7 @@ public class AppointmentManagement
     }
 
     // Accept an appointment
-    protected void acceptAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    protected void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time)
     {
         for (Appointment appointment : appointments)
         {

@@ -39,7 +39,7 @@ public class DoctorMenu
     // Consider adding doctorId to extract personal schedule too.
     public void viewPersonalSchedule(String doctorName)
     {
-        appointmentManagement.getPersonalSchedule(doctorName);
+        appointmentManagement.viewPersonalSchedule(doctorName);
     }
 
     public void setAvailability(int doctorId, String doctorName, String date, String time)
@@ -52,9 +52,9 @@ public class DoctorMenu
         appointmentManagement.cancelAvailability(doctorId, doctorName, date, time);
     }
 
-    public void acceptAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    public void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time)
     {
-        appointmentManagement.acceptAppointment(patientId, patientName, doctorName, date, time);
+        appointmentManagement.acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
     }
 
     public void rejectAppointment(int patientId, String patientName, String doctorName, String date, String time)
