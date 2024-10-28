@@ -50,6 +50,22 @@ public class AppointmentManagement
         }
     }
 
+    public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
+    {
+        for(AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecords)
+        {
+            if (appointmentOutcomeRecord.getAppointment().getPatientId() == patientId && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
+            {
+                System.out.println("Doctor: " + appointmentOutcomeRecord.getAppointment().getDoctorName());
+                System.out.println("Date: " + appointmentOutcomeRecord.getAppointment().getDate());
+                System.out.println("Time: " + appointmentOutcomeRecord.getAppointment().getTime());
+                System.out.println("Type of Service: " + appointmentOutcomeRecord.getTypeOfService());
+                System.out.println("Medications Prescribed: " + appointmentOutcomeRecord.getMedicationsPrescribed());
+                System.out.println("Prescription Status: " + appointmentOutcomeRecord.getPrescriptionStatus());
+                System.out.println("Consultation Notes: " + appointmentOutcomeRecord.getConsultationNotes());
+            }
+        }
+    }
     // Implement updateTypeOfService() method to update the type of service for a specific appointment
     protected void updateTypeOfService(int patientId, String patientName, int doctorId, String doctorName, String date, String time, String typeOfService)
     {
