@@ -36,9 +36,10 @@ public class DoctorMenu
         medicalRecordManagement.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
     }
 
+    // Consider adding doctorId to extract personal schedule too.
     public void viewPersonalSchedule(String doctorName)
     {
-        appointmentManagement.getPersonalSchedule(doctorName);
+        appointmentManagement.viewPersonalSchedule(doctorName);
     }
 
     public void setAvailability(int doctorId, String doctorName, String date, String time)
@@ -83,7 +84,7 @@ public class DoctorMenu
 
     public void addNewDiagnosis(int patientId, String patientName, String diagnosis)
     {
-        medicalRecordManagement.addNewMedicalDiganosis(patientId, patientName, diagnosis);
+        medicalRecordManagement.addNewMedicalDiagnosis(patientId, patientName, diagnosis);
     }
 
     // Consider whether other doctors should be able to addNewPrescription on behalf of another doctor.

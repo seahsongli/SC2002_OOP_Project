@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +15,13 @@ public class AppointmentManagement
     {
         appointments = new ArrayList<>();
         appointmentOutcomeRecords = new ArrayList<>();
+        doctorAvailability = new HashMap<>();
     }
 
     // For doctor protected methods:
-    // Implement getPersonalSchedule() method to return all appointments that are scheduled but not yet completed
-    protected void getPersonalSchedule(String doctorName)
+    // Implement viewPersonalSchedule() method to return all appointments that are scheduled but not yet completed
+    // Perhaps include sorting by date and time
+    protected void viewPersonalSchedule(String doctorName)
     {
         for (Appointment appointment : appointments)
         {
@@ -32,6 +35,7 @@ public class AppointmentManagement
     }
 
     // Implement viewUpcomingAppointments() method to view all upcoming appointments for the next 7 days for a specific doctor
+    // Perhaps include sorting by date and time
     protected void viewUpcomingAppointments(int doctorId, String doctorName)
     {
         LocalDate today = LocalDate.now();
