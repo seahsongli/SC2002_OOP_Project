@@ -29,12 +29,12 @@ public class PharmacistMenu
 
     public void viewInventory()
     {
-        inventoryManagement.viewCurrentStockLevels();
+        inventoryManagement.displayInventory();
     }
 
-    public void updateInventory(String medicationName, int quantity)
+    public void updateStockLevel(String medicationName, int quantity)
     {
-        inventoryManagement.updateInventory(medicationName, quantity);
+        inventoryManagement.updateStockLevel(medicationName, quantity);
     }
 
     public void submitReplenishmentRequest(String medicationName, int quantity)

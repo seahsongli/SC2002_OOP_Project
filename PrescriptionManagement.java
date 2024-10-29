@@ -1,9 +1,9 @@
 public class PrescriptionManagement
 {
     private AppointmentManagement appointmentManagement;
+    // Consider using doctorId on top of doctorName to ensure that the correct doctor is selected
     public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
     {
-        // Logic to find the correct appointment and display the prescription
         appointmentManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
         // System.out.println("Prescription for patient " + patientName + " with ID " + patientId + " is: ");
         
