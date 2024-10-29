@@ -6,14 +6,9 @@ public class InventoryManagement
     private List<Request> replenishmentRequest;
 
     // Constructor with parameter
-    public InventoryManagement(int lowStockAlertLevel) {
+    public InventoryManagement() {
         this.currentStockLevels = new ArrayList<>();
         this.replenishmentRequest = new ArrayList<>();
-    }
-
-    // Constructor with default value = 5
-    public InventoryManagement() {
-        this(5); 
     }
 
     public void displayInventory()

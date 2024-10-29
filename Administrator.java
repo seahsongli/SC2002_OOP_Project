@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Adminstrator extends Staff{
+public class Administrator extends Staff{
     Scanner sc = new Scanner(System.in);
 
     private List<Staff> staffList;
-    private AdminstratorMenu adminstratorMenu;
+    private AdministratorMenu adminstratorMenu;
     
-    public Adminstrator()
+    public Administrator()
     {
         super("", "", "", 0); 
         super.updateRole("Adminstrator");
