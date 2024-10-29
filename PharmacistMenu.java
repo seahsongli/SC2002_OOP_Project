@@ -3,6 +3,12 @@ public class PharmacistMenu
     PrescriptionManagement prescriptionManagement;
     InventoryManagement inventoryManagement;
 
+    public PharmacistMenu(PrescriptionManagement prescriptionManagement, InventoryManagement inventoryManagement)
+    {
+        this.prescriptionManagement = prescriptionManagement;
+        this.inventoryManagement = inventoryManagement;
+    }
+    
     public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
     {
         prescriptionManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
