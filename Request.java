@@ -1,10 +1,17 @@
 import java.util.List;
 public class Request
 {
+    static int totalRequests = 0;
+    private int requestId = totalRequests++;
     private List<Medicine> medicine;
     private int replenishQuantity;
     private Status status;
 
+    public int getRequestId()
+    {
+        return requestId;
+    }
+    
     public Status getStatus()
     {
         return status;

@@ -4,13 +4,11 @@ public class InventoryManagement
 {
     private List<Medicine> currentStockLevels;
     private List<Request> replenishmentRequest;
-    private int lowStockAlertLevel;
 
     // Constructor with parameter
     public InventoryManagement(int lowStockAlertLevel) {
         this.currentStockLevels = new ArrayList<>();
         this.replenishmentRequest = new ArrayList<>();
-        this.lowStockAlertLevel = lowStockAlertLevel;
     }
 
     // Constructor with default value = 5
@@ -18,7 +16,7 @@ public class InventoryManagement
         this(5); 
     }
 
-    public void viewCurrentStockLevels()
+    public void displayInventory()
     {
         for (Medicine medicine : currentStockLevels)
         {
@@ -30,6 +28,17 @@ public class InventoryManagement
     {
         Medicine newMedicine = new Medicine(name, quantity);
         currentStockLevels.add(newMedicine);
+    }
+
+    public void removeStock(String name, int quantity)
+    {
+        for (Medicine medicine : currentStockLevels)
+        {
+            if (medicine.getName().equals(name))
+            {
+                medicine.setQuantity(medicine.getQuantity() - quantity);
+            }
+        }
     }
 
     public void requestReplenishment(String name, int quantity)
@@ -47,7 +56,7 @@ public class InventoryManagement
         replenishmentRequest.add(newRequest);
     }
 
-    public void updateInventory(String medicationName, int quantity)
+    public void updateStockLevel(String medicationName, int quantity)
     {
         for (Medicine medicine : currentStockLevels)
         {
@@ -67,22 +76,49 @@ public class InventoryManagement
     {
         for (Medicine medicine : currentStockLevels)
         {
-            if (medicine.getQuantity() < lowStockAlertLevel)
+            if (medicine.getQuantity() < medicine.getLowStockAlertLevel())
             {
                 System.out.println("Medicine: " + medicine.getName() + " Quantity: " + medicine.getQuantity());
             }
         }
     }
 
-    public int getLowStockAlertLevel()
+    public int getLowStockAlertLevel(String medicationName)
     {
-        return lowStockAlertLevel;
+        for (Medicine medicine : currentStockLevels)
+        {
+            if (medicine.getName().equals(medicationName))
+            {
+                return medicine.getLowStockAlertLevel();
+            }
+        }
+        return -1;
     }
 
-    public void setLowStockAlertLevel(int lowStockAlertLevel)
+    public void setLowStockAlertLevel(String medicationName, int lowStockAlertLevel)
     {
-        this.lowStockAlertLevel = lowStockAlertLevel;
+        for (Medicine medicine : currentStockLevels)
+        {
+            if (medicine.getName().equals(medicationName))
+            {
+                medicine.setLowStockAlertLevel(lowStockAlertLevel);
+            }
+        }
     }
 
+    public void approveReplenishmentRequest(int requestId)
+    {
+        for (Request request : replenishmentRequest)
+        {
+            if (request.getRequestId() == requestId && request.getStatus() == Status.PENDING)
+            {
+                request.setStatus(Status.COMPLETED);
+                for (Medicine medicine : request.getMedicine())
+                {
+                    medicine.setQuantity(medicine.getQuantity() + request.getReplenishQuantity());
+                }
+            }
+        }
+    }
   
 }

@@ -267,4 +267,19 @@ public class AppointmentManagement
             }
         }
     }
+
+    public void adminViewScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
+    {
+        for (Appointment appointment : appointments)
+        {
+            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
+            {
+                System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Doctor ID: " + doctorId);
+                System.out.println("Date: " + appointment.getDate());
+                System.out.println("Time: " + appointment.getTime());
+                System.out.println("Status: " + appointment.getStatus());
+            }
+        }
+    }
 }
