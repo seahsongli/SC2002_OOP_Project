@@ -78,15 +78,15 @@ public class Main {
                 break;
             case "Doctor":
                 DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement);
-                // doctorMenu.displayMenu();
+                doctorMenu.displayMenu();
                 break;
             case "Pharmacist":
                 PharmacistMenu pharmacistMenu = new PharmacistMenu(prescriptionManagement, inventoryManagement);
-                // pharmacistMenu.displayMenu();
+                pharmacistMenu.displayMenu();
                 break;
             case "Patient":
                 PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement);
-                // patientMenu.displayMenu();
+                patientMenu.displayMenu();
                 break;
             default:
                 System.out.println("Invalid role. Access denied.");

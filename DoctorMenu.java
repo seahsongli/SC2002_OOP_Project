@@ -1,7 +1,9 @@
+import java.util.Scanner;
 public class DoctorMenu 
 {
     private MedicalRecordManagement medicalRecordManagement;
     private AppointmentManagement appointmentManagement;
+    private Scanner sc = new Scanner(System.in);
 
     public DoctorMenu(MedicalRecordManagement medicalRecordManagement, AppointmentManagement appointmentManagement)
     {
@@ -23,6 +25,109 @@ public class DoctorMenu
     // {
     //     medicalRecordManagement.viewPersonalMedicalRecord(doctorId, doctorName);
     // }
+
+    public void displayMenu() {
+        while (true) {
+            System.out.println("Doctor Menu:");
+            System.out.println("1. View Upcoming Appointments");
+            System.out.println("2. Add New Diagnosis");
+            System.out.println("3. Add New Prescription");
+            System.out.println("4. Edit Service");
+            System.out.println("5. Edit Prescription");
+            System.out.println("6. Edit Consultation Notes");
+            System.out.println("7. Logout");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            int patientId;
+            String patientName;
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter doctor ID: ");
+                    int doctorId = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    String doctorName = sc.nextLine();
+                    viewUpcomingAppointments(doctorId, doctorName);
+                    break;
+                case 2:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter diagnosis: ");
+                    String diagnosis = sc.nextLine();
+                    addNewDiagnosis(patientId, patientName, diagnosis);
+                    break;
+                case 3:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter prescription: ");
+                    String prescription = sc.nextLine();
+                    addNewPrescription(patientId, patientName, doctorName, prescription);
+                    break;
+                case 4:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter date (yyyy-mm-dd): ");
+                    String date = sc.nextLine();
+                    System.out.println("Enter time (HH:mm): ");
+                    String time = sc.nextLine();
+                    System.out.println("Enter service: ");
+                    String service = sc.nextLine();
+                    editService(patientId, doctorName, date, time, service);
+                    break;
+                case 5:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter date (yyyy-mm-dd): ");
+                    date = sc.nextLine();
+                    System.out.println("Enter time (HH:mm): ");
+                    time = sc.nextLine();
+                    System.out.println("Enter prescription: ");
+                    prescription = sc.nextLine();
+                    System.out.println("Enter prescription status: ");
+                    String status = sc.nextLine();
+                    editPrescription(patientId, patientName, doctorName, date, time, prescription, Status.valueOf(status.toUpperCase()));
+                    break;
+                case 6:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter date (yyyy-mm-dd): ");
+                    date = sc.nextLine();
+                    System.out.println("Enter time (HH:mm): ");
+                    time = sc.nextLine();
+                    System.out.println("Enter consultation notes: ");
+                    String consultationNotes = sc.nextLine();
+                    editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
+                    break;
+                case 7:
+                    System.out.println("Logging out...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
 
     public void viewPatientMedicalRecord(int patientId, String patientName)
     {
