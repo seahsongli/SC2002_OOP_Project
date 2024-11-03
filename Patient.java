@@ -1,14 +1,32 @@
-public class Patient {
-    private int id;
-    private String name;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Patient(int id, String name) {
-        this.id = id;
+public class Patient extends User {
+    private int patientId;
+    private String name;
+    private LocalDate dob; // Date of Birth
+    private String gender;
+    private String bloodGroup;
+    private String email;
+
+    // Define a DateTimeFormatter for yyyy-MM-dd format
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+
+    public Patient(String hospitalID, String password, int patientId, String name,  String dob, String gender, String bloodGroup, String email) {
+        super(hospitalID, password, "Patient");
+        this.patientId = patientId;
         this.name = name;
+        setDob(dob);
+        this.gender = gender;
+        this.bloodGroup = bloodGroup;
+        this.email = email;
     }
 
     public int getId() {
-        return id;
+        return patientId;
     }
 
     public String getName() {
@@ -23,6 +41,13 @@ public class Patient {
     public void setEmail(PatientMenu patientMenu, String email)
     {
         patientMenu.updateEmail(getId(), getName(), email);
+    }
+    public void setDob(String dobStr) {
+        try {
+            this.dob = LocalDate.parse(dobStr, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid DOB format. Please use yyyy-MM-dd.");
+        }
     }
     
     public void viewPersonalMedicalRecord(PatientMenu patientMenu) {

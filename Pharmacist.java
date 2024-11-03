@@ -5,7 +5,7 @@ class Pharmacist extends Staff
     Scanner sc = new Scanner(System.in);
     public Pharmacist()
     {
-        super("", "", "", 0); // super() has to be at the first statement of constructor.
+        super("", "", 0, "", "", "", 0); // super() has to be at the first statement of constructor.
         super.updateRole("Pharmacist");
 
         System.out.println("Enter pharmacist name: ");
