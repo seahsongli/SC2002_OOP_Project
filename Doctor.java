@@ -5,7 +5,7 @@ public class Doctor extends Staff
     private Scanner sc = new Scanner(System.in); // Define the Scanner object
     
     public Doctor() {
-        super("", "", "", 0); // super() has to be at the first statement of constructor.
+        super("", "", 0, "", "", "", 0); // super() has to be at the first statement of constructor.
 
         System.out.println("Enter doctor name: ");
         String doctorName = sc.nextLine();

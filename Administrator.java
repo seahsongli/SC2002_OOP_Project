@@ -8,9 +8,9 @@ public class Administrator extends Staff{
     private List<Staff> staffList;
     private AdministratorMenu adminstratorMenu;
     
-    public Administrator()
+    public Administrator(String hospitalId, String password, int staffId, String name, String role, String gender, int age)
     {
-        super("", "", "", 0); 
+        super(hospitalId, password, staffId, name, role, gender, age); 
         super.updateRole("Adminstrator");
 
         System.out.println("Enter Adminstrator name: ");
@@ -28,9 +28,9 @@ public class Administrator extends Staff{
         this.staffList = new ArrayList<>();
     }
 
-    public void addStaff(String name, String role, String gender, int age)
+    public void addStaff(String hospitalID, String password, int staffId, String name, String role, String gender, int age)
     {
-        Staff newStaff = new Staff(name, role, gender, age);
+        Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);
         staffList.add(newStaff);
     }
 
