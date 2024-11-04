@@ -3,7 +3,7 @@ import java.util.List;
 
 public class StaffManagement
 {
-    List<Staff> staffs;
+    private List<Staff> staffs;
     public StaffManagement()
     {
         staffs = new ArrayList<>();
