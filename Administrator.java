@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Administrator extends Staff{
+public class Administrator extends Staff
+{
     Scanner sc = new Scanner(System.in);
 
     private List<Staff> staffList;
@@ -17,11 +18,11 @@ public class Administrator extends Staff{
         String adminstratorName = sc.nextLine();
         super.updateName(adminstratorName);
 
-        System.out.println("Enter pharmacist gender: ");
+        System.out.println("Enter administrator gender: ");
         String adminstratorGender = sc.nextLine();
         super.updateGender(adminstratorGender);
 
-        System.out.println("Enter pharmacist age: ");
+        System.out.println("Enter administrator age: ");
         int adminstratorAge = sc.nextInt();
         sc.nextLine();
         super.updateAge(adminstratorAge);
