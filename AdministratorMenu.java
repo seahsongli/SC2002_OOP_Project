@@ -1,4 +1,6 @@
 
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AdministratorMenu
@@ -34,23 +36,30 @@ public class AdministratorMenu
             switch (choice)
             {
                 case 1:
-                    staffManagement.viewStaffs();
+                    staffManagement.viewStaffsWithFiltering();
                     break;
                 case 2:
                     manageStaff();
                     break;
-                
-
-
-                
-                
-                
-                
+                case 3:
+                    viewAppointmentsByEnteringDetails();
+                    break;
+                case 4:
+                    displayInventory();
+                    break;
+                case 5:
+                    manageMedicationInventory();
+                    break;
+                case 6:
+                    approveReplenishmentRequests();
+                    break;
                 case 7:
                     System.out.println("Logging out...");
-                    return;
+                return;
                 
-                
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
             }
         }
         
@@ -58,8 +67,103 @@ public class AdministratorMenu
     
     public void viewStaffs()
     {
-        staffManagement.viewStaffs();
+        staffManagement.viewStaffsWithFiltering();
     }
+    public void addStaff(String hospitalID, String password, int staffId,  String name, String role, String gender, int age)
+    {
+        staffManagement.addStaff(hospitalID, password, staffId, name, role, gender, age);
+    }
+
+    public void removeStaff(int staffId)
+    {
+        staffManagement.removeStaff(staffId);
+    }
+    
+    
+    public void updateStaffDetails(int staffId, String name, String role, String gender, int age)
+    {
+        staffManagement.updateStaffDetails(staffId, name, role, gender, age);
+    }
+    
+    
+    public void displayInventory()
+    {
+        inventoryManagement.displayInventory();
+    }
+    
+    public void displayLowStocks()
+    {
+        inventoryManagement.displayLowStocks();
+    }
+    
+    public void addStock(String name, int quantity)
+    {
+        inventoryManagement.addStock(name, quantity);
+    }
+
+    public void removeStock(String name, int quantity)
+    {
+        inventoryManagement.removeStock(name, quantity);
+    }
+    
+    public void updateStock(String name, int quantity)
+    {
+        inventoryManagement.updateStockLevel(name, quantity);
+    }
+    
+    public void approveReplenishmentRequest(int requestId)
+    {
+        inventoryManagement.approveReplenishmentRequest(requestId);
+    }
+    
+    
+    // public void displayScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
+    // {
+        //     appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
+        // }
+        
+        public void adminViewScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
+        {
+            appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
+    }
+
+
+
+    // helper functions
+    
+    public void viewAppointmentsByEnteringDetails()
+    {
+        System.out.println("\n--- View Appointment Details ---");
+        System.out.println("Enter the following details to filter appointments. Leave blank to skip a filter.");
+        
+        try {
+            System.out.print("Enter Patient ID: ");
+            String patientIdInput = sc.nextLine().trim();
+            Integer patientId = patientIdInput.isEmpty() ? null : Integer.parseInt(patientIdInput);
+            
+            System.out.print("Enter Patient Name: ");
+            String patientName = sc.nextLine().trim();
+            patientName = patientName.isEmpty() ? null : patientName;
+            
+            System.out.print("Enter Doctor ID: ");
+            String doctorIdInput = sc.nextLine().trim();
+            String doctorId = doctorIdInput.isEmpty() ? null : doctorIdInput;
+            
+            System.out.print("Enter Doctor Name: ");
+            String doctorName = sc.nextLine().trim();
+            doctorName = doctorName.isEmpty() ? null : doctorName;
+            
+            // Call to view appointments
+            adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
+            
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Patient ID must be an integer.");
+        } catch (Exception e) {
+            System.out.println("Error viewing appointments: " + e.getMessage());
+        }
+        
+    }
+
     // Function to add, remove or update staff
     public void manageStaff()
     {
@@ -73,7 +177,7 @@ public class AdministratorMenu
         
         int staffChoice = sc.nextInt();
         sc.nextLine(); // Consume newline
-
+    
         switch (staffChoice) 
         {
             case 1:
@@ -158,72 +262,222 @@ public class AdministratorMenu
                 int age = Integer.parseInt(sc.nextLine());
                 staffManagement.updateStaffDetails(staffId, name, role, gender, age);
                 break;
-                
-            case 4:
-                break;
+        
             default:
                 System.out.println("Invalid choice. Please try again.");
-                 break;
+                break;
         }    
             
     }
+    /**
+ * Helper method to manage medication inventory.
+ */
+private void manageMedicationInventory() 
+{
+    while (true) {
+        System.out.println("\n--- Manage Medication Inventory ---");
+        System.out.println("1. Add Medicine");
+        System.out.println("2. Remove Medicine");
+        System.out.println("3. Update Stock Level");
+        System.out.println("4. Set Low Stock Alert Level");
+        System.out.println("5. Back to Administrator Menu");
+        System.out.print("Enter your choice: ");
         
-        public void addStaff(String hospitalID, String password, int staffId,  String name, String role, String gender, int age)
-        {
-            staffManagement.addStaff(hospitalID, password, staffId, name, role, gender, age);
+        int choice;
+        try {
+            choice = sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a number between 1 and 5.");
+            sc.nextLine(); // Clear the scanner buffer
+            continue;
         }
+        sc.nextLine(); // Consume newline
 
-    public void removeStaff(int staffId)
-    {
-        staffManagement.removeStaff(staffId);
+        switch (choice) {
+            case 1:
+                addMedicine();
+                break;
+            case 2:
+                removeMedicine();
+                break;
+            case 3:
+                updateStockLevel();
+                break;
+            case 4:
+                setLowStockAlertLevel();
+                break;
+            case 5:
+                // Return to main menu
+                return;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
+        }
     }
+}
 
-
-    public void updateStaffDetails(int staffId, String name, String role, String gender, int age)
-    {
-        staffManagement.updateStaffDetails(staffId, name, role, gender, age);
-    }
-
-
-    public void displayInventory()
-    {
-        inventoryManagement.displayInventory();
-    }
-
-    public void displayLowStocks()
-    {
-        inventoryManagement.displayLowStocks();
-    }
-
-    public void addStock(String name, int quantity)
-    {
+/**
+ * Adds a new medicine or updates the quantity if it already exists.
+ */
+private void addMedicine() {
+    try {
+        System.out.print("Enter Medicine Name: ");
+        String name = sc.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Medicine name cannot be empty.");
+            return;
+        }
+        
+        System.out.print("Enter Quantity to Add: ");
+        int quantity = Integer.parseInt(sc.nextLine().trim());
+        if (quantity <= 0) {
+            System.out.println("Quantity must be a positive integer.");
+            return;
+        }
+        
         inventoryManagement.addStock(name, quantity);
+        System.out.println("Medicine added/updated successfully.");
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Quantity must be an integer.");
+    } catch (Exception e) {
+        System.out.println("Error adding medicine: " + e.getMessage());
     }
+}
 
-    public void removeStock(String name, int quantity)
-    {
+
+/**
+ * Removes a specified quantity of a medicine or deletes it if quantity reaches zero.
+ */
+private void removeMedicine() {
+    try {
+        System.out.print("Enter Medicine Name to Remove: ");
+        String name = sc.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Medicine name cannot be empty.");
+            return;
+        }
+        
+        System.out.print("Enter Quantity to Remove: ");
+        int quantity = Integer.parseInt(sc.nextLine().trim());
+        if (quantity <= 0) {
+            System.out.println("Quantity must be a positive integer.");
+            return;
+        }
+        
         inventoryManagement.removeStock(name, quantity);
+        System.out.println("Medicine removed/decreased successfully.");
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Quantity must be an integer.");
+    } catch (Exception e) {
+        System.out.println("Error removing medicine: " + e.getMessage());
     }
-    
-    public void updateStock(String name, int quantity)
-    {
+}
+
+/**
+ * Updates the stock level of a specific medicine by adding the specified quantity.
+ */
+private void updateStockLevel() {
+    try {
+        System.out.print("Enter Medicine Name to Update: ");
+        String name = sc.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Medicine name cannot be empty.");
+            return;
+        }
+        
+        System.out.print("Enter Quantity to Add: ");
+        int quantity = Integer.parseInt(sc.nextLine().trim());
+        // Quantity can be negative to decrease stock if needed
         inventoryManagement.updateStockLevel(name, quantity);
-    }
-
-    public void approveReplenishmentRequest(int requestId)
+        System.out.println("Stock level updated successfully.");
+    } catch (NumberFormatException e) 
     {
-        inventoryManagement.approveReplenishmentRequest(requestId);
+        System.out.println("Invalid input. Quantity must be an integer.");
+    } catch (Exception e) 
+    {
+        System.out.println("Error updating stock level: " + e.getMessage());
+    }
+}
+
+
+/**
+ * Sets the low stock alert level for a specific medicine.
+ */
+private void setLowStockAlertLevel() {
+    try {
+        System.out.print("Enter Medicine Name: ");
+        String name = sc.nextLine().trim();
+        if (name.isEmpty()) {
+            System.out.println("Medicine name cannot be empty.");
+            return;
+        }
+        
+        System.out.print("Enter Low Stock Alert Level: ");
+        int alertLevel = Integer.parseInt(sc.nextLine().trim());
+        if (alertLevel < 0) {
+            System.out.println("Alert level cannot be negative.");
+            return;
+        }
+        
+        inventoryManagement.setLowStockAlertLevel(name, alertLevel);
+        System.out.println("Low stock alert level set successfully.");
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Alert level must be an integer.");
+    } catch (Exception e) {
+        System.out.println("Error setting low stock alert level: " + e.getMessage());
+    }
+}
+
+/**
+ * Approves pending replenishment requests.
+ */
+private void approveReplenishmentRequests() 
+{
+    System.out.println("\n--- Pending Replenishment Requests ---");
+    
+    // Assuming InventoryManagement has a method to retrieve pending requests
+    List<Request> pendingRequests = inventoryManagement.getPendingReplenishmentRequests();
+    
+    if (pendingRequests.isEmpty()) {
+        System.out.println("No pending replenishment requests.");
+        return;
     }
     
-
-    public void displayScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
-    {
-        appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
+    // Display all pending requests
+    for (Request request : pendingRequests) {
+        System.out.println("Request ID: " + request.getRequestId() +
+                           ", Medicine: " + request.getMedicine().getName() +
+                           ", Quantity: " + request.getReplenishQuantity() +
+                           ", Status: " + request.getStatus());
     }
-
-    public void adminViewScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
-    {
-        appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
+    
+    // Prompt admin to approve a request
+    System.out.print("\nEnter the Request ID to approve (or type 'cancel' to return): ");
+    String input = sc.nextLine().trim();
+    
+    if (input.equalsIgnoreCase("cancel")) {
+        System.out.println("Returning to Administrator Menu.");
+        return;
     }
-
+    
+    try 
+    {
+        int requestId = Integer.parseInt(input);
+        boolean approved = inventoryManagement.approveReplenishmentRequest(requestId);
+        
+        if (approved) 
+        {
+            System.out.println("Replenishment request " + requestId + " approved successfully.");
+        } 
+        else 
+        {
+            System.out.println("Replenishment request " + requestId + " not found or already processed.");
+        }
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Request ID must be an integer.");
+    } catch (Exception e) {
+        System.out.println("Error approving replenishment request: " + e.getMessage());
+    }
+}
+        
 }
