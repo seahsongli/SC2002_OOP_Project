@@ -219,7 +219,32 @@ public class DoctorMenu {
                     rejectAppointment(patientId, patientName,doctorName, date, time);
                     break;
 
-                case 14:
+
+                case 14:  // New case for recording appointment outcome
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter date (yyyy-mm-dd): ");
+                    date = sc.nextLine();
+                    System.out.println("Enter time (HH:mm): ");
+                    time = sc.nextLine();
+                    System.out.println("Enter service: ");
+                    service = sc.nextLine();
+                    System.out.println("Enter prescription: ");
+                    prescription = sc.nextLine();
+                    System.out.println("Enter consultation notes: ");
+                    consultationNotes = sc.nextLine();
+                    System.out.println("Enter prescription status (e.g., APPROVED, PENDING): ");
+                    Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
+
+                    recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
+                    break;
+
+                case 15:
                     System.out.println("Logging out...");
                     return;
                 default:
