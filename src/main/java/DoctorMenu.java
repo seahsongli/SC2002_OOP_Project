@@ -31,24 +31,27 @@ public class DoctorMenu {
             System.out.println("Doctor Menu:");
             System.out.println("1. View Upcoming Appointments");
             System.out.println("2. View Patient medical records");
-            System.out.println("3. View Personal schedule records");
-            System.out.println("4. Add New Diagnosis");
-            System.out.println("5. Add New Prescription");
-            System.out.println("6. Edit Service");
-            System.out.println("7. Edit Prescription");
-            System.out.println("8. Edit Consultation Notes");
-            System.out.println("9. Set availability for Appointment");
-            System.out.println("10. Cancel availability for Appointment");
-            System.out.println("11. Accept Appointment requests");
-            System.out.println("12. Decline Appointment requests");
-            System.out.println("13. Record Appointment Outcome");
-            System.out.println("14. Logout");
+            System.out.println("3. Update Patient medical records");
+            System.out.println("4. View Personal schedule records");
+            System.out.println("5. Add New Diagnosis");
+            System.out.println("6. Add New Prescription");
+            System.out.println("7. Edit Service");
+            System.out.println("8. Edit Prescription");
+            System.out.println("9. Edit Consultation Notes");
+            System.out.println("10. Set availability for Appointment");
+            System.out.println("11. Cancel availability for Appointment");
+            System.out.println("12. Accept Appointment requests");
+            System.out.println("13. Decline Appointment requests");
+            System.out.println("14. Record Appointment Outcome");
+            System.out.println("15. Logout");
             int choice = sc.nextInt();
             sc.nextLine();
             int patientId;
             String patientName;
             String doctorName;
             int doctorId;
+            String diagnosis;
+            String prescription;
             switch (choice) {
                 case 1:
                     System.out.println("Enter doctor ID: ");
@@ -69,22 +72,35 @@ public class DoctorMenu {
                     viewPatientMedicalRecord(patientId, patientName);
                     break;
 
-                case 3:
+                case 3: // Update Patient Medical Record
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter diagnosis: ");
+                    diagnosis = sc.nextLine();
+                    System.out.println("Enter prescription: ");
+                    prescription = sc.nextLine();
+                    setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
+                    break;
+
+                case 4:
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     viewPersonalSchedule(doctorName);
                     break;
-                case 4:
+                case 5:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter diagnosis: ");
-                    String diagnosis = sc.nextLine();
+                    diagnosis = sc.nextLine();
                     addNewDiagnosis(patientId, patientName, diagnosis);
                     break;
-                case 5:
+                case 6:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -93,10 +109,10 @@ public class DoctorMenu {
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter prescription: ");
-                    String prescription = sc.nextLine();
+                    prescription = sc.nextLine();
                     addNewPrescription(patientId, patientName, doctorName, prescription);
                     break;
-                case 6:
+                case 7:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -110,7 +126,7 @@ public class DoctorMenu {
                     String service = sc.nextLine();
                     editService(patientId, doctorName, date, time, service);
                     break;
-                case 7:
+                case 8:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -128,7 +144,7 @@ public class DoctorMenu {
                     String status = sc.nextLine();
                     editPrescription(patientId, patientName, doctorName, date, time, prescription, Status.valueOf(status.toUpperCase()));
                     break;
-                case 8:
+                case 9:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -145,7 +161,7 @@ public class DoctorMenu {
                     editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
                     break;
 
-                case 9:
+                case 10:
                     System.out.println("Enter doctor ID: ");
                     doctorId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -158,7 +174,7 @@ public class DoctorMenu {
                     setAvailability(doctorId,doctorName,date,time);
                     break;
 
-                case 10:
+                case 11:
                     System.out.println("Enter doctor ID: ");
                     doctorId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -171,7 +187,7 @@ public class DoctorMenu {
                     cancelAvailability(doctorId,doctorName,date,time);
                     break;
 
-                case 11:
+                case 12:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -188,7 +204,7 @@ public class DoctorMenu {
                     acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
                     break;
 
-                case 12:
+                case 13:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -203,7 +219,7 @@ public class DoctorMenu {
                     rejectAppointment(patientId, patientName,doctorName, date, time);
                     break;
 
-                case 13:
+                case 14:
                     System.out.println("Logging out...");
                     return;
                 default:
