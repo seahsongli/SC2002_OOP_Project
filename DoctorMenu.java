@@ -9,19 +9,19 @@ public class DoctorMenu
         this.appointmentManagement = appointmentManagement;
     }
 
-    // public void updateContactNumber(int doctorId, String doctorName, String contactNumber)
+    // public void updateContactNumber(String staffId, String doctorName, String contactNumber)
     // {
-    //     medicalRecordManagement.updateContactNumber(doctorId, doctorName, contactNumber);
+    //     medicalRecordManagement.updateContactNumber(staffId, doctorName, contactNumber);
     // }
 
-    // public void updateEmail(int doctorId, String doctorName, String email)
+    // public void updateEmail(String staffId, String doctorName, String email)
     // {
-    //     medicalRecordManagement.updateEmail(doctorId, doctorName, email);
+    //     medicalRecordManagement.updateEmail(staffId, doctorName, email);
     // }
 
-    // public void viewPersonalMedicalRecord(int doctorId, String doctorName)
+    // public void viewPersonalMedicalRecord(String staffId, String doctorName)
     // {
-    //     medicalRecordManagement.viewPersonalMedicalRecord(doctorId, doctorName);
+    //     medicalRecordManagement.viewPersonalMedicalRecord(staffId, doctorName);
     // }
 
     public void viewPatientMedicalRecord(String patientId, String patientName)
