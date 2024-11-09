@@ -1,5 +1,3 @@
-
-
 public class Appointment
 {
     private int patientId;

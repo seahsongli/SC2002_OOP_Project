@@ -73,5 +73,4 @@ public class Patient extends User {
     public void viewPastAppointmentRecords(PatientMenu patientMenu) {
         patientMenu.displayPastAppointmentRecords(getId(), getName());
     }
-
 }
