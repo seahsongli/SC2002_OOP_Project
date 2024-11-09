@@ -13,22 +13,19 @@ public class Administrator extends Staff{
         super(hospitalId, password, staffId, name, role, gender, age);
         super.updateRole("Adminstrator");
 
-        try {
-            System.out.println("Enter Adminstrator name: ");
-            String administratorName = sc.nextLine();
-            super.updateName(administratorName);
+        System.out.println("Enter Adminstrator name: ");
+        String adminstratorName = sc.nextLine();
+        super.updateName(adminstratorName);
 
-            System.out.println("Enter pharmacist gender: ");
-            String administratorGender = sc.nextLine();
-            super.updateGender(administratorGender);
+        System.out.println("Enter pharmacist gender: ");
+        String adminstratorGender = sc.nextLine();
+        super.updateGender(adminstratorGender);
 
-            System.out.println("Enter pharmacist age: ");
-            int administratorAge = sc.nextInt();
-            sc.nextLine();
-            super.updateAge(administratorAge);
-        } catch (Exception e) {
-            System.out.println("An error occurred while reading input: " + e.getMessage());
-        }
+        System.out.println("Enter pharmacist age: ");
+        int adminstratorAge = sc.nextInt();
+        sc.nextLine();
+        super.updateAge(adminstratorAge);
+        this.staffList = new ArrayList<>();
     }
 
     public void addStaff(String hospitalID, String password, int staffId, String name, String role, String gender, int age)
@@ -58,7 +55,7 @@ public class Administrator extends Staff{
                 staff.updateName(name);
                 staff.updateRole(role);
                 staff.updateGender(gender);
-                staff.updateAge(age);   
+                staff.updateAge(age);
             }
         }
     }
