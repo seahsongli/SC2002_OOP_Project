@@ -2,14 +2,14 @@
 
 public class Appointment
 {
-    private int patientId;
+    private String patientId;
     private String patientName;
     private String doctorName;
     private String date;
     private String time;
     private Status consultationStatus;
     
-    public Appointment(int patientId, String patientName, String doctorName, String date, String time)
+    public Appointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         this.patientId = patientId;
         this.patientName = patientName;
@@ -19,7 +19,7 @@ public class Appointment
         this.consultationStatus = Status.PENDING;
     }
     
-    public int getPatientId()
+    public String getPatientId()
     {
         return patientId;
     }

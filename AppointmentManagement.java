@@ -36,12 +36,12 @@ public class AppointmentManagement
 
     // Implement viewUpcomingAppointments() method to view all upcoming appointments for the next 7 days for a specific doctor
     // Perhaps include sorting by date and time
-    protected void viewUpcomingAppointments(int doctorId, String doctorName)
+    protected void viewUpcomingAppointments(String staffId, String doctorName)
     {
         LocalDate today = LocalDate.now();
         LocalDate sevenDaysFromNow = today.plusDays(7);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
+        
         for (Appointment appointment : appointments)
         {
             LocalDate appointmentDate = LocalDate.parse(appointment.getDate(), formatter);
@@ -54,7 +54,7 @@ public class AppointmentManagement
         }
     }
 
-    public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
+    public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
     {
         for(AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecords)
         {
@@ -71,7 +71,7 @@ public class AppointmentManagement
         }
     }
     // Implement updateTypeOfService() method to update the type of service for a specific appointment
-    protected void updateTypeOfService(int patientId, String patientName, int doctorId, String doctorName, String date, String time, String typeOfService)
+    protected void updateTypeOfService(String patientId, String patientName, String staffId, String doctorName, String date, String time, String typeOfService)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -83,7 +83,7 @@ public class AppointmentManagement
     }
     // Consider using doctorId in design, but this also means that doctorId would need ot be present in appointment, but when patient schedules an appointment, they would not know the doctorId, only the doctorName.
     // Implement updatePrescribedMedications() method to update the medications prescribed for a specific appointment
-    protected void updatePrescribedMedications(int patientId, String patientName, int doctorId, String doctorName, String date, String time, String medicationsPrescribed)
+    protected void updatePrescribedMedications(String patientId, String patientName, String staffId, String doctorName, String date, String time, String medicationsPrescribed)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -94,7 +94,7 @@ public class AppointmentManagement
         }
     }
     // Implement updatePrescriptionStatus() method to update the prescription status for a specific appointment
-    protected void updatePrescriptionStatus(int patientId, String patientName, int doctorId, String doctorName, String date, String time, Status prescriptionStatus)
+    protected void updatePrescriptionStatus(String patientId, String patientName, String staffId, String doctorName, String date, String time, Status prescriptionStatus)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -106,7 +106,7 @@ public class AppointmentManagement
     }
 
     // Implement updateConsultationNotes() method to update the consultation notes for a specific appointment
-    protected void updateConsultationNotes(int patientId, String patientName, int doctorId, String doctorName, String date, String time, String consultationNotes)
+    protected void updateConsultationNotes(String patientId, String patientName, String staffId, String doctorName, String date, String time, String consultationNotes)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -120,7 +120,7 @@ public class AppointmentManagement
     // Need to implement displayAvailableSlots() method
 
     // This function is called after every consultation is completed. It records the outcome of the appointment.
-    protected void recordAppointmentOutcomeRecords(int patientId, String patientName, String doctorName, String date, String time, String typeOfService, String medicationsPrescribed, String consultationNotes, Status prescriptionStatus)
+    protected void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date, String time, String typeOfService, String medicationsPrescribed, String consultationNotes, Status prescriptionStatus)
     {
         for (Appointment appointment : appointments)
         {
@@ -132,7 +132,7 @@ public class AppointmentManagement
         }
     }
 
-    protected void editService(int patientId, String doctorName, String date, String time, String service)
+    protected void editService(String patientId, String doctorName, String date, String time, String service)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -143,7 +143,7 @@ public class AppointmentManagement
         }
     }
 
-    protected void editPrescription(int patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus)
+    protected void editPrescription(String patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -155,7 +155,7 @@ public class AppointmentManagement
         }
     }
 
-    protected void editConsultationNotes(int patientId, String patientName, String doctorName, String date, String time, String consultationNotes)
+    protected void editConsultationNotes(String patientId, String patientName, String doctorName, String date, String time, String consultationNotes)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -168,17 +168,17 @@ public class AppointmentManagement
 
     
     // Set availability for a doctor
-    protected void setAvailability(int doctorId, String doctorName, String date, String time)
+    protected void setAvailability(String staffId, String doctorName, String date, String time)
     {
-        String key = doctorId + "_" + date;
+        String key = staffId + "_" + date;
         doctorAvailability.putIfAbsent(key, new ArrayList<>());
         doctorAvailability.get(key).add(time);
     }
 
     // Cancel availability for a doctor
-    protected void cancelAvailability(int doctorId, String doctorName, String date, String time)
+    protected void cancelAvailability(String staffId, String doctorName, String date, String time)
     {
-        String key = doctorId + "_" + date;
+        String key = staffId + "_" + date;
         if (doctorAvailability.containsKey(key))
         {
             doctorAvailability.get(key).remove(time);
@@ -190,21 +190,21 @@ public class AppointmentManagement
     }
 
     // Accept an appointment
-    protected void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time)
+    protected void acceptAppointment(String patientId, String patientName, String staffId, String doctorName, String date, String time)
     {
         for (Appointment appointment : appointments)
         {
             if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.CONFIRMED);
-                cancelAvailability(doctorId, doctorName, date, time); // Remove the time slot from availability
+                cancelAvailability(staffId, doctorName, date, time); // Remove the time slot from availability
                 break;
             }
         }
     }
 
     // Reject an appointment
-    protected void rejectAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    protected void rejectAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         for (Appointment appointment : appointments)
         {
@@ -216,12 +216,12 @@ public class AppointmentManagement
         }
     }
 
-    public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         appointments.add(new Appointment(patientId, patientName, doctorName, date, time));
     }
 
-    public void rescheduleAppointment(int patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime)
+    public void rescheduleAppointment(String patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime)
     {
         for (Appointment appointment : appointments)
         {
@@ -233,12 +233,12 @@ public class AppointmentManagement
         }
     }
 
-    public void cancelAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         appointments.removeIf(appointment -> appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time));
     }
 
-    public void displayScheduledAppointments(int patientId, String patientName)
+    public void displayScheduledAppointments(String patientId, String patientName)
     {
         for (Appointment appointment : appointments)
         {
@@ -251,7 +251,7 @@ public class AppointmentManagement
         }
     }
 
-    public void displayPastAppointmentRecords(int patientId, String patientName)
+    public void displayPastAppointmentRecords(String patientId, String patientName)
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
@@ -268,14 +268,14 @@ public class AppointmentManagement
         }
     }
 
-    public void adminViewScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
+    public void adminViewScheduledAppointments(String patientId, String patientName, String doctorName, String staffId)
     {
         for (Appointment appointment : appointments)
         {
             if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
-                System.out.println("Doctor ID: " + doctorId);
+                System.out.println("Doctor ID: " + staffId);
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
                 System.out.println("Status: " + appointment.getStatus());

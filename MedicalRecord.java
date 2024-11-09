@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class MedicalRecord
 {
-    private int patientId;
+    private String patientId;
     private String patientName;
     private String dateOfBirth;
     private String gender;
@@ -16,7 +16,7 @@ public class MedicalRecord
     private List<String> prescriptions;
 
 
-    public MedicalRecord(int patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions)
+    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions)
     {
         this.patientId = patientId;
         this.patientName = patientName;
@@ -35,11 +35,11 @@ public class MedicalRecord
 
     // Overload the MedicalRecord constructor to allow for creation of a MedicalRecord object without any past diagnoses, past treatments, current diagnoses, current treatments, or prescriptions.
     // This is useful when creating a new MedicalRecord object for a new patient, especially when the new patient has no medical history.
-    public MedicalRecord(int patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email) {
+    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email) {
         this(patientId, patientName, dateOfBirth, gender, bloodType, contactNumber, email, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-    public int getPatientId()
+    public String getPatientId()
     {
         return patientId;
     }

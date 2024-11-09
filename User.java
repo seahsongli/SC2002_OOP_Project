@@ -1,15 +1,18 @@
-public class User {
+public class User 
+{
     private String hospitalId;
     private String password;
     private String role;
 
-    public User(String hospitalId, String password, String role) {
+    public User(String hospitalId, String password, String role) 
+    {
         this.hospitalId = hospitalId;
         this.password = password;
         this.role = role;
     }
 
-    public String getHospitalId() {
+    public String getHospitalId() 
+    {
         return hospitalId;
     }
 
@@ -17,7 +20,8 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
 

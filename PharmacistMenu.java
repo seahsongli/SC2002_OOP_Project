@@ -9,12 +9,12 @@ public class PharmacistMenu
         this.inventoryManagement = inventoryManagement;
     }
     
-    public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
+    public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
     {
         prescriptionManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
     }
 
-    public void setPrescription(int patientId, String patientName, String prescription)
+    public void setPrescription(String patientId, String patientName, String prescription)
     {
         prescriptionManagement.setPrescription(patientId, patientName, prescription);
     }
@@ -25,11 +25,11 @@ public class PharmacistMenu
     //     prescriptionManagement.updatePrescriptionStatus(patientId, patientName, status);
     // }
 
-    public void updatePrescriptionStatus(int patientId, String patientName, int doctorId, String doctorName, String date, String time, Status prescriptionStatus) {
+    public void updatePrescriptionStatus(String patientId, String patientName, String staffId, String doctorName, String date, String time, Status prescriptionStatus) {
         // Logic to find the correct appointment and update the prescription status
         
             // Assuming Appointment has a method to set prescription status
-            prescriptionManagement.updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time, prescriptionStatus);
+            prescriptionManagement.updatePrescriptionStatus(patientId, patientName, staffId, doctorName, date, time, prescriptionStatus);
             System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
     }
 

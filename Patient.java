@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Patient extends User {
-    private int patientId;
+    private String patientId;
     private String name;
     private LocalDate dob; // Date of Birth
     private String gender;
@@ -15,7 +15,7 @@ public class Patient extends User {
 
 
 
-    public Patient(String hospitalID, String password, int patientId, String name,  String dob, String gender, String bloodGroup, String email) {
+    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email) {
         super(hospitalID, password, "Patient");
         this.patientId = patientId;
         this.name = name;
@@ -25,7 +25,7 @@ public class Patient extends User {
         this.email = email;
     }
 
-    public int getId() {
+    public String getId() {
         return patientId;
     }
 

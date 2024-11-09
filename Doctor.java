@@ -5,7 +5,7 @@ public class Doctor extends Staff
     private Scanner sc = new Scanner(System.in); // Define the Scanner object
     
     public Doctor() {
-        super("", "", 0, "", "", "", 0); // super() has to be at the first statement of constructor.
+        super("", "", "", "", "", "", 0); // super() has to be at the first statement of constructor.
 
         System.out.println("Enter doctor name: ");
         String doctorName = sc.nextLine();
@@ -27,7 +27,7 @@ public class Doctor extends Staff
     public void addNewDiagnosis(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
@@ -41,7 +41,7 @@ public class Doctor extends Staff
     public void addNewPrescription(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
@@ -54,22 +54,22 @@ public class Doctor extends Staff
     public void addTreatmentPlans(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
-        String patientName = sc.nextLine();
+        String patientName = sc.nextLine().trim();
         System.out.println("Enter treatment plan: ");
-        String treatmentPlan = sc.nextLine();
+        String treatmentPlan = sc.nextLine().trim();
         doctorMenu.addTreatmentPlan(patientId, patientName, treatmentPlan);
     }
 
     public void viewPatientMedicalRecord(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
-        String patientName = sc.nextLine();
+        String patientName = sc.nextLine().trim();
         doctorMenu.viewPatientMedicalRecord(patientId, patientName);
     }
 
@@ -82,7 +82,7 @@ public class Doctor extends Staff
     public void acceptAppointment(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
@@ -96,7 +96,7 @@ public class Doctor extends Staff
     public void rejectAppointment(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
-        int patientId = sc.nextInt();
+        String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
