@@ -247,6 +247,7 @@ public class AppointmentManagement
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
+                System.out.println("Status: " + appointment.getStatus());
             }
         }
     }

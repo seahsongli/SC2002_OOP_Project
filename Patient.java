@@ -13,8 +13,6 @@ public class Patient extends User {
     // Define a DateTimeFormatter for yyyy-MM-dd format
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-
-
     public Patient(String hospitalID, String password, int patientId, String name,  String dob, String gender, String bloodGroup, String email) {
         super(hospitalID, password, "Patient");
         this.patientId = patientId;

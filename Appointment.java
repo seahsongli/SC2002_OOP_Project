@@ -63,7 +63,5 @@ public class Appointment
     {
         this.consultationStatus = status;
     }
-
-   
 }
 

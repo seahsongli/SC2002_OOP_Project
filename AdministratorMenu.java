@@ -63,8 +63,6 @@ public class AdministratorMenu
     // Function to add, remove or update staff
     public void manageStaff()
     {
-        
-        
         System.out.println("--- Manage Hospital Staff ---");
         System.out.println("1. Add Staff");
         System.out.println("2. Remove Staff");
@@ -116,8 +114,6 @@ public class AdministratorMenu
                 {
                     System.out.println("Error adding staff: " + e.getMessage());
                     break;
-                    
-                    
                 }
             case 2:
                 try 
@@ -141,7 +137,6 @@ public class AdministratorMenu
                     
                 }
             case 3:
-                
                 System.out.print("Enter staff ID to update: ");
                 int staffId = Integer.parseInt(sc.nextLine());
                 
@@ -163,15 +158,15 @@ public class AdministratorMenu
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
-                 break;
+                break;
         }    
             
     }
         
-        public void addStaff(String hospitalID, String password, int staffId,  String name, String role, String gender, int age)
-        {
-            staffManagement.addStaff(hospitalID, password, staffId, name, role, gender, age);
-        }
+    public void addStaff(String hospitalID, String password, int staffId,  String name, String role, String gender, int age)
+    {
+        staffManagement.addStaff(hospitalID, password, staffId, name, role, gender, age);
+    }
 
     public void removeStaff(int staffId)
     {
