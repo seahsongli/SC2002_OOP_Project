@@ -21,8 +21,9 @@ public class PharmacistMenu
             System.out.println("2. Set Prescription");
             System.out.println("3. Update Prescription Status");
             System.out.println("4. View Inventory");
-            System.out.println("5. Update Inventory");
-            System.out.println("6. Logout");
+            System.out.println("5. Logout");
+            System.out.println("6. test");
+            
             int choice = sc.nextInt();
             sc.nextLine(); // Consume newline
 
@@ -71,16 +72,19 @@ public class PharmacistMenu
                     viewInventory();
                     break;
                 case 5:
-                    System.out.println("Enter medicine name: ");
-                    String medicineName = sc.nextLine();
-                    System.out.println("Enter quantity: ");
-                    int quantity = sc.nextInt();
-                    sc.nextLine(); // Consume newline
-                    updateStockLevel(medicineName, quantity);
-                    break;
-                case 6:
                     System.out.println("Logging out...");
                     return;
+                case 6:
+                    // InventoryManagement im = new InventoryManagement();
+                    
+                    System.out.println("enter medication name ");
+                    String medicationName = sc.nextLine();
+                    System.out.println(" quantity ");
+                    int quantity = sc.nextInt();
+                    sc.nextLine();
+                    submitReplenishmentRequest(medicationName, quantity);
+                    
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
@@ -149,3 +153,7 @@ public class PharmacistMenu
         inventoryManagement.submitReplenishmentRequest(medicationName, quantity);
     }
 }
+
+
+
+

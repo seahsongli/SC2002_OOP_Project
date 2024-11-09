@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -22,6 +20,7 @@ public class Main
         initializeUsers(staffManagement);
 
         while (true)
+        
         {
             System.out.println("Welcome to the Hospital Management System");
             System.out.println("1. Login");

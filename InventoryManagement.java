@@ -39,16 +39,17 @@ public class InventoryManagement
     public void requestReplenishment(String name, int quantity)
     {
         Request newRequest = new Request();
-        newRequest.setStatus(Status.PENDING);
-        newRequest.setReplenishQuantity(quantity);
         for (Medicine medicine : currentStockLevels)
         {
             if (medicine.getName().equals(name))
             {
                 newRequest.getMedicine().add(medicine);
+                newRequest.setStatus(Status.PENDING);
+                newRequest.setReplenishQuantity(quantity);
+                replenishmentRequest.add(newRequest);
             }
         }
-        replenishmentRequest.add(newRequest);
+        
     }
 
     public void updateStockLevel(String medicationName, int quantity)

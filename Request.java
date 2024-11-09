@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 public class Request
 {
@@ -6,6 +7,10 @@ public class Request
     private List<Medicine> medicine;
     private int replenishQuantity;
     private Status status;
+
+    public Request(){
+        this.medicine = new ArrayList<>();
+    }
 
     public int getRequestId()
     {
