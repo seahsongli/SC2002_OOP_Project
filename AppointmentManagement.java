@@ -9,7 +9,8 @@ public class AppointmentManagement
 {
     private List<Appointment> appointments;
     private List<AppointmentOutcomeRecord> appointmentOutcomeRecords;
-    private Map<String, List<String>> doctorAvailability; // Key: "doctorId_date", Value: List of available times   
+    private Map<String, List<String>> doctorAvailability; // Key: "doctorName_date", Value: List of available times
+
 
     public AppointmentManagement()
     {
@@ -166,24 +167,45 @@ public class AppointmentManagement
         }
     }
 
+    private boolean isValidTime(String time) {
+        // Check if the time is in the correct format (HH:mm)
+        String[] timeParts = time.split(":");
+        if (timeParts.length != 2) {
+            return false;
+        }
     
-    // Set availability for a doctor
-    protected void setAvailability(int doctorId, String doctorName, String date, String time)
-    {
-        String key = doctorId + "_" + date;
+        int hour = Integer.parseInt(timeParts[0]);
+        int minute = Integer.parseInt(timeParts[1]);
+    
+        // Check if hour is between 9 and 18 (9 AM to 6 PM) and minute is either 00 or 30 (30-minute intervals)
+        return (hour >= 9 && hour < 18) && (minute == 0 || minute == 30);
+    }
+    
+    protected  void setAvailability(int doctorId, String doctorName, String date, String time) {
+        // Validate the time to ensure it's a valid 30-minute slot within the working hours (9 AM to 6 PM)
+        if (!isValidTime(time)) {
+            System.out.println("Invalid time slot. Available time slots are from 9:00 AM to 6:00 PM in 30-minute intervals.");
+            return;
+        }
+    
+        String key = doctorName + "_" + time;
+    
+        // Initialize the availability list if not already present
         doctorAvailability.putIfAbsent(key, new ArrayList<>());
+    
+        // Add the time slot to the doctor's availability list
         doctorAvailability.get(key).add(time);
+        System.out.println("Availability set for " + doctorName + " on " + date + " at " + time);
     }
 
     // Cancel availability for a doctor
-    protected void cancelAvailability(int doctorId, String doctorName, String date, String time)
-    {
-        String key = doctorId + "_" + date;
-        if (doctorAvailability.containsKey(key))
-        {
+    protected void cancelAvailability(int doctorId, String doctorName, String date, String time) {
+        String key = doctorName + "_" + date;
+        if (doctorAvailability.containsKey(key)) {
+            // Remove the time slot from the doctor's availability
             doctorAvailability.get(key).remove(time);
-            if (doctorAvailability.get(key).isEmpty())
-            {
+            // If no more slots are available for this doctor on the given date, remove the entry
+            if (doctorAvailability.get(key).isEmpty()) {
                 doctorAvailability.remove(key);
             }
         }
@@ -216,27 +238,52 @@ public class AppointmentManagement
         }
     }
 
-    public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time)
-    {
+    public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time) {
+        // Check if the doctor has availability for the given time slot
+        String key = doctorName + "_" + date; // Use doctor name and date as key
+        
+        // Check if the doctor is available at the requested time
+        if (!doctorAvailability.containsKey(key) || !doctorAvailability.get(key).contains(time)) {
+            System.out.println("The doctor is not available at " + time + " on " + date + ". Please choose another time.");
+            return; // Reject the appointment if the slot is not available
+        }
+        
+        // If the slot is available, schedule the appointment
         appointments.add(new Appointment(patientId, patientName, doctorName, date, time));
+        System.out.println("Appointment scheduled for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
     }
 
-    public void rescheduleAppointment(int patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime)
-    {
-        for (Appointment appointment : appointments)
-        {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(oldDate) && appointment.getTime().equals(oldTime))
-            {
-                appointment.setDate(newDate);
-                appointment.setTime(newTime);
+    public void cancelAppointment(int patientId, String patientName, String doctorName, String date, String time) {
+        appointments.removeIf(appointment -> 
+            appointment.getPatientId() == patientId && 
+            appointment.getPatientName().equals(patientName) && 
+            appointment.getDoctorName().equals(doctorName) && 
+            appointment.getDate().equals(date) && 
+            appointment.getTime().equals(time)
+        );
+    }
+
+    public void rescheduleAppointment(int patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime) {
+        // Cancel the old appointment first
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatientId() == patientId && 
+                appointment.getPatientName().equals(patientName) && 
+                appointment.getDoctorName().equals(doctorName) && 
+                appointment.getDate().equals(oldDate) && 
+                appointment.getTime().equals(oldTime)) {
+                
+                // Set the old appointment status to canceled or just remove it
+                appointment.setStatus(Status.CANCELLED);  // Assuming you have a CANCELLED status
+                appointments.remove(appointment);
+                System.out.println("Old appointment canceled for " + patientName + " with Dr. " + doctorName + " on " + oldDate + " at " + oldTime);
+                break;
             }
         }
+    
+        // Now, try to schedule the new appointment
+        scheduleAppointment(patientId, patientName, doctorName, newDate, newTime); // Call the existing scheduleAppointment method to book the new appointment
     }
 
-    public void cancelAppointment(int patientId, String patientName, String doctorName, String date, String time)
-    {
-        appointments.removeIf(appointment -> appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time));
-    }
 
     public void displayScheduledAppointments(int patientId, String patientName)
     {
