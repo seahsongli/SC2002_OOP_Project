@@ -8,7 +8,7 @@ public class Administrator extends Staff{
     private List<Staff> staffList;
     private AdministratorMenu adminstratorMenu;
 
-    public Administrator(String hospitalId, String password, int staffId, String name, String role, String gender, int age)
+    public Administrator(String hospitalId, String password, String staffId, String name, String role, String gender, int age)
     {
         super(hospitalId, password, staffId, name, role, gender, age);
         super.updateRole("Adminstrator");
@@ -28,13 +28,13 @@ public class Administrator extends Staff{
         this.staffList = new ArrayList<>();
     }
 
-    public void addStaff(String hospitalID, String password, int staffId, String name, String role, String gender, int age)
+    public void addStaff(String hospitalID, String password, String staffId, String name, String role, String gender, int age)
     {
         Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);
         staffList.add(newStaff);
     }
 
-    public void removeStaff(int staffId)
+    public void removeStaff(String staffId)
     {
         for (Staff staff : staffList)
         {
@@ -46,7 +46,7 @@ public class Administrator extends Staff{
         }
     }
 
-    public void updateStaffDetails(int staffId, String name, String role, String gender, int age)
+    public void updateStaffDetails(String staffId, String name, String role, String gender, int age)
     {
         for (Staff staff : staffList)
         {
@@ -61,7 +61,7 @@ public class Administrator extends Staff{
     }
 
     // get scheduled appointments for a particular patient.
-    public void viewScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
+    public void viewScheduledAppointments(String patientId, String patientName, String doctorName, String doctorId)
     {
         adminstratorMenu.adminViewScheduledAppointments(patientId, patientName , doctorName, doctorId);
     }

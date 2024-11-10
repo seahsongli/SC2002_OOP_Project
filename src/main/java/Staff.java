@@ -1,7 +1,8 @@
-public class Staff extends User {
+public class Staff extends User 
+{
     
     // use staff ID to identify staff
-    private int staffId;
+    private String staffId;
     private String name;
     private String role;
     private String gender;
@@ -9,7 +10,7 @@ public class Staff extends User {
 
     //static int staffCount = 0;
     // Every user is a staff except a patient
-    public Staff(String hospitalID, String password, int staffId,  String name, String role, String gender, int age) 
+    public Staff(String hospitalID, String password, String staffId,  String name, String role, String gender, int age) 
     {
 
         super(hospitalID, password, role);
@@ -40,7 +41,7 @@ public class Staff extends User {
         return age;
     }
 
-    public int getStaffId() 
+    public String getStaffId() 
     {
         return staffId;
     }
@@ -118,7 +119,7 @@ public class Staff extends User {
         }
     }
 
-    public void updateStaffId(int staffId) 
+    public void updateStaffId(String staffId) 
     {
         this.staffId = staffId;
     }

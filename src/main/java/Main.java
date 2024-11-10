@@ -46,10 +46,10 @@ public class Main
         // Staff data: hospitalId, password, staffId, name, role, gender, age
         Object[][] staffData = 
         {
-            {"doctor1", "password", 102, "John Smith", "Doctor", "Male", 45},
-            {"doctor2", "password", 103, "Emily Clarke", "Doctor", "Female", 38},
-            {"pharmacist1", "password", 104, "Mark Lee", "Pharmacist", "Male", 29},
-            {"admin1", "passoword", 105, "Sarah Lee", "Administrator", "Female", 40}
+            {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
+            {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
+            {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
+            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40}
         };
 
         for (int i = 0; i < staffData.length; i++) 
@@ -57,18 +57,25 @@ public class Main
             Object[] data = staffData[i];
             String hospitalId = (String) data[0];
             String password = (String) data[1];
-            int staffId = (int) data[2];
+            String staffId = (String) data[2];
             String name = (String) data[3];
             String role = (String) data[4];
             String gender = (String) data[5];
             int age = (int) data[6];
 
-          
-            Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
-            users.put(hospitalId, staff);
-            System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
-            // Add to staff list using staffManagement.addStaff()
-            staffManagement.addStaff(hospitalId, password, staffId, name, role, gender, age);
+            if (!Roles.ALLOWED_ROLES.contains(role)) 
+            {
+                System.out.println("Invalid role '" + role + "' for staff member " + name + ". Staff not added.");
+            }
+            else
+            {
+                
+                Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
+                users.put(hospitalId, staff);
+                System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
+                // Add to staff list using staffManagement.addStaff()
+                staffManagement.addStaff(hospitalId, password, staffId, name, role, gender, age);
+            }
             
         }
 
@@ -84,10 +91,7 @@ public class Main
             users.put(patientHospitalId, patient);
             System.out.println("User with Hospital ID " + patientHospitalId + " added successfully.");
         }
-        // users.put("admin1", new User("admin1", "password", "Administrator"));
-        // users.put("doctor1", new User("doctor1", "password", "Doctor"));
-        // users.put("pharmacist1", new User("pharmacist1", "password", "Pharmacist"));
-        // users.put("patient1", new User("patient1", "password", "Patient"));
+    
     }
 
     private static void login(AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement, PrescriptionManagement prescriptionManagement, StaffManagement staffManagement)
@@ -99,7 +103,7 @@ public class Main
 
         User user = users.get(hospitalId);
 
-        if (user != null && user.checkPassword(password))
+        if (user != null && user.getPassword().equals(password)) 
         {
             System.out.println("Login successful!");
             if (password.equals("password")) 
@@ -129,20 +133,20 @@ public class Main
         switch (user.getRole()) 
         {
             case "Administrator":
-                AdministratorMenu adminMenu = new AdministratorMenu(inventoryManagement, staffManagement, appointmentManagement);
+                AdministratorMenu adminMenu = new AdministratorMenu(inventoryManagement, staffManagement, appointmentManagement, users);
                 adminMenu.displayMenu();
                 break;
             case "Doctor":
                 DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement);
-                doctorMenu.displayMenu();
+                // doctorMenu.displayMenu();
                 break;
             case "Pharmacist":
                 PharmacistMenu pharmacistMenu = new PharmacistMenu(prescriptionManagement, inventoryManagement);
-                pharmacistMenu.displayMenu();
+                // pharmacistMenu.displayMenu();
                 break;
             case "Patient":
                 PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement);
-                patientMenu.displayMenu();
+                // patientMenu.displayMenu();
                 break;
             default:
                 System.out.println("Invalid role. Access denied.");

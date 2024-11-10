@@ -29,8 +29,7 @@ public class PharmacistMenu
             switch (choice) {
                 case 1:
                     System.out.println("Enter patient ID: ");
-                    int patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    String patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     String patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -39,8 +38,7 @@ public class PharmacistMenu
                     break;
                 case 2:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter prescription: ");
@@ -49,12 +47,11 @@ public class PharmacistMenu
                     break;
                 case 3:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor id: "); 
-                    int doctorId = sc.nextInt();
+                    String doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
@@ -110,12 +107,12 @@ public class PharmacistMenu
         }
     }
 
-    public void viewAppointmentOutcomeRecord(int patientId, String patientName, String doctorName)
+    public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
     {
         prescriptionManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
     }
 
-    public void setPrescription(int patientId, String patientName, String prescription)
+    public void setPrescription(String patientId, String patientName, String prescription)
     {
         prescriptionManagement.setPrescription(patientId, patientName, prescription);
     }
@@ -126,7 +123,7 @@ public class PharmacistMenu
     //     prescriptionManagement.updatePrescriptionStatus(patientId, patientName, status);
     // }
 
-    public void updatePrescriptionStatus(int patientId, String patientName, int doctorId, String doctorName, String date, String time, Status prescriptionStatus) {
+    public void updatePrescriptionStatus(String patientId, String patientName, String doctorId, String doctorName, String date, String time, Status prescriptionStatus) {
         // Logic to find the correct appointment and update the prescription status
         
             // Assuming Appointment has a method to set prescription status

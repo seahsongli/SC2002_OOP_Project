@@ -27,16 +27,14 @@ public class PatientMenu
             switch (choice) {
                 case 1:
                     System.out.println("Enter patient ID: ");
-                    int patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    String patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     String patientName = sc.nextLine();
                     viewPersonalMedicalRecord(patientId, patientName);
                     break;
                 case 2:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -49,8 +47,7 @@ public class PatientMenu
                     break;
                 case 3:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -67,8 +64,7 @@ public class PatientMenu
                     break;
                 case 4:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -81,7 +77,7 @@ public class PatientMenu
                     break;
                 case 5:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
+                    patientId = sc.nextLine();
                     sc.nextLine(); // Consume newline
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
@@ -97,44 +93,44 @@ public class PatientMenu
         }
     }
 
-    public void updateContactNumber(int patientId, String patientName, String contactNumber)
+    public void updateContactNumber(String patientId, String patientName, String contactNumber)
     {
         medicalRecordManagement.updateContactNumber(patientId, patientName, contactNumber);
     }
 
-    public void updateEmail(int patientId, String patientName, String email)
+    public void updateEmail(String patientId, String patientName, String email)
     {
         medicalRecordManagement.updateEmail(patientId, patientName, email);
     }
 
-    public void viewPersonalMedicalRecord(int patientId, String patientName)
+    public void viewPersonalMedicalRecord(String patientId, String patientName)
     {
         medicalRecordManagement.viewPersonalMedicalRecord(patientId, patientName);
     }
 
     //Implement viewAvailableAppointmentSlots method here.
 
-    public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         appointmentManagement.scheduleAppointment(patientId, patientName, doctorName, date, time);
     }
 
-    public void rescheduleAppointment(int patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime)
+    public void rescheduleAppointment(String patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime)
     {
         appointmentManagement.rescheduleAppointment(patientId, patientName, doctorName, oldDate, oldTime, newDate, newTime);
     }
 
-    public void cancelAppointment(int patientId, String patientName, String doctorName, String date, String time)
+    public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {
         appointmentManagement.cancelAppointment(patientId, patientName, doctorName, date, time);
     }
 
-    public void displayScheduledAppointments(int patientId, String patientName)
+    public void displayScheduledAppointments(String patientId, String patientName)
     {
         appointmentManagement.displayScheduledAppointments(patientId, patientName);
     }
 
-    public void displayPastAppointmentRecords(int patientId, String patientName)
+    public void displayPastAppointmentRecords(String patientId, String patientName)
     {
         appointmentManagement.displayPastAppointmentRecords(patientId, patientName);
     }

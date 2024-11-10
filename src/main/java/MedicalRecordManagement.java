@@ -10,7 +10,7 @@ public class MedicalRecordManagement
         this.medicalRecords = new ArrayList<>();
     }
 
-    public void updateContactNumber(int patientId, String patientName, String phoneNumber)
+    public void updateContactNumber(String patientId, String patientName, String phoneNumber)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -22,7 +22,7 @@ public class MedicalRecordManagement
         }
     }
 
-    public void updateEmail(int patientId, String patientName, String email)
+    public void updateEmail(String patientId, String patientName, String email)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -34,7 +34,7 @@ public class MedicalRecordManagement
         }
     }
 
-    public void viewPersonalMedicalRecord(int patientId, String patientName)
+    public void viewPersonalMedicalRecord(String patientId, String patientName)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -66,7 +66,7 @@ public class MedicalRecordManagement
     }
 
     // might not need this since we can just use the viewPersonalMedicalRecord method where doctors can view their own patient medical records.
-    protected void viewPatientMedicalRecord(int patientId, String patientName)
+    protected void viewPatientMedicalRecord(String patientId, String patientName)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -78,7 +78,7 @@ public class MedicalRecordManagement
         }
     }
 
-    protected void setPatientMedicalrecord(int patientId, String patientName, String diagnosis, String prescription)
+    protected void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -91,7 +91,7 @@ public class MedicalRecordManagement
         }
     }
 
-    protected void setPatientTreatmentPlan(int patientId, String patientName, String treatmentPlan)
+    protected void setPatientTreatmentPlan(String patientId, String patientName, String treatmentPlan)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -103,7 +103,7 @@ public class MedicalRecordManagement
         }
     }
 
-    protected void setPatientMedicalPrescription(int patientId, String patientName, String prescription)
+    protected void setPatientMedicalPrescription(String patientId, String patientName, String prescription)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -116,7 +116,7 @@ public class MedicalRecordManagement
     }
 
     // Below 3 methods are used to append new diagnosis and prescription and treatment plans to the existing ones.
-    protected void addNewMedicalDiagnosis(int patientId, String patientName, String diagnosis)
+    protected void addNewMedicalDiagnosis(String patientId, String patientName, String diagnosis)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -128,7 +128,7 @@ public class MedicalRecordManagement
         }
     }
 
-    protected void addNewMedicalPrescription(int patientId, String patientName, String prescription)
+    protected void addNewMedicalPrescription(String patientId, String patientName, String prescription)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
@@ -140,7 +140,7 @@ public class MedicalRecordManagement
         }
     }
 
-    protected void addNewTreatmentPlan(int patientId, String patientName, String treatmentPlan)
+    protected void addNewTreatmentPlan(String patientId, String patientName, String treatmentPlan)
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {

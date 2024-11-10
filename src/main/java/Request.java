@@ -1,17 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
 public class Request
 {
     static int totalRequests = 0;
     private int requestId = totalRequests++;
-    private List<Medicine> medicine;
+    private Medicine medicine;
     private int replenishQuantity;
     private Status status;
-
-    public Request()
-    {
-        this.medicine = new ArrayList<>();
-    }
 
     public int getRequestId()
     {
@@ -28,11 +21,15 @@ public class Request
         return replenishQuantity;
     }
 
-    public List<Medicine> getMedicine()
+    public Medicine getMedicine()
     {
         return medicine;
     }
 
+    public void setMedicine(Medicine medicine) 
+    {
+        this.medicine = medicine;
+    }
     public void setStatus(Status status)
     {
         this.status = status;

@@ -46,17 +46,16 @@ public class DoctorMenu {
             System.out.println("15. Logout");
             int choice = sc.nextInt();
             sc.nextLine();
-            int patientId;
+            String patientId;
             String patientName;
             String doctorName;
-            int doctorId;
+            String doctorId;
             String diagnosis;
             String prescription;
             switch (choice) {
                 case 1:
                     System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextInt();
-                    sc.nextLine();
+                    doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     viewUpcomingAppointments(doctorId, doctorName);
@@ -65,8 +64,7 @@ public class DoctorMenu {
 
                 case 2:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     viewPatientMedicalRecord(patientId, patientName);
@@ -74,8 +72,7 @@ public class DoctorMenu {
 
                 case 3: // Update Patient Medical Record
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine();
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter diagnosis: ");
@@ -92,8 +89,7 @@ public class DoctorMenu {
                     break;
                 case 5:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter diagnosis: ");
@@ -102,8 +98,7 @@ public class DoctorMenu {
                     break;
                 case 6:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -114,8 +109,7 @@ public class DoctorMenu {
                     break;
                 case 7:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
@@ -128,8 +122,7 @@ public class DoctorMenu {
                     break;
                 case 8:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -146,8 +139,7 @@ public class DoctorMenu {
                     break;
                 case 9:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -163,8 +155,7 @@ public class DoctorMenu {
 
                 case 10:
                     System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
@@ -176,8 +167,7 @@ public class DoctorMenu {
 
                 case 11:
                     System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
@@ -189,12 +179,11 @@ public class DoctorMenu {
 
                 case 12:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextInt();
+                    doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
@@ -206,8 +195,7 @@ public class DoctorMenu {
 
                 case 13:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine(); // Consume newline
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -222,8 +210,7 @@ public class DoctorMenu {
 
                 case 14:  // New case for recording appointment outcome
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextInt();
-                    sc.nextLine();
+                    patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
@@ -254,13 +241,13 @@ public class DoctorMenu {
         }
     }
 
-    public void viewPatientMedicalRecord(int patientId, String patientName) {
+    public void viewPatientMedicalRecord(String patientId, String patientName) {
         medicalRecordManagement.viewPatientMedicalRecord(patientId, patientName);
     }
 
     // To set the patient's medical record, the doctor must provide the patient's ID, name, diagnosis, and prescription.
     // This is to be done after every consultation.
-    public void setPatientMedicalrecord(int patientId, String patientName, String diagnosis, String prescription) {
+    public void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription) {
         medicalRecordManagement.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
     }
 
@@ -269,59 +256,59 @@ public class DoctorMenu {
         appointmentManagement.viewPersonalSchedule(doctorName);
     }
 
-    public void setAvailability(int doctorId, String doctorName, String date, String time) {
+    public void setAvailability(String doctorId, String doctorName, String date, String time) {
         appointmentManagement.setAvailability(doctorId, doctorName, date, time);
     }
 
-    public void cancelAvailability(int doctorId, String doctorName, String date, String time) {
+    public void cancelAvailability(String doctorId, String doctorName, String date, String time) {
         appointmentManagement.cancelAvailability(doctorId, doctorName, date, time);
     }
 
-    public void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time) {
+    public void acceptAppointment(String patientId, String patientName, String doctorId, String doctorName, String date, String time) {
         appointmentManagement.acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
     }
 
-    public void rejectAppointment(int patientId, String patientName, String doctorName, String date, String time) {
+    public void rejectAppointment(String patientId, String patientName, String doctorName, String date, String time) {
         appointmentManagement.rejectAppointment(patientId, patientName, doctorName, date, time);
     }
 
-    public void displayScheduledAppointments(int doctorId, String doctorName) {
+    public void displayScheduledAppointments(String doctorId, String doctorName) {
         appointmentManagement.displayScheduledAppointments(doctorId, doctorName);
     }
 
-    public void viewUpcomingAppointments(int doctorId, String doctorName) {
+    public void viewUpcomingAppointments(String doctorId, String doctorName) {
         appointmentManagement.viewUpcomingAppointments(doctorId, doctorName);
     }
 
-    public void recordAppointmentOutcomeRecords(int patientId, String patientName, String doctorName, String date, String time, String service, String prescription, String consultationNotes, Status prescriptionStatus) {
+    public void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date, String time, String service, String prescription, String consultationNotes, Status prescriptionStatus) {
         appointmentManagement.recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
     }
 
-    public void addTreatmentPlan(int patientId, String patientName, String treatmentPlan) {
+    public void addTreatmentPlan(String patientId, String patientName, String treatmentPlan) {
         medicalRecordManagement.addNewTreatmentPlan(patientId, patientName, treatmentPlan);
     }
 
-    public void addNewDiagnosis(int patientId, String patientName, String diagnosis) {
+    public void addNewDiagnosis(String patientId, String patientName, String diagnosis) {
         medicalRecordManagement.addNewMedicalDiagnosis(patientId, patientName, diagnosis);
     }
 
     // Consider whether other doctors should be able to addNewPrescription on behalf of another doctor.
     // Remove the doctorName from parameter if this isn't the case.
-    public void addNewPrescription(int patientId, String patientName, String doctorName, String prescription) {
+    public void addNewPrescription(String patientId, String patientName, String doctorName, String prescription) {
         medicalRecordManagement.addNewMedicalPrescription(patientId, patientName, prescription);
     }
 
     // Individual functions to edit specific fields so that the doctor can edit the appointment outcome in case of errata.
-    public void editService(int patientId, String doctorName, String date, String time, String service) {
+    public void editService(String patientId, String doctorName, String date, String time, String service) {
         appointmentManagement.editService(patientId, doctorName, date, time, service);
     }
 
     // Consider whether other doctors should be able to editPrescription on behalf of another doctor.
-    public void editPrescription(int patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus) {
+    public void editPrescription(String patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus) {
         appointmentManagement.editPrescription(patientId, patientName, doctorName, date, time, prescription, prescriptionStatus);
     }
 
-    public void editConsultationNotes(int patientId, String patientName, String doctorName, String date, String time, String consultationNotes) {
+    public void editConsultationNotes(String patientId, String patientName, String doctorName, String date, String time, String consultationNotes) {
         appointmentManagement.editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
     }
 }
