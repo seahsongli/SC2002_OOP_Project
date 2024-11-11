@@ -204,6 +204,7 @@ public class AppointmentManagement
         if (doctorAvailability.containsKey(key)) {
             // Remove the time slot from the doctor's availability
             doctorAvailability.get(key).remove(time);
+            System.out.println("Availability canceled for " + doctorName + " on " + date + " at " + time);
             // If no more slots are available for this doctor on the given date, remove the entry
             if (doctorAvailability.get(key).isEmpty()) {
                 doctorAvailability.remove(key);
@@ -220,9 +221,11 @@ public class AppointmentManagement
             {
                 appointment.setStatus(Status.CONFIRMED);
                 cancelAvailability(doctorId, doctorName, date, time); // Remove the time slot from availability
-                break;
+                System.out.println("Appointment confirmed for " + patientName + " with Dr. " + doctorName);
+                return;
             }
         }
+        System.out.println("Appointment not found for confirmation.");
     }
 
     // Reject an appointment
@@ -233,9 +236,11 @@ public class AppointmentManagement
             if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.REJECTED);
-                break;
+                System.out.println("Appointment rejected for " + patientName + " with Dr. " + doctorName);
+                return;
             }
         }
+        System.out.println("Appointment not found for rejection.");
     }
 
     public void scheduleAppointment(int patientId, String patientName, String doctorName, String date, String time) {
@@ -246,6 +251,14 @@ public class AppointmentManagement
         if (!doctorAvailability.containsKey(key) || !doctorAvailability.get(key).contains(time)) {
             System.out.println("The doctor is not available at " + time + " on " + date + ". Please choose another time.");
             return; // Reject the appointment if the slot is not available
+        }
+
+        // Check if patient already has an appointment at that time
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatientId() == patientId && appointment.getDate().equals(date) && appointment.getTime().equals(time)) {
+                System.out.println("Patient already has an appointment at this time.");
+                return;
+            }
         }
         
         // If the slot is available, schedule the appointment
@@ -261,6 +274,7 @@ public class AppointmentManagement
             appointment.getDate().equals(date) && 
             appointment.getTime().equals(time)
         );
+        System.out.println("Appointment canceled for " + patientName + " with Dr. " + doctorName);
     }
 
     public void rescheduleAppointment(int patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime) {
@@ -284,6 +298,26 @@ public class AppointmentManagement
         scheduleAppointment(patientId, patientName, doctorName, newDate, newTime); // Call the existing scheduleAppointment method to book the new appointment
     }
 
+        // Method to display available appointments for a doctor on a specific date
+    public void displayAvailableAppointments(String doctorName, String date) {
+        // Create a key based on the doctor name and the date
+        String key = doctorName + "_" + date;
+        
+        // Check if the doctor has availability for the given date
+        if (doctorAvailability.containsKey(key)) {
+            // Get the list of available time slots for the doctor on that date
+            List<String> availableTimes = doctorAvailability.get(key);
+            
+            // Display the available time slots
+            System.out.println("Available appointments for Dr. " + doctorName + " on " + date + ":");
+            for (String time : availableTimes) {
+                System.out.println("Time: " + time);
+            }
+        } else {
+            // If there are no available slots for the doctor on that date
+            System.out.println("No available appointments for Dr. " + doctorName + " on " + date + ".");
+        }
+    }
 
     public void displayScheduledAppointments(int patientId, String patientName)
     {

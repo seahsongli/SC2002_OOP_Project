@@ -32,21 +32,26 @@ public class DoctorMenu
             System.out.println("1. View Upcoming Appointments");
             System.out.println("2. Add New Diagnosis");
             System.out.println("3. Add New Prescription");
-            System.out.println("4. Edit Service");
-            System.out.println("5. Edit Prescription");
-            System.out.println("6. Edit Consultation Notes");
-            System.out.println("7. Logout");
+            System.out.println("4. Add Available Time for appointment");
+            System.out.println("5. Edit Service");
+            System.out.println("6. Edit Prescription");
+            System.out.println("7. Edit Consultation Notes");
+            System.out.println("8. Logout");
             int choice = sc.nextInt();
             sc.nextLine();
             int patientId;
             String patientName;
+            int doctorId;
+            String doctorName;
+            String date;
+            String time;
             switch (choice) {
                 case 1:
                     System.out.println("Enter doctor ID: ");
-                    int doctorId = sc.nextInt();
+                    doctorId = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Enter doctor name: ");
-                    String doctorName = sc.nextLine();
+                    doctorName = sc.nextLine();
                     viewUpcomingAppointments(doctorId, doctorName);
                     break;
                 case 2:
@@ -72,20 +77,37 @@ public class DoctorMenu
                     addNewPrescription(patientId, patientName, doctorName, prescription);
                     break;
                 case 4:
+                    System.out.println("Enter doctor ID: ");
+                    doctorId = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                
+                    System.out.println("Enter date (e.g., 2024-11-01): ");
+                    date = sc.nextLine();
+                
+                    System.out.println("Enter time (in 30-minute intervals from 9:00 AM to 6:00 PM, e.g., 09:30): ");
+                    time = sc.nextLine();
+                
+                    // Call setAvailability on the AppointmentManagement instance
+                    appointmentManagement.setAvailability(doctorId, doctorName, date, time);
+                    break;
+                case 5:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
-                    String date = sc.nextLine();
+                    date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
-                    String time = sc.nextLine();
+                    time = sc.nextLine();
                     System.out.println("Enter service: ");
                     String service = sc.nextLine();
                     editService(patientId, doctorName, date, time, service);
                     break;
-                case 5:
+                case 6:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -103,7 +125,7 @@ public class DoctorMenu
                     String status = sc.nextLine();
                     editPrescription(patientId, patientName, doctorName, date, time, prescription, Status.valueOf(status.toUpperCase()));
                     break;
-                case 6:
+                case 7:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextInt();
                     sc.nextLine(); // Consume newline
@@ -119,7 +141,7 @@ public class DoctorMenu
                     String consultationNotes = sc.nextLine();
                     editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
                     break;
-                case 7:
+                case 8:
                     System.out.println("Logging out...");
                     return;
                 default:

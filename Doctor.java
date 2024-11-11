@@ -24,6 +24,13 @@ public class Doctor extends Staff
     }
 
     
+    // Utility method to check if the user is a doctor
+    private void checkDoctorRole() {
+        if (!"Doctor".equals(super.getRole())) {
+            throw new SecurityException("Access denied: Only doctors can perform this action.");
+        }
+    }
+
     public void addNewDiagnosis(DoctorMenu doctorMenu)
     {
         System.out.println("Enter patient ID: ");
@@ -78,6 +85,13 @@ public class Doctor extends Staff
         doctorMenu.viewPersonalSchedule(super.getName());
     }
 
+    public void setAvailability(DoctorMenu doctorMenu) {
+        System.out.println("Enter available date: ");
+        String date = sc.nextLine();
+        System.out.println("Enter available time: ");
+        String time = sc.nextLine();
+        doctorMenu.setAvailability(super.getStaffId(), super.getName(), date, time);
+    }
     //  public void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time)
     public void acceptAppointment(DoctorMenu doctorMenu)
     {
