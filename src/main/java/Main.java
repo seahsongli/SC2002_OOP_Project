@@ -2,6 +2,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import hospitalManagement.AdministratorMenu;
+import hospitalManagement.AppointmentManagement;
+import hospitalManagement.DoctorMenu;
+import hospitalManagement.InventoryManagement;
+import hospitalManagement.MedicalRecordManagement;
+import hospitalManagement.PharmacistMenu;
+import hospitalManagement.PrescriptionManagement;
+import hospitalManagement.Roles;
+import hospitalManagement.Staff;
+import hospitalManagement.StaffManagement;
+import hospitalManagement.User;
+import patient.PatientMenu;
+
 public class Main 
 {
     private static Map<String, User> users = new HashMap<>();

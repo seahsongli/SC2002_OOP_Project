@@ -1,3 +1,4 @@
+package hospitalManagement;
 public class PrescriptionManagement
 {
     private AppointmentManagement appointmentManagement;

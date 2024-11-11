@@ -1,4 +1,8 @@
+package patient;
 import java.util.Scanner;
+
+import hospitalManagement.AppointmentManagement;
+import hospitalManagement.MedicalRecordManagement;
 public class PatientMenu
 {
     private MedicalRecordManagement medicalRecordManagement;

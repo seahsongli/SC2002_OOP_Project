@@ -1,3 +1,5 @@
+package hospitalManagement;
+
 public class Request
 {
     static int totalRequests = 0;
