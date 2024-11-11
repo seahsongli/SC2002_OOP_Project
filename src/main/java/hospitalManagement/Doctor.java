@@ -1,3 +1,4 @@
+package hospitalManagement;
 import java.util.Scanner;
 
 public class Doctor extends Staff

@@ -1,3 +1,4 @@
+package hospitalManagement;
 enum Status
 {
     PENDING,
