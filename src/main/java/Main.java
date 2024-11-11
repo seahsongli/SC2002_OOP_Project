@@ -13,6 +13,7 @@ import hospitalManagement.Roles;
 import hospitalManagement.Staff;
 import hospitalManagement.StaffManagement;
 import hospitalManagement.User;
+import patient.Patient;
 import patient.PatientMenu;
 
 public class Main 
@@ -62,7 +63,7 @@ public class Main
             {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
             {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
             {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
-            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40}
+            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40},
         };
 
         for (int i = 0; i < staffData.length; i++) 
@@ -93,18 +94,41 @@ public class Main
         }
 
         // Create patient user and add to users map only
-        String patientHospitalId = "patient1";
-        if (users.containsKey(patientHospitalId)) 
+        Object[][] patientData = 
         {
-            System.out.println("Hospital ID " + patientHospitalId + " already exists. Please try again.");
-        } 
-        else 
+            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
+            {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com"},
+            {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com"},
+            {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com"},
+            {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com"},
+            {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com"}
+        };
+
+        for (int i = 0; i < patientData.length; i++) 
         {
-            User patient = new User(patientHospitalId, "password", "Patient");
-            users.put(patientHospitalId, patient);
-            System.out.println("User with Hospital ID " + patientHospitalId + " added successfully.");
+            Object[] data = patientData[i];
+            String hospitalId = (String) data[0];
+            String password = (String) data[1];
+            String patientId = (String) data[2];
+            String name = (String) data[3];
+            String dob = (String) data[4];
+            String gender = (String) data[5];
+            String bloodGroup = (String) data[6];
+            String email = (String) data[7];
+
+            if (users.containsKey(hospitalId)) 
+            {
+                System.out.println("Hospital ID " + hospitalId + " already exists. Please try again.");
+            }
+            else
+            {
+                // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
+                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
+                users.put(hospitalId, patient);
+                System.out.println("Patient with Hospital ID " + hospitalId + " and Staff ID " + patientId + " added to users map.");
+            }
+            
         }
-    
     }
 
     private static void login(AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement, PrescriptionManagement prescriptionManagement, StaffManagement staffManagement)
@@ -116,7 +140,7 @@ public class Main
 
         User user = users.get(hospitalId);
 
-        if (user != null && user.getPassword().equals(password)) 
+        if (user != null && user.checkPassword(password)) 
         {
             System.out.println("Login successful!");
             if (password.equals("password")) 

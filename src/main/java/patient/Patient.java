@@ -35,7 +35,7 @@ public class Patient extends User {
     public String getName() {
         return name;
     }
-
+    
     public void setContactNumber(PatientMenu patientMenu, String phoneNumber)
     {
         patientMenu.updateContactNumber(getId(), getName(), phoneNumber);
