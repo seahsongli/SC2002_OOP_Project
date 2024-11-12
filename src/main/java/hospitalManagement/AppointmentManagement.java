@@ -2,6 +2,7 @@ package hospitalManagement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,6 +168,35 @@ public class AppointmentManagement
         }
     }
 
+    public void intializeDoctorAvailability(String doctorId, String doctorName)
+    {
+        ArrayList<String> availableTimes = new ArrayList<>(Arrays.asList(
+    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
+        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
+        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
+        ));
+        // Initailize availability for the next 1 month
+        ArrayList<String> availableDates = new ArrayList<>();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDate = LocalDate.now().plusMonths(1);
+
+        for (int i = 0; i < 10; i++) 
+        {
+            availableDates.add(startDate.plusDays(i).format(dateFormatter));
+        }
+        for (String date : availableDates) 
+        {
+            String key = doctorName + "_" + date;
+            for (String availableTime : availableTimes) 
+            {
+                doctorAvailability.putIfAbsent(key, new ArrayList<>());
+                doctorAvailability.get(key).add(availableTime);
+            }
+            doctorAvailability.put(key, availableTimes);
+        }
+        
+    }
+
     private boolean isValidTime(String time) {
         // Check if the time is in the correct format (HH:mm)
         String[] timeParts = time.split(":");
@@ -316,6 +346,23 @@ public class AppointmentManagement
                 System.out.println("Prescription Status: " + record.getPrescriptionStatus());
                 System.out.println("Consultation Notes: " + record.getConsultationNotes());
             }
+        }
+    }
+
+    public void viewAvailableAppointmentSlots(String patientId, String patientName, String doctorName, String date)
+    {
+        String key = doctorName + "_" + date;
+        if (doctorAvailability.containsKey(key))
+        {
+            System.out.println("Available slots for Dr. " + doctorName + " on " + date + ":");
+            for (String time : doctorAvailability.get(key))
+            {
+                System.out.println(time);
+            }
+        }
+        else
+        {
+            System.out.println("No available slots for Dr. " + doctorName + " on " + date);
         }
     }
 
