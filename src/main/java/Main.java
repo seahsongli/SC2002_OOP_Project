@@ -20,14 +20,13 @@ public class Main
 {
     private static Map<String, User> users = new HashMap<>();
     private static Scanner sc = new Scanner(System.in);
+    private static AppointmentManagement appointmentManagement = new AppointmentManagement();
+    private static MedicalRecordManagement medicalRecordManagement = new MedicalRecordManagement();
+    private static InventoryManagement inventoryManagement = new InventoryManagement();
+    private static PrescriptionManagement prescriptionManagement = new PrescriptionManagement(appointmentManagement);
+    private static StaffManagement staffManagement = new StaffManagement();
     public static void main(String[] args) 
     {
-        
-        AppointmentManagement appointmentManagement = new AppointmentManagement();
-        MedicalRecordManagement medicalRecordManagement = new MedicalRecordManagement();
-        InventoryManagement inventoryManagement = new InventoryManagement();
-        PrescriptionManagement prescriptionManagement = new PrescriptionManagement(appointmentManagement);
-        StaffManagement staffManagement = new StaffManagement();
         // Initialize some users for testing
         initializeUsers(staffManagement);
 
@@ -87,6 +86,11 @@ public class Main
                 Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
                 users.put(hospitalId, staff);
                 System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
+                if (role.equals("doctor"))
+                {
+                    // Initialize doctor availability
+                    appointmentManagement.intializeDoctorAvailability(hospitalId, name);
+                }
                 // Add to staff list using staffManagement.addStaff()
                 staffManagement.addStaff(hospitalId, password, staffId, name, role, gender, age);
             }
@@ -148,7 +152,11 @@ public class Main
                 System.out.println("You are using the default password. Please change your password.");
                 changePassword(user);
             }
-            navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
+            else
+            {
+                navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
+            }
+            
         } 
         else 
         {
