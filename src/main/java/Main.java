@@ -97,11 +97,11 @@ public class Main
         Object[][] patientData = 
         {
             // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
-            {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com"},
-            {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com"},
-            {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com"},
-            {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com"},
-            {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com"}
+            {"patient1", "password", "p001", "john doe", "1990-05-22", "male", "O+", "john.doe@example.com"},
+            {"patient2", "password", "p002", "jane smith", "1985-03-14", "female", "A-", "jane.smith@example.com"},
+            {"patient3", "password", "p003", "alice johnson", "1992-07-30", "female", "B+", "alice.johnson@example.com"},
+            {"patient4", "password", "p004", "bob brown", "1980-11-12", "male", "AB-", "bob.brown@example.com"},
+            {"patient5", "password", "p005", "charlie davis", "1995-09-05", "male", "O-", "charlie.davis@example.com"}
         };
 
         for (int i = 0; i < patientData.length; i++) 
@@ -125,7 +125,7 @@ public class Main
                 // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
                 Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
                 users.put(hospitalId, patient);
-                System.out.println("Patient with Hospital ID " + hospitalId + " and Staff ID " + patientId + " added to users map.");
+                System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
             }
             
         }
@@ -169,21 +169,21 @@ public class Main
        
         switch (user.getRole()) 
         {
-            case "Administrator":
+            case "administrator":
                 AdministratorMenu adminMenu = new AdministratorMenu(inventoryManagement, staffManagement, appointmentManagement, users);
                 adminMenu.displayMenu();
                 break;
-            case "Doctor":
+            case "doctor":
                 DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement);
-                // doctorMenu.displayMenu();
+                doctorMenu.displayMenu();
                 break;
-            case "Pharmacist":
+            case "pharmacist":
                 PharmacistMenu pharmacistMenu = new PharmacistMenu(prescriptionManagement, inventoryManagement);
-                // pharmacistMenu.displayMenu();
+                pharmacistMenu.displayMenu();
                 break;
-            case "Patient":
+            case "patient":
                 PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement);
-                // patientMenu.displayMenu();
+                patientMenu.displayMenu();
                 break;
             default:
                 System.out.println("Invalid role. Access denied.");

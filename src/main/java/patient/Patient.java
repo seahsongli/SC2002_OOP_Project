@@ -5,7 +5,8 @@ import java.time.format.DateTimeParseException;
 
 import hospitalManagement.User;
 
-public class Patient extends User {
+public class Patient extends User 
+{
     private String patientId;
     private String name;
     private LocalDate dob; // Date of Birth
@@ -18,8 +19,9 @@ public class Patient extends User {
 
 
 
-    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email) {
-        super(hospitalID, password, "Patient");
+    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email) 
+    {
+        super(hospitalID, password, "patient");
         this.patientId = patientId;
         this.name = name;
         setDob(dob);
@@ -28,11 +30,13 @@ public class Patient extends User {
         this.email = email;
     }
 
-    public String getId() {
+    public String getId() 
+    {
         return patientId;
     }
 
-    public String getName() {
+    public String getName() 
+    {
         return name;
     }
     
