@@ -168,34 +168,30 @@ public class AppointmentManagement
         }
     }
 
-    public void intializeDoctorAvailability(String doctorId, String doctorName)
-    {
+    public void intializeDoctorAvailability(String doctorId, String doctorName) {
         ArrayList<String> availableTimes = new ArrayList<>(Arrays.asList(
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
-        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
-        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
+            "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
+            "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
+            "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
         ));
-        // Initailize availability for the next 1 month
+    
+        // Initialize availability for the next 1 month
         ArrayList<String> availableDates = new ArrayList<>();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate startDate = LocalDate.now().plusMonths(1);
-
-        for (int i = 0; i < 10; i++) 
-        {
+        LocalDate startDate = LocalDate.now();
+    
+        for (int i = 0; i < 30; i++) {
             availableDates.add(startDate.plusDays(i).format(dateFormatter));
         }
-        for (String date : availableDates) 
-        {
-            String key = doctorName + "_" + date;
-            for (String availableTime : availableTimes) 
-            {
-                doctorAvailability.putIfAbsent(key, new ArrayList<>());
-                doctorAvailability.get(key).add(availableTime);
-            }
-            doctorAvailability.put(key, availableTimes);
-        }
         
+        for (String date : availableDates) {
+            String key = doctorName + "_" + date;
+            // Create a new list for each date to avoid shared references
+            ArrayList<String> dailyTimes = new ArrayList<>(availableTimes);
+            doctorAvailability.put(key, dailyTimes);
+        }
     }
+    
 
     private boolean isValidTime(String time) {
         // Check if the time is in the correct format (HH:mm)
