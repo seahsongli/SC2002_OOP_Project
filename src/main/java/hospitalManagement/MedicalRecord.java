@@ -26,11 +26,13 @@ public class MedicalRecord
         this.bloodType = bloodType;
         this.contactNumber = contactNumber;
         this.email = email;
+
         this.pastDiagnosis = pastDiagnosis;
         this.pastTreatments = pastTreatments;
         this.currentDiagnosis = currentDiagnosis;
         this.currentTreatments = currentTreatments;
         this.prescriptions = prescriptions;
+        
     }
 
 
@@ -101,7 +103,7 @@ public class MedicalRecord
         return pastDiagnosis;
     }
     
-    protected List<String>  getPastTreatments()
+    protected List<String> getPastTreatments()
     {
         return pastTreatments;
     }
