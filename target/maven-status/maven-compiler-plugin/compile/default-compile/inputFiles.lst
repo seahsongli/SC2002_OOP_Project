@@ -1,22 +1,23 @@
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Administrator.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\AdministratorMenu.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Appointment.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\AppointmentManagement.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\AppointmentOutcomeRecord.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Doctor.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\DoctorMenu.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\InventoryManagement.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Main.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\MedicalRecord.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\MedicalRecordManagement.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Medicine.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Patient.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\PatientMenu.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Pharmacist.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\PharmacistMenu.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\PrescriptionManagement.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Request.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Staff.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\StaffManagement.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\Status.java
-C:\Users\seahs\repos\SC2002_OOP_Project\src\main\java\User.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/Main.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Administrator.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/AdministratorMenu.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Appointment.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/AppointmentManagement.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/AppointmentOutcomeRecord.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Doctor.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/DoctorMenu.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/InventoryManagement.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/MedicalRecord.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/MedicalRecordManagement.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Medicine.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Pharmacist.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/PharmacistMenu.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/PrescriptionManagement.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Request.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Roles.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Staff.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/StaffManagement.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/Status.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/hospitalManagement/User.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/patient/Patient.java
+/Users/anaychadha/Desktop/NTU sem 1/OOP SC2002/project/SC2002_OOP_Project/src/main/java/patient/PatientMenu.java

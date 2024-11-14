@@ -89,9 +89,9 @@ public class AdministratorMenu
     }
     
     
-    public void updateStaffDetails(String staffId, String name, String role, String gender, int age)
+    public void updateStaffDetails(String oldStaffId, String newStaffId, String name, String role, String gender, Integer age)
     {
-        staffManagement.updateStaffDetails(staffId, name, role, gender, age);
+        staffManagement.updateStaffDetails(oldStaffId, newStaffId, name, role, gender, age);
     }
     
     
@@ -152,8 +152,8 @@ public class AdministratorMenu
             
             System.out.print("Enter Patient Name: ");
             String patientName = sc.nextLine().trim();
-            
-            System.out.print("Enter staff ID: ");
+            // doctor Id and staff Id are the same
+            System.out.print("Enter Doctor ID: ");
             String staffId = sc.nextLine().trim();
             
             System.out.print("Enter Doctor Name: ");
@@ -184,110 +184,190 @@ public class AdministratorMenu
         }
         
     }
-    
+    private void updateStaffDetailsInteractive() 
+    {
+        System.out.print("Enter current staff ID: ");
+        String oldStaffId = sc.nextLine().trim().toLowerCase();
+        
+        // Check if staff exists
+        if (!staffManagement.isStaffIdMatched(oldStaffId)) {
+            System.out.println("Staff with ID " + oldStaffId + " not found.");
+            return;
+        }
+        
+        System.out.println("Select the fields you want to update:");
+        System.out.println("1. Staff ID");
+        System.out.println("2. Name");
+        System.out.println("3. Role");
+        System.out.println("4. Gender");
+        System.out.println("5. Age");
+        System.out.println("6. Back to Manage Staff Menu");
+        System.out.print("Enter your choices separated by commas (e.g., 1,3,5): ");
+        String choicesLine = sc.nextLine().trim();
+        
+        if (choicesLine.equals("6")) {
+            return; // Return to Manage Staff Menu
+        }
+        
+        String[] choices = choicesLine.split(",");
+        String newStaffId = null;
+        String name = null;
+        String role = null;
+        String gender = null;
+        Integer age = null;
+        
+        for (String choiceStr : choices) {
+            int choice;
+            try 
+            {
+                choice = Integer.parseInt(choiceStr.trim());
+            } catch (NumberFormatException e) 
+            {
+                System.out.println("Invalid input: " + choiceStr.trim());
+                continue;
+            }
+            
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter new Staff ID: ");
+                    newStaffId = sc.nextLine().trim().toLowerCase();
+                    break;
+                case 2:
+                    System.out.print("Enter new Name: ");
+                    name = sc.nextLine().trim().toLowerCase();
+                    break;
+                case 3:
+                    System.out.print("Enter new Role: ");
+                    role = sc.nextLine().trim().toLowerCase();
+                    break;
+                case 4:
+                    System.out.print("Enter new Gender: ");
+                    gender = sc.nextLine().trim().toLowerCase();
+                    break;
+                case 5:
+                    System.out.print("Enter new Age: ");
+                    try {
+                        age = Integer.parseInt(sc.nextLine().trim());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid age input. Skipping age update.");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid choice: " + choice);
+                    break;
+            }
+        }
+        
+        // Call the update method with the collected data
+        staffManagement.updateStaffDetails(oldStaffId, newStaffId, name, role, gender, age);
+    }
     // Function to add, remove or update staff
     public void manageStaff()
     {
         
-        
-        System.out.println("--- Manage Hospital Staff ---");
-        System.out.println("1. Add Staff");
-        System.out.println("2. Remove Staff");
-        System.out.println("3. Update Staff Details");
-        System.out.println("4. Back to main menu");
-        
-        int staffChoice = sc.nextInt();
-        sc.nextLine(); // Consume newline
-        
-        switch (staffChoice) 
-        {
-            case 1:
-            try 
-            {
-                System.out.print("Enter hospital ID: ");
-                String hospitalID = sc.nextLine();
-                
-                
-                System.out.print("Enter staff ID: ");
-                String staffId = sc.nextLine().trim().toLowerCase();
-                
-                System.out.print("Enter staff name: ");
-                String name = sc.nextLine();
-                
-                System.out.print("Enter staff role: ");
-                String role = sc.nextLine();
-                
-                System.out.print("Enter staff gender: ");
-                String gender = sc.nextLine();
-                
-                System.out.print("Enter staff age: ");
-                int age = Integer.parseInt(sc.nextLine());
-                
-                // Add the staff member
-                staffManagement.addStaff(hospitalID, "Password", staffId, name.toUpperCase(), role.toUpperCase(), gender.toUpperCase(), age);
-                break;
-                
-                
-                
-            } catch (NumberFormatException e) 
-            
-            {
-                System.out.println("Invalid input. Staff ID and age must be integers.");
-                break;
-                
-                
-            } catch (Exception e) 
-            
-            {
-                System.out.println("Error adding staff: " + e.getMessage());
-                break;
-                
-                
-            }
-            case 2:
-            try 
-            {
-                System.out.print("Enter staff ID to remove: ");
-                String staffId = sc.nextLine().trim().toLowerCase();
-                staffManagement.removeStaff(staffId);
-                break;
-                
-            } catch (NumberFormatException e) 
-            
-            {
-                System.out.println("Invalid input. Staff ID must be an integer.");
-                break;
-                
-            } catch (Exception e) 
-            
-            {
-                System.out.println("Error removing staff: " + e.getMessage());
-                break;
-                
-            }
-            case 3:
-            
-            System.out.print("Enter staff ID to update: ");
-            String staffId = sc.nextLine().trim().toLowerCase();
-            
-            System.out.print("Enter staff name: ");
-            String name = sc.nextLine().trim().toLowerCase();
-            
-            System.out.print("Enter staff role: ");
-            String role = sc.nextLine().trim().toLowerCase();
-            
-            System.out.print("Enter new staff gender: ");
-            String gender = sc.nextLine().trim().toLowerCase();
-            
-            System.out.print("Enter new staff age: ");
-            int age = Integer.parseInt(sc.nextLine());
-            staffManagement.updateStaffDetails(staffId, name, role, gender, age);
-            break;
-            
-            default:
-                System.out.println("Invalid choice. Please try again.");
-                break;
-        }    
+       while(true) 
+       {
+
+           System.out.println("--- Manage Hospital Staff ---");
+           System.out.println("1. Add Staff");
+           System.out.println("2. Remove Staff");
+           System.out.println("3. Update Staff Details");
+           System.out.println("4. Back to main menu");
+           
+           int staffChoice = sc.nextInt();
+           sc.nextLine(); // Consume newline
+           
+           switch (staffChoice) 
+           {
+               case 1:
+                   try 
+                   {
+                       System.out.print("Enter hospital ID: ");
+                       String hospitalID = sc.nextLine();
+                       // validate hospital Id
+                       if(staffManagement.isHospitalIdMatched(hospitalID))
+                       {
+                           System.out.println("Hospital ID already exists. Please try again.");
+                           break;
+                       }
+                       
+                       
+                       System.out.print("Enter staff ID: ");
+                       String staffId = sc.nextLine().trim().toLowerCase();
+   
+                       // validate staffId
+                       if(staffManagement.isStaffIdMatched(staffId))
+                       {
+                           System.out.println("Staff ID already exists. Please try again.");
+                           break;
+                       }
+                       
+                       System.out.print("Enter staff name: ");
+                       String name = sc.nextLine();
+                       
+                       System.out.print("Enter staff role: ");
+                       String role = sc.nextLine();
+                       
+                       System.out.print("Enter staff gender: ");
+                       String gender = sc.nextLine();
+                       
+                       System.out.print("Enter staff age: ");
+                       int age = Integer.parseInt(sc.nextLine());
+                       
+                       // Add the staff member
+                       staffManagement.addStaff(hospitalID, "Password", staffId.toLowerCase(), name.toLowerCase(), role.toLowerCase(), gender.toLowerCase(), age);
+                       break;
+                       
+                       
+                       
+                   } catch (NumberFormatException e) 
+                   
+                   {
+                       System.out.println("Invalid input. Staff ID and age must be integers.");
+                       break;
+                       
+                       
+                   } catch (Exception e) 
+                   
+                   {
+                       System.out.println("Error adding staff: " + e.getMessage());
+                       break;
+                       
+                       
+                   }
+               case 2:
+                   try 
+                   {
+                       System.out.print("Enter staff ID to remove: ");
+                       String staffId = sc.nextLine().trim().toLowerCase();
+                       staffManagement.removeStaff(staffId);
+                       break;
+                       
+                   } catch (NumberFormatException e) 
+                   
+                   {
+                       System.out.println("Invalid input. Staff ID must be an integer.");
+                       break;
+                       
+                   } catch (Exception e) 
+                   
+                   {
+                       System.out.println("Error removing staff: " + e.getMessage());
+                       break;
+                       
+                   }
+               case 3:
+                   
+                   
+                   updateStaffDetailsInteractive();
+                   break;
+               case 4:
+                   return;
+               default:
+                   System.out.println("Invalid choice. Please try again.");
+                   break;
+           }    
+       }
         
     }
     /**

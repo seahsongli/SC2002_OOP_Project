@@ -366,7 +366,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Doctor ID: " + staffId);

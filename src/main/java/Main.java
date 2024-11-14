@@ -131,7 +131,7 @@ public class Main
                 // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
                 Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
                 users.put(hospitalId, patient);
-                System.out.println("Patient with Hospital ID " + hospitalId + " and Staff ID " + patientId + " added to users map.");
+                System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
             }
             // This for testing purposes
             // String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions
