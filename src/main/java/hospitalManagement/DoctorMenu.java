@@ -34,11 +34,11 @@ public class DoctorMenu {
             System.out.println("2. View Patient medical records"); // Done
             System.out.println("3. Update Patient medical records"); // Done
             System.out.println("4. View Personal schedule records"); // Done
-            System.out.println("5. Add New Diagnosis"); // For medicalRecords
-            System.out.println("6. Add New Prescription"); // For medicalRecords
-            System.out.println("7. Edit Service"); // For AppointmentOutcomeRecord
-            System.out.println("8. Edit Prescription"); // For AppointmentOutcomeRecord
-            System.out.println("9. Edit Consultation Notes"); // For AppointmentOutcomeRecord
+            System.out.println("5. Add New Diagnosis"); // For medicalRecords Done
+            System.out.println("6. Add New Prescription"); // For medicalRecords Done
+            System.out.println("7. Edit Service"); // For AppointmentOutcomeRecord Done
+            System.out.println("8. Edit Prescription"); // For AppointmentOutcomeRecord Done
+            System.out.println("9. Edit Consultation Notes"); // For AppointmentOutcomeRecord Done
             System.out.println("10. Set availability for Appointment"); // Done
             System.out.println("11. Cancel availability for Appointment"); // Done
             System.out.println("12. View Appointment requests"); // Done
@@ -233,7 +233,7 @@ public class DoctorMenu {
                     prescription = sc.nextLine();
                     System.out.println("Enter consultation notes: ");
                     consultationNotes = sc.nextLine();
-                    System.out.println("Enter prescription status (e.g., APPROVED, PENDING): ");
+                    System.out.println("Enter prescription status (e.g.PENDING): ");
                     Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
 
                     recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);

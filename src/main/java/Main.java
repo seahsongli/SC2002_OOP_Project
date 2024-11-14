@@ -83,7 +83,6 @@ public class Main
             }
             else
             {
-                
                 Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
                 users.put(hospitalId, staff);
                 System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
@@ -179,7 +178,8 @@ public class Main
 
     private static void navigateToMenu(User user, AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement ,PrescriptionManagement prescriptionManagement ,StaffManagement staffManagement) 
     {
-       
+        prescriptionManagement = new PrescriptionManagement(appointmentManagement); // This is to ensure that prescriptionManagement has the latest appointment data.
+
         switch (user.getRole()) 
         {
             case "administrator":

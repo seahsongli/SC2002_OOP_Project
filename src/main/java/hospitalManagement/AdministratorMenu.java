@@ -1,4 +1,5 @@
 package hospitalManagement;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ public class AdministratorMenu
     private InventoryManagement inventoryManagement;
     private StaffManagement staffManagement;
     private AppointmentManagement appointmentManagement;
-    private Map<String, User> users; // Users map from Main class
+    private Map<String, User> users = new HashMap<>(); // Users map from Main class
     
     private Scanner sc = new Scanner(System.in);
     public AdministratorMenu(InventoryManagement inventoryManagement, StaffManagement staffManagement, AppointmentManagement appointmentManagement, Map<String, User> users)
@@ -30,9 +31,9 @@ public class AdministratorMenu
         while (true) 
         {
             System.out.println("--- Administrator Menu ---");
-            System.out.println("1. View Hospital Staff");
-            System.out.println("2. Manage Hospital Staff");
-            System.out.println("3. View Appointment details");
+            System.out.println("1. View Hospital Staff"); // done
+            System.out.println("2. Manage Hospital Staff"); // done
+            System.out.println("3. View Appointment details"); 
             System.out.println("4. View Medication Inventory"); // done
             System.out.println("5. Manage Medication Inventory"); // done
             System.out.println("6. Approve Replenishment Requests"); // done
@@ -72,7 +73,11 @@ public class AdministratorMenu
         }
         
     }
-    
+    //testing purpose => think of how to implement this
+    public void initializeUsers(StaffManagement staffManagement) 
+    {
+        // Staff data: hospitalId, password, staffId, name, role
+    }
     public void viewStaffs()
     {
         staffManagement.viewStaffsWithFiltering();
@@ -167,11 +172,9 @@ public class AdministratorMenu
                 System.out.println("Error: staff ID " + staffId + " does not exist.");
                 return;
             }
-
             
             // Call to view appointments
             adminViewScheduledAppointments(patientId, patientName, doctorName, staffId);
-            
         } 
         catch (Exception e) {
             System.out.println("Error viewing appointments: " + e.getMessage());
