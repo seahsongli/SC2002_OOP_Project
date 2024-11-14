@@ -47,6 +47,12 @@ public class MedicalRecordManagement
         }
     }
 
+    // this for testing purposes
+    public void addMedicalRecord(MedicalRecord newMedicalRecord)
+    {
+        medicalRecords.add(newMedicalRecord);
+    }
+
     // The following protected methods are used for Doctor class to update the medical record
     protected void setMedicalRecords(List<MedicalRecord> medicalRecords)
     {
@@ -71,12 +77,15 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
+               
                 medicalRecords.get(i).viewMedicalRecord();
                 System.out.println("Medical record viewed for patient " + patientName + " with ID " + patientId);
+                return;
             }
         }
+        System.out.println("Patient " + patientName + " with ID " + patientId + " not found.");
     }
 
     protected void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription)
@@ -88,6 +97,7 @@ public class MedicalRecordManagement
                 medicalRecords.get(i).addCurrentDiagnosis(diagnosis);
                 medicalRecords.get(i).addPrescription(prescription);
                 System.out.println("Medical record updated for patient " + patientName + " with ID " + patientId);
+                return;
             }
         }
     }
