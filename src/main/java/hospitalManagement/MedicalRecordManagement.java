@@ -15,7 +15,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
                 medicalRecords.get(i).setContactNumber(phoneNumber);
                 System.out.println("Contact number updated for patient " + patientName + " with ID " + patientId + " to " + phoneNumber);
@@ -27,7 +27,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
                 medicalRecords.get(i).setEmail(email);
                 System.out.println("Email updated for patient " + patientName + " with ID " + patientId + " to " + email);
@@ -39,7 +39,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
                 medicalRecords.get(i).viewMedicalRecord();
                 System.out.println("Medical record viewed for patient " + patientName + " with ID " + patientId);
@@ -92,7 +92,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
                 medicalRecords.get(i).addCurrentDiagnosis(diagnosis);
                 medicalRecords.get(i).addPrescription(prescription);
@@ -118,7 +118,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId)
+            if (medicalRecords.get(i).getPatientId().equals(patientId))
             {
                 medicalRecords.get(i).addPrescription(prescription);
                 System.out.println("Medical record prescription updated for patient " + patientName + " with ID " + patientId);
@@ -131,7 +131,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId && medicalRecords.get(i).getPatientName().equals(patientName))
+            if (medicalRecords.get(i).getPatientId().equals(patientId) && medicalRecords.get(i).getPatientName().equals(patientName))
             {
                 medicalRecords.get(i).addCurrentDiagnosis(diagnosis);
                 System.out.println("New medical record diagnosis added for patient " + patientName + " with ID " + patientId);
@@ -143,7 +143,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId && medicalRecords.get(i).getPatientName().equals(patientName))
+            if (medicalRecords.get(i).getPatientId().equals(patientId) && medicalRecords.get(i).getPatientName().equals(patientName))
             {
                 medicalRecords.get(i).addPrescription(prescription);
                 System.out.println("New medical record prescription added for patient " + patientName + " with ID " + patientId);
@@ -155,7 +155,7 @@ public class MedicalRecordManagement
     {
         for (int i = 0; i < medicalRecords.size(); i++)
         {
-            if (medicalRecords.get(i).getPatientId() == patientId && medicalRecords.get(i).getPatientName().equals(patientName))
+            if (medicalRecords.get(i).getPatientId().equals(patientId) && medicalRecords.get(i).getPatientName().equals(patientName))
             {
                 medicalRecords.get(i).addCurrentTreatment(treatmentPlan);
                 System.out.println("New medical record treatment plan added for patient " + patientName + " with ID " + patientId);

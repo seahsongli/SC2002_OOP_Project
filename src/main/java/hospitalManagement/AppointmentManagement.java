@@ -60,7 +60,7 @@ public class AppointmentManagement
     {
         for(AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecords)
         {
-            if (appointmentOutcomeRecord.getAppointment().getPatientId() == patientId && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
+            if (appointmentOutcomeRecord.getAppointment().getPatientId().equals(patientId) && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
             {
                 System.out.println("Doctor: " + appointmentOutcomeRecord.getAppointment().getDoctorName());
                 System.out.println("Date: " + appointmentOutcomeRecord.getAppointment().getDate());
@@ -77,7 +77,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setTypeOfService(typeOfService);
             }
@@ -89,7 +89,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setMedicationsPrescribed(medicationsPrescribed);
             }
@@ -100,7 +100,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setPrescriptionStatus(prescriptionStatus);
             }
@@ -112,7 +112,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setConsultationNotes(consultationNotes);
             }
@@ -126,7 +126,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.COMPLETED);
                 appointmentOutcomeRecords.add(new AppointmentOutcomeRecord(appointment, typeOfService, medicationsPrescribed, prescriptionStatus, consultationNotes));
@@ -138,7 +138,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setTypeOfService(service);
             }
@@ -149,7 +149,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setMedicationsPrescribed(prescription);
                 record.setPrescriptionStatus(prescriptionStatus);
@@ -161,7 +161,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setConsultationNotes(consultationNotes);
             }
@@ -180,11 +180,13 @@ public class AppointmentManagement
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate startDate = LocalDate.now();
     
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 30; i++) 
+        {
             availableDates.add(startDate.plusDays(i).format(dateFormatter));
         }
         
-        for (String date : availableDates) {
+        for (String date : availableDates) 
+        {
             String key = doctorName + "_" + date;
             // Create a new list for each date to avoid shared references
             ArrayList<String> dailyTimes = new ArrayList<>(availableTimes);
@@ -208,18 +210,26 @@ public class AppointmentManagement
     }
 
     // Set availability for a doctor
-    protected  void setAvailability(String doctorId, String doctorName, String date, String time) 
+    protected void setAvailability(String doctorId, String doctorName, String date, String time) 
     {
         // Validate the time to ensure it's a valid 30-minute slot within the working hours (9 AM to 6 PM)
-        if (!isValidTime(time)) {
+        if (!isValidTime(time)) 
+        {
             System.out.println("Invalid time slot. Available time slots are from 9:00 AM to 6:00 PM in 30-minute intervals.");
             return;
         }
 
-        String key = doctorName + "_" + time;
+        String key = doctorName + "_" + date;
 
         // Initialize the availability list if not already present
         doctorAvailability.putIfAbsent(key, new ArrayList<>());
+
+        // Check if the time slot is already in the list
+        if (doctorAvailability.get(key).contains(time)) 
+        {
+            System.out.println("Time slot already set for " + doctorName + " on " + date + " at " + time);
+            return;
+        }
 
         // Add the time slot to the doctor's availability list
         doctorAvailability.get(key).add(time);
@@ -242,15 +252,30 @@ public class AppointmentManagement
         }
     }
 
+    // View all requests for a specific doctor
+    protected void viewAppointmentRequests(String doctorName)
+    {
+        for (Appointment appointment : appointments)
+        {
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.PENDING)
+            {
+                System.out.println("Patient: " + appointment.getPatientName());
+                System.out.println("Date: " + appointment.getDate());
+                System.out.println("Time: " + appointment.getTime());
+            }
+        }
+    }
+
     // Accept an appointment
     protected void acceptAppointment(String patientId, String patientName, String staffId, String doctorName, String date, String time)
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.CONFIRMED);
                 cancelAvailability(staffId, doctorName, date, time); // Remove the time slot from availability
+                System.out.println("Appointment confirmed for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
                 break;
             }
         }
@@ -261,7 +286,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.REJECTED);
                 break;
@@ -289,7 +314,7 @@ public class AppointmentManagement
     {
         // Cancel the old appointment first
         for (Appointment appointment : appointments) {
-            if (appointment.getPatientId() == patientId && 
+            if (appointment.getPatientId().equals(patientId) && 
                 appointment.getPatientName().equals(patientName) && 
                 appointment.getDoctorName().equals(doctorName) && 
                 appointment.getDate().equals(oldDate) && 
@@ -307,7 +332,7 @@ public class AppointmentManagement
     public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
         appointments.removeIf(appointment -> 
-            appointment.getPatientId() == patientId && 
+            appointment.getPatientId().equals(patientId) && 
             appointment.getPatientName().equals(patientName) && 
             appointment.getDoctorName().equals(doctorName) && 
             appointment.getDate().equals(date) && 
@@ -319,7 +344,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
@@ -332,7 +357,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (patientId == record.getAppointment().getPatientId() && patientName.equals(record.getAppointment().getPatientName()))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName))
             {
                 System.out.println("Doctor: " + record.getAppointment().getDoctorName());
                 System.out.println("Date: " + record.getAppointment().getDate());

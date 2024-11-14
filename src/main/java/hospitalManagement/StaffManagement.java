@@ -190,7 +190,6 @@ public class StaffManagement
 
     public void viewStaffs(List<Staff> staffList)
     {
-        
         if(staffs.isEmpty())
         {
             System.out.println("Currently there is no staff in the Hospital!\n");
@@ -205,7 +204,6 @@ public class StaffManagement
 
     public void addStaff(String hospitalID, String password, String staffId, String name, String role, String gender, int age)
     {
-    
         Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);
         staffs.add(newStaff);
         System.out.println("Staff with ID " + staffId + " added successfully.");
@@ -222,9 +220,9 @@ public class StaffManagement
                 System.out.println("Staff with ID " + capitalizeName(staffId) + " removed successfully.");
                 return;
             }
-            System.out.println("Staff with ID " + capitalizeName(staffId) + " not found.");
-            return;
         }
+        System.out.println("Staff with ID " + capitalizeName(staffId) + " not found.");
+        return;
     }
 
     public void updateStaffDetails(String oldStaffId, String newStaffId, String name, String role, String gender, Integer age)
