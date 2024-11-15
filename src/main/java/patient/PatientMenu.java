@@ -125,7 +125,6 @@ public class PatientMenu
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     viewAvailableAppointmentSlots(patientId, patientName, doctorName, date);
-                    //scheduleAppointment(patientId, patientName, doctorName, date, time);
                     break;
                 case 8: // View Past Appointment Outcome Records
                     System.out.println("Enter patient ID: ");

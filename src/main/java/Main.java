@@ -151,6 +151,7 @@ public class Main
             {
                 System.out.println("You are using the default password. Please change your password.");
                 changePassword(user);
+                navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
             }
             else
             {
