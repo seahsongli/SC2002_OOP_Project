@@ -409,11 +409,18 @@ public class AppointmentManagement
         {
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
             {
+                System.out.println("The appointment details are as follows: \n");
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Doctor ID: " + staffId);
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
                 System.out.println("Status: " + appointment.getStatus());
+                System.out.print("\n");
+            }
+            else
+            {
+                System.err.println("No appointments scheduled for the date and time entered");
+                return;
             }
         }
     }
