@@ -27,7 +27,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.SCHEDULED)
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED)
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
@@ -42,14 +42,15 @@ public class AppointmentManagement
     {
         LocalDate today = LocalDate.now();
         LocalDate sevenDaysFromNow = today.plusDays(7);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
         for (Appointment appointment : appointments)
         {
             LocalDate appointmentDate = LocalDate.parse(appointment.getDate(), formatter);
-            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.SCHEDULED && (appointmentDate.isAfter(today) || appointmentDate.isEqual(today)) && appointmentDate.isBefore(sevenDaysFromNow))
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED && (appointmentDate.isAfter(today) || appointmentDate.isEqual(today)) && appointmentDate.isBefore(sevenDaysFromNow))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Patient: " + appointment.getPatientName());
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
             }
@@ -60,7 +61,7 @@ public class AppointmentManagement
     {
         for(AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecords)
         {
-            if (appointmentOutcomeRecord.getAppointment().getPatientId() == patientId && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
+            if (appointmentOutcomeRecord.getAppointment().getPatientId().equals(patientId) && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
             {
                 System.out.println("Doctor: " + appointmentOutcomeRecord.getAppointment().getDoctorName());
                 System.out.println("Date: " + appointmentOutcomeRecord.getAppointment().getDate());
@@ -77,7 +78,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setTypeOfService(typeOfService);
             }
@@ -89,7 +90,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setMedicationsPrescribed(medicationsPrescribed);
             }
@@ -100,11 +101,14 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setPrescriptionStatus(prescriptionStatus);
+                System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
+                return;
             }
         }
+        System.out.println("No matching appointment found for patient " + patientName + " with ID " + patientId);
     }
 
     // Implement updateConsultationNotes() method to update the consultation notes for a specific appointment
@@ -112,7 +116,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setConsultationNotes(consultationNotes);
             }
@@ -126,7 +130,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.COMPLETED);
                 appointmentOutcomeRecords.add(new AppointmentOutcomeRecord(appointment, typeOfService, medicationsPrescribed, prescriptionStatus, consultationNotes));
@@ -138,7 +142,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setTypeOfService(service);
             }
@@ -149,7 +153,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setMedicationsPrescribed(prescription);
                 record.setPrescriptionStatus(prescriptionStatus);
@@ -161,41 +165,39 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (record.getAppointment().getPatientId() == patientId && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setConsultationNotes(consultationNotes);
             }
         }
     }
 
-    public void intializeDoctorAvailability(String doctorId, String doctorName)
-    {
+    public void intializeDoctorAvailability(String doctorId, String doctorName) {
         ArrayList<String> availableTimes = new ArrayList<>(Arrays.asList(
-    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
-        "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
-        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
+            "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
+            "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
+            "15:00", "15:30", "16:00", "16:30", "17:00", "17:30"
         ));
-        // Initailize availability for the next 1 month
+    
+        // Initialize availability for the next 1 month
         ArrayList<String> availableDates = new ArrayList<>();
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate startDate = LocalDate.now().plusMonths(1);
-
-        for (int i = 0; i < 10; i++) 
+        LocalDate startDate = LocalDate.now();
+    
+        for (int i = 0; i < 30; i++) 
         {
             availableDates.add(startDate.plusDays(i).format(dateFormatter));
         }
+        
         for (String date : availableDates) 
         {
             String key = doctorName + "_" + date;
-            for (String availableTime : availableTimes) 
-            {
-                doctorAvailability.putIfAbsent(key, new ArrayList<>());
-                doctorAvailability.get(key).add(availableTime);
-            }
-            doctorAvailability.put(key, availableTimes);
+            // Create a new list for each date to avoid shared references
+            ArrayList<String> dailyTimes = new ArrayList<>(availableTimes);
+            doctorAvailability.put(key, dailyTimes);
         }
-        
     }
+    
 
     private boolean isValidTime(String time) {
         // Check if the time is in the correct format (HH:mm)
@@ -212,18 +214,26 @@ public class AppointmentManagement
     }
 
     // Set availability for a doctor
-    protected  void setAvailability(String doctorId, String doctorName, String date, String time) 
+    protected void setAvailability(String doctorId, String doctorName, String date, String time) 
     {
         // Validate the time to ensure it's a valid 30-minute slot within the working hours (9 AM to 6 PM)
-        if (!isValidTime(time)) {
+        if (!isValidTime(time)) 
+        {
             System.out.println("Invalid time slot. Available time slots are from 9:00 AM to 6:00 PM in 30-minute intervals.");
             return;
         }
 
-        String key = doctorName + "_" + time;
+        String key = doctorName + "_" + date;
 
         // Initialize the availability list if not already present
         doctorAvailability.putIfAbsent(key, new ArrayList<>());
+
+        // Check if the time slot is already in the list
+        if (doctorAvailability.get(key).contains(time)) 
+        {
+            System.out.println("Time slot already set for " + doctorName + " on " + date + " at " + time);
+            return;
+        }
 
         // Add the time slot to the doctor's availability list
         doctorAvailability.get(key).add(time);
@@ -246,15 +256,30 @@ public class AppointmentManagement
         }
     }
 
+    // View all requests for a specific doctor
+    protected void viewAppointmentRequests(String doctorName)
+    {
+        for (Appointment appointment : appointments)
+        {
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.PENDING)
+            {
+                System.out.println("Patient: " + appointment.getPatientName());
+                System.out.println("Date: " + appointment.getDate());
+                System.out.println("Time: " + appointment.getTime());
+            }
+        }
+    }
+
     // Accept an appointment
     protected void acceptAppointment(String patientId, String patientName, String staffId, String doctorName, String date, String time)
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.CONFIRMED);
                 cancelAvailability(staffId, doctorName, date, time); // Remove the time slot from availability
+                System.out.println("Appointment confirmed for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
                 break;
             }
         }
@@ -265,7 +290,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.REJECTED);
                 break;
@@ -293,16 +318,19 @@ public class AppointmentManagement
     {
         // Cancel the old appointment first
         for (Appointment appointment : appointments) {
-            if (appointment.getPatientId() == patientId && 
+            if (appointment.getPatientId().equals(patientId) && 
                 appointment.getPatientName().equals(patientName) && 
                 appointment.getDoctorName().equals(doctorName) && 
                 appointment.getDate().equals(oldDate) && 
                 appointment.getTime().equals(oldTime)) {
 
                 // Set the old appointment status to canceled or just remove it
-                appointment.setStatus(Status.CANCELLED);  // Assuming you have a CANCELLED status
+                appointment.setStatus(Status.CANCELLED);
                 appointments.remove(appointment);
                 System.out.println("Old appointment canceled for " + patientName + " with Dr. " + doctorName + " on " + oldDate + " at " + oldTime);
+
+                // Schedule the new appointment
+                scheduleAppointment(patientId, patientName, doctorName, newDate, newTime);
                 break;
             }
         }
@@ -310,20 +338,29 @@ public class AppointmentManagement
 
     public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
-        appointments.removeIf(appointment -> 
-            appointment.getPatientId() == patientId && 
+        boolean removed = appointments.removeIf(appointment -> 
+            appointment.getPatientId().equals(patientId) && 
             appointment.getPatientName().equals(patientName) && 
             appointment.getDoctorName().equals(doctorName) && 
             appointment.getDate().equals(date) && 
             appointment.getTime().equals(time)
         );
+    
+        if (removed) 
+        {
+            System.out.println("Appointment canceled for patient " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time + ".");
+        } 
+        else 
+        {
+            System.out.println("No matching appointment found to cancel for patient " + patientName + ".");
+        }
     }
 
     public void displayScheduledAppointments(String patientId, String patientName)
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId() == patientId && appointment.getPatientName().equals(patientName))
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
@@ -336,7 +373,7 @@ public class AppointmentManagement
     {
         for (AppointmentOutcomeRecord record : appointmentOutcomeRecords)
         {
-            if (patientId == record.getAppointment().getPatientId() && patientName.equals(record.getAppointment().getPatientName()))
+            if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName))
             {
                 System.out.println("Doctor: " + record.getAppointment().getDoctorName());
                 System.out.println("Date: " + record.getAppointment().getDate());

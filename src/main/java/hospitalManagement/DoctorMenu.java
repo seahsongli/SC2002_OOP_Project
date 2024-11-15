@@ -30,21 +30,22 @@ public class DoctorMenu {
     public void displayMenu() {
         while (true) {
             System.out.println("Doctor Menu:");
-            System.out.println("1. View Upcoming Appointments");
-            System.out.println("2. View Patient medical records");
-            System.out.println("3. Update Patient medical records");
-            System.out.println("4. View Personal schedule records");
-            System.out.println("5. Add New Diagnosis");
-            System.out.println("6. Add New Prescription");
-            System.out.println("7. Edit Service");
-            System.out.println("8. Edit Prescription");
-            System.out.println("9. Edit Consultation Notes");
-            System.out.println("10. Set availability for Appointment");
-            System.out.println("11. Cancel availability for Appointment");
-            System.out.println("12. Accept Appointment requests");
-            System.out.println("13. Decline Appointment requests");
-            System.out.println("14. Record Appointment Outcome");
-            System.out.println("15. Logout");
+            System.out.println("1. View Upcoming Appointments"); // Done
+            System.out.println("2. View Patient medical records"); // Done
+            System.out.println("3. Update Patient medical records"); // Done
+            System.out.println("4. View Personal schedule records"); // Done
+            System.out.println("5. Add New Diagnosis"); // For medicalRecords Done
+            System.out.println("6. Add New Prescription"); // For medicalRecords Done
+            System.out.println("7. Edit Service"); // For AppointmentOutcomeRecord Done
+            System.out.println("8. Edit Prescription"); // For AppointmentOutcomeRecord Done
+            System.out.println("9. Edit Consultation Notes"); // For AppointmentOutcomeRecord Done
+            System.out.println("10. Set availability for Appointment"); // Done
+            System.out.println("11. Cancel availability for Appointment"); // Done
+            System.out.println("12. View Appointment requests"); // Done
+            System.out.println("13. Accept Appointment requests"); // Done
+            System.out.println("14. Decline Appointment requests"); // Done
+            System.out.println("15. Record Appointment Outcome"); // Done
+            System.out.println("16. Logout");
             int choice = sc.nextInt();
             sc.nextLine();
             String patientId;
@@ -97,16 +98,14 @@ public class DoctorMenu {
                     diagnosis = sc.nextLine();
                     addNewDiagnosis(patientId, patientName, diagnosis);
                     break;
-                case 6:
+                case 6: // add new prescription
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
-                    addNewPrescription(patientId, patientName, doctorName, prescription);
+                    addNewPrescription(patientId, patientName, prescription);
                     break;
                 case 7:
                     System.out.println("Enter patient ID: ");
@@ -178,7 +177,15 @@ public class DoctorMenu {
                     cancelAvailability(doctorId,doctorName,date,time);
                     break;
 
-                case 12:
+                case 12: // View Appointment requests
+                    System.out.println("Enter doctor ID: ");
+                    doctorId = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    viewAppointmentRequests(doctorName);
+                    break;
+
+                case 13:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
@@ -194,7 +201,7 @@ public class DoctorMenu {
                     acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
                     break;
 
-                case 13:
+                case 14:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
@@ -209,7 +216,7 @@ public class DoctorMenu {
                     break;
 
 
-                case 14:  // New case for recording appointment outcome
+                case 15:  // New case for recording appointment outcome
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
@@ -226,13 +233,13 @@ public class DoctorMenu {
                     prescription = sc.nextLine();
                     System.out.println("Enter consultation notes: ");
                     consultationNotes = sc.nextLine();
-                    System.out.println("Enter prescription status (e.g., APPROVED, PENDING): ");
+                    System.out.println("Enter prescription status (e.g.PENDING): ");
                     Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
 
                     recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
                     break;
 
-                case 15:
+                case 16:
                     System.out.println("Logging out...");
                     return;
                 default:
@@ -265,6 +272,10 @@ public class DoctorMenu {
         appointmentManagement.cancelAvailability(doctorId, doctorName, date, time);
     }
 
+    public void viewAppointmentRequests(String doctorName) {
+        appointmentManagement.viewAppointmentRequests(doctorName);
+    }
+
     public void acceptAppointment(String patientId, String patientName, String doctorId, String doctorName, String date, String time) {
         appointmentManagement.acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
     }
@@ -295,7 +306,7 @@ public class DoctorMenu {
 
     // Consider whether other doctors should be able to addNewPrescription on behalf of another doctor.
     // Remove the doctorName from parameter if this isn't the case.
-    public void addNewPrescription(String patientId, String patientName, String doctorName, String prescription) {
+    public void addNewPrescription(String patientId, String patientName, String prescription) {
         medicalRecordManagement.addNewMedicalPrescription(patientId, patientName, prescription);
     }
 

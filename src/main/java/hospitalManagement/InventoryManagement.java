@@ -75,44 +75,68 @@ public class InventoryManagement
                .filter(request -> request.getStatus() == Status.PENDING)
                .collect(Collectors.toList());
     }
+
     public void requestReplenishment(String name, int quantity)
     {
-        Medicine medicine = findMedicineByName(name);
-        if (medicine == null) {
-            System.out.println("Medicine " + name + " not found in the inventory.");
+        if (name == null || name.trim().isEmpty())  // Ensure medicine name is valid
+        {
+            System.out.println("Invalid medicine name. Please provide a valid name.");
             return;
         }
+    
+        if (quantity <= 0) 
+        { // Ensure quantity is valid
+            System.out.println("Invalid quantity. Please request a positive amount.");
+            return;
+        }
+    
+        Medicine medicine = findMedicineByName(name);
+        if (medicine == null)  // New medicine not found in inventory
+        {
+            medicine = new Medicine(name, 0); // Initialize with 0 stock
+        }
+    
         Request newRequest = new Request();
         newRequest.setMedicine(medicine);
         newRequest.setReplenishQuantity(quantity);
         newRequest.setStatus(Status.PENDING);
         replenishmentRequest.add(newRequest);
+    
         System.out.println("Replenishment request submitted for " + name + " with quantity " + quantity + ".");
     }
 
-    public void updateStockLevel(String medicationName, int quantity)
-    {
+    public void updateStockLevel(String medicationName, int quantity) {
+        // Ensure quantity is non-negative before proceeding
+        if (quantity < 0) {
+            System.out.println("Invalid quantity: Cannot set stock level to a negative amount.");
+            return;
+        }
+    
         Medicine medicine = findMedicineByName(medicationName);
-        if (medicine != null) 
-        {
+        if (medicine != null) { // Medicine already exists in the inventory
             int newQuantity = medicine.getQuantity() + quantity;
-            if (newQuantity < 0) 
-            {
+            
+            // If quantity drops below zero, reject the update
+            if (newQuantity < 0) {
                 System.out.println("Cannot set stock level to " + newQuantity + ". Quantity cannot be negative.");
                 return;
             }
+    
+            // Update quantity and check if it should be removed from inventory
             medicine.setQuantity(newQuantity);
             System.out.println("Stock level of " + medicationName + " updated to " + newQuantity + ".");
-            // Optionally, remove the medicine if quantity is zero
-            if (medicine.getQuantity() == 0) 
-            {
+    
+            if (newQuantity == 0) {
                 currentStockLevels.remove(medicine);
                 System.out.println(medicationName + " has been removed from the inventory as its quantity reached zero.");
             }
         } 
-        else 
-        {
+
+        else // Medicine does not exist in the inventory; add it as a new entry
+        { 
             System.out.println("Medicine " + medicationName + " not found in the inventory.");
+            System.out.println("Adding new medicine " + medicationName + " with quantity " + quantity + ".");
+            currentStockLevels.add(new Medicine(medicationName, quantity));
         }
     }
 
@@ -176,7 +200,8 @@ public class InventoryManagement
                 Medicine medicine = request.getMedicine();
                 if (medicine != null) 
                 {
-                    medicine.setQuantity(medicine.getQuantity() + request.getReplenishQuantity());
+                    medicine.setQuantity(medicine.getQuantity() + request.getReplenishQuantity()); // This updates the current medicine quantity
+                    updateStockLevel(medicine.getName(), request.getReplenishQuantity()); // This updates currentStock level
                     System.out.println("Approved replenishment of " + request.getReplenishQuantity() + " units for " + medicine.getName() + ".");
                 }
                 return true;

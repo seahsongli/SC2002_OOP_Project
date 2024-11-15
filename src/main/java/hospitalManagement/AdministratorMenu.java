@@ -1,4 +1,5 @@
 package hospitalManagement;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,7 @@ public class AdministratorMenu
     private InventoryManagement inventoryManagement;
     private StaffManagement staffManagement;
     private AppointmentManagement appointmentManagement;
-    private Map<String, User> users; // Users map from Main class
+    private Map<String, User> users = new HashMap<>(); // Users map from Main class
     
     private Scanner sc = new Scanner(System.in);
     public AdministratorMenu(InventoryManagement inventoryManagement, StaffManagement staffManagement, AppointmentManagement appointmentManagement, Map<String, User> users)
@@ -19,7 +20,6 @@ public class AdministratorMenu
         this.inventoryManagement = inventoryManagement;
         this.staffManagement = staffManagement;
         this.appointmentManagement = appointmentManagement;
-
 
         // Debugging statement to confirm receipt
         System.out.println("AdministratorMenu initialized with " + users.size() + " users.");
@@ -31,12 +31,12 @@ public class AdministratorMenu
         while (true) 
         {
             System.out.println("--- Administrator Menu ---");
-            System.out.println("1. View Hospital Staff");
-            System.out.println("2. Manage Hospital Staff");
-            System.out.println("3. View Appointment details");
-            System.out.println("4. View Medication Inventory");
-            System.out.println("5. Manage Medication Inventory");
-            System.out.println("6. Approve Replenishment Requests");
+            System.out.println("1. View Hospital Staff"); // done
+            System.out.println("2. Manage Hospital Staff"); // done
+            System.out.println("3. View Appointment details"); 
+            System.out.println("4. View Medication Inventory"); // done
+            System.out.println("5. Manage Medication Inventory"); // done
+            System.out.println("6. Approve Replenishment Requests"); // done
             System.out.println("7. Logout");
             int choice = sc.nextInt();
             sc.nextLine(); // Consume newline
@@ -73,7 +73,11 @@ public class AdministratorMenu
         }
         
     }
-    
+    //testing purpose => think of how to implement this
+    public void initializeUsers(StaffManagement staffManagement) 
+    {
+        // Staff data: hospitalId, password, staffId, name, role
+    }
     public void viewStaffs()
     {
         staffManagement.viewStaffsWithFiltering();
@@ -88,12 +92,10 @@ public class AdministratorMenu
         staffManagement.removeStaff(staffId);
     }
     
-    
     public void updateStaffDetails(String oldStaffId, String newStaffId, String name, String role, String gender, Integer age)
     {
         staffManagement.updateStaffDetails(oldStaffId, newStaffId, name, role, gender, age);
     }
-    
     
     public void displayInventory()
     {
@@ -136,10 +138,7 @@ public class AdministratorMenu
         appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, staffId);
     }
 
-
-
     // helper functions
-    
     public void viewAppointmentsByEnteringDetails()
     {
         System.out.println("\n--- View Appointment Details ---");
@@ -148,7 +147,7 @@ public class AdministratorMenu
         try 
         {
             System.out.print("Enter Patient ID: ");
-            String patientId = sc.nextLine().trim().toLowerCase();
+            String patientId = sc.nextLine().trim();
             
             System.out.print("Enter Patient Name: ");
             String patientName = sc.nextLine().trim();
@@ -173,11 +172,9 @@ public class AdministratorMenu
                 System.out.println("Error: staff ID " + staffId + " does not exist.");
                 return;
             }
-
             
             // Call to view appointments
             adminViewScheduledAppointments(patientId, patientName, doctorName, staffId);
-            
         } 
         catch (Exception e) {
             System.out.println("Error viewing appointments: " + e.getMessage());
@@ -291,7 +288,6 @@ public class AdministratorMenu
                            break;
                        }
                        
-                       
                        System.out.print("Enter staff ID: ");
                        String staffId = sc.nextLine().trim().toLowerCase();
    
@@ -340,6 +336,7 @@ public class AdministratorMenu
                    {
                        System.out.print("Enter staff ID to remove: ");
                        String staffId = sc.nextLine().trim().toLowerCase();
+                    //    String staffId = sc.nextLine();
                        staffManagement.removeStaff(staffId);
                        break;
                        
@@ -377,11 +374,11 @@ public class AdministratorMenu
     {
         while (true) {
             System.out.println("\n--- Manage Medication Inventory ---");
-            System.out.println("1. Add Medicine");
-            System.out.println("2. Remove Medicine");
-            System.out.println("3. Update Stock Level");
-            System.out.println("4. Set Low Stock Alert Level");
-            System.out.println("5. Back to Administrator Menu");
+            System.out.println("1. Add Medicine"); // done
+            System.out.println("2. Remove Medicine"); // done
+            System.out.println("3. Update Stock Level"); // done
+            System.out.println("4. Set Low Stock Alert Level"); // done
+            System.out.println("5. Back to Administrator Menu"); // done
             System.out.print("Enter your choice: ");
             
             int choice;

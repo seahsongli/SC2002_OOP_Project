@@ -6,6 +6,7 @@ import hospitalManagement.AdministratorMenu;
 import hospitalManagement.AppointmentManagement;
 import hospitalManagement.DoctorMenu;
 import hospitalManagement.InventoryManagement;
+import hospitalManagement.MedicalRecord;
 import hospitalManagement.MedicalRecordManagement;
 import hospitalManagement.PharmacistMenu;
 import hospitalManagement.PrescriptionManagement;
@@ -82,7 +83,6 @@ public class Main
             }
             else
             {
-                
                 Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
                 users.put(hospitalId, staff);
                 System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
@@ -100,12 +100,12 @@ public class Main
         // Create patient user and add to users map only
         Object[][] patientData = 
         {
-            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
-            {"patient1", "password", "p001", "john doe", "1990-05-22", "male", "O+", "john.doe@example.com"},
-            {"patient2", "password", "p002", "jane smith", "1985-03-14", "female", "A-", "jane.smith@example.com"},
-            {"patient3", "password", "p003", "alice johnson", "1992-07-30", "female", "B+", "alice.johnson@example.com"},
-            {"patient4", "password", "p004", "bob brown", "1980-11-12", "male", "AB-", "bob.brown@example.com"},
-            {"patient5", "password", "p005", "charlie davis", "1995-09-05", "male", "O-", "charlie.davis@example.com"}
+            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
+            {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com", "12345678"},
+            {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com", "87654321"},
+            {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com", "45678912"},
+            {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com", "98765432"},
+            {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com", "65432198"},
         };
 
         for (int i = 0; i < patientData.length; i++) 
@@ -119,6 +119,7 @@ public class Main
             String gender = (String) data[5];
             String bloodGroup = (String) data[6];
             String email = (String) data[7];
+            String contactNumber = (String) data[8];
 
             if (users.containsKey(hospitalId)) 
             {
@@ -131,7 +132,13 @@ public class Main
                 users.put(hospitalId, patient);
                 System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
             }
-            
+            // This for testing purposes
+            // String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions
+            MedicalRecord medicalRecord = new MedicalRecord(patientId, name, dob, gender, bloodGroup, contactNumber, email);
+            medicalRecordManagement.addMedicalRecord(medicalRecord);
+
+            // // Add users to adminMenu
+            // adminMenu.addUser(hospitalId, password, patient
         }
     }
 
@@ -175,7 +182,8 @@ public class Main
 
     private static void navigateToMenu(User user, AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement ,PrescriptionManagement prescriptionManagement ,StaffManagement staffManagement) 
     {
-       
+        prescriptionManagement = new PrescriptionManagement(appointmentManagement); // This is to ensure that prescriptionManagement has the latest appointment data.
+
         switch (user.getRole()) 
         {
             case "administrator":
