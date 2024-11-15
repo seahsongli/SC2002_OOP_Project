@@ -1,4 +1,8 @@
+package patient;
 import java.util.Scanner;
+
+import hospitalManagement.AppointmentManagement;
+import hospitalManagement.MedicalRecordManagement;
 public class PatientMenu
 {
     private MedicalRecordManagement medicalRecordManagement;
@@ -15,12 +19,15 @@ public class PatientMenu
     public void displayMenu() {
         while (true) {
             System.out.println("Patient Menu:");
-            System.out.println("1. View Personal Medical Record");
-            System.out.println("2. Schedule Appointment");
-            System.out.println("3. Reschedule Appointment");
-            System.out.println("4. Cancel Appointment");
-            System.out.println("5. View Scheduled Appointments");
-            System.out.println("6. Logout");
+            System.out.println("1. View Personal Medical Record"); // done
+            System.out.println("2. Schedule Appointment"); // done
+            System.out.println("3. Reschedule Appointment"); // done
+            System.out.println("4. Cancel Appointment"); // done
+            System.out.println("5. View Scheduled Appointments"); // done
+            System.out.println("6. Update Personal Information"); // done
+            System.out.println("7. View available appointment slots"); // done
+            System.out.println("8. View Past Appointment Outcome Records"); // done
+            System.out.println("9. Logout"); // keep
             int choice = sc.nextInt();
             sc.nextLine(); // Consume newline
 
@@ -78,12 +85,55 @@ public class PatientMenu
                 case 5:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
-                    sc.nextLine(); // Consume newline
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     displayScheduledAppointments(patientId, patientName);
                     break;
-                case 6:
+                case 6: // Update personal information
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextLine();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("1. Update contact number");
+                    System.out.println("2. Update email");
+                    int updateChoice = sc.nextInt();
+                    sc.nextLine(); // Consume newline
+                    switch (updateChoice) {
+                        case 1:
+                            System.out.println("Enter new contact number: ");
+                            String contactNumber = sc.nextLine();
+                            updateContactNumber(patientId, patientName, contactNumber);
+                            break;
+                        case 2:
+                            System.out.println("Enter new email: ");
+                            String email = sc.nextLine();
+                            updateEmail(patientId, patientName, email);
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                            break;
+                    }
+                    break;
+                case 7: // View available appointment slots 
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextLine();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    System.out.println("Enter doctor name: ");
+                    doctorName = sc.nextLine();
+                    System.out.println("Enter date (yyyy-mm-dd): ");
+                    date = sc.nextLine();
+                    viewAvailableAppointmentSlots(patientId, patientName, doctorName, date);
+                    //scheduleAppointment(patientId, patientName, doctorName, date, time);
+                    break;
+                case 8: // View Past Appointment Outcome Records
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextLine();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine();
+                    displayPastAppointmentRecords(patientId, patientName);
+                    break;
+                case 9:
                     System.out.println("Logging out...");
                     return;
                 default:
@@ -108,7 +158,10 @@ public class PatientMenu
         medicalRecordManagement.viewPersonalMedicalRecord(patientId, patientName);
     }
 
-    //Implement viewAvailableAppointmentSlots method here.
+    public void viewAvailableAppointmentSlots(String patientId, String patientName, String doctorName, String date)
+    {
+        appointmentManagement.viewAvailableAppointmentSlots(patientId, patientName, doctorName, date);
+    }
 
     public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time)
     {

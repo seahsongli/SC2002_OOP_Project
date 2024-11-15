@@ -1,3 +1,4 @@
+package hospitalManagement;
 import java.util.Scanner;
 
 public class Doctor extends Staff
@@ -48,7 +49,7 @@ public class Doctor extends Staff
         System.out.println("Enter prescription: ");
         String prescription = sc.nextLine();
         // public void editPrescription(int patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus
-        doctorMenu.addNewPrescription(patientId, patientName, super.getName(), prescription);
+        doctorMenu.addNewPrescription(patientId, patientName, prescription);
     }
 
     public void addTreatmentPlans(DoctorMenu doctorMenu)

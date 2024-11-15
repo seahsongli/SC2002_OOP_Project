@@ -1,3 +1,4 @@
+package hospitalManagement;
 public class Medicine
 {
     private String name;

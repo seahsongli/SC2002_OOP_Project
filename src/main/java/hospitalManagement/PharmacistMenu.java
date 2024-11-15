@@ -1,3 +1,4 @@
+package hospitalManagement;
 
 import java.util.Scanner;
 
@@ -17,12 +18,11 @@ public class PharmacistMenu
     public void displayMenu() {
         while (true) {
             System.out.println("Pharmacist Menu:");
-            System.out.println("1. View Appointment Outcome Record");
-            System.out.println("2. Set Prescription");
-            System.out.println("3. Update Prescription Status");
-            System.out.println("4. View Inventory");
+            System.out.println("1. View Appointment Outcome Record"); // done
+            System.out.println("2. Update Prescription Status"); // done
+            System.out.println("3. View Inventory"); // done
+            System.out.println("4. Submit Replenishment Request"); // done
             System.out.println("5. Logout");
-            System.out.println("6. test");
             int choice = sc.nextInt();
             sc.nextLine(); // Consume newline
 
@@ -36,16 +36,8 @@ public class PharmacistMenu
                     String doctorName = sc.nextLine();
                     viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
                     break;
+               
                 case 2:
-                    System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
-                    System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter prescription: ");
-                    String prescription = sc.nextLine();
-                    setPrescription(patientId, patientName, prescription);
-                    break;
-                case 3:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
                     System.out.println("Enter patient name: ");
@@ -64,20 +56,24 @@ public class PharmacistMenu
                         updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time, status);
                     }
                     break;
-                case 4:
+
+                case 3:
                     viewInventory();
                     break;
-                case 5:
-                    System.out.println("Logging out...");
-                    return;
-                case 6:
-                    System.out.println("enter medication name ");
+
+                case 4:
+                    System.out.println("Enter medication name ");
                     String medicationName = sc.nextLine();
-                    System.out.println(" quantity ");
+                    System.out.println("Enter quantity to restock: ");
                     int quantity = sc.nextInt();
                     sc.nextLine();
                     submitReplenishmentRequest(medicationName, quantity);
                     break;
+
+                case 5:
+                    System.out.println("Logging out...");
+                    return;
+
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
@@ -128,7 +124,6 @@ public class PharmacistMenu
         
             // Assuming Appointment has a method to set prescription status
             prescriptionManagement.updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time, prescriptionStatus);
-            System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
     }
 
     public void viewInventory()

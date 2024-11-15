@@ -2,18 +2,32 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import hospitalManagement.AdministratorMenu;
+import hospitalManagement.AppointmentManagement;
+import hospitalManagement.DoctorMenu;
+import hospitalManagement.InventoryManagement;
+import hospitalManagement.MedicalRecord;
+import hospitalManagement.MedicalRecordManagement;
+import hospitalManagement.PharmacistMenu;
+import hospitalManagement.PrescriptionManagement;
+import hospitalManagement.Roles;
+import hospitalManagement.Staff;
+import hospitalManagement.StaffManagement;
+import hospitalManagement.User;
+import patient.Patient;
+import patient.PatientMenu;
+
 public class Main 
 {
     private static Map<String, User> users = new HashMap<>();
     private static Scanner sc = new Scanner(System.in);
+    private static AppointmentManagement appointmentManagement = new AppointmentManagement();
+    private static MedicalRecordManagement medicalRecordManagement = new MedicalRecordManagement();
+    private static InventoryManagement inventoryManagement = new InventoryManagement();
+    private static PrescriptionManagement prescriptionManagement = new PrescriptionManagement(appointmentManagement);
+    private static StaffManagement staffManagement = new StaffManagement();
     public static void main(String[] args) 
     {
-        
-        AppointmentManagement appointmentManagement = new AppointmentManagement();
-        MedicalRecordManagement medicalRecordManagement = new MedicalRecordManagement();
-        InventoryManagement inventoryManagement = new InventoryManagement();
-        PrescriptionManagement prescriptionManagement = new PrescriptionManagement(appointmentManagement);
-        StaffManagement staffManagement = new StaffManagement();
         // Initialize some users for testing
         initializeUsers(staffManagement);
 
@@ -49,7 +63,7 @@ public class Main
             {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
             {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
             {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
-            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40}
+            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40},
         };
 
         for (int i = 0; i < staffData.length; i++) 
@@ -69,10 +83,14 @@ public class Main
             }
             else
             {
-                
                 Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
                 users.put(hospitalId, staff);
                 System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
+                if (role.equals("doctor"))
+                {
+                    // Initialize doctor availability
+                    appointmentManagement.intializeDoctorAvailability(hospitalId, name);
+                }
                 // Add to staff list using staffManagement.addStaff()
                 staffManagement.addStaff(hospitalId, password, staffId, name, role, gender, age);
             }
@@ -80,18 +98,48 @@ public class Main
         }
 
         // Create patient user and add to users map only
-        String patientHospitalId = "patient1";
-        if (users.containsKey(patientHospitalId)) 
+        Object[][] patientData = 
         {
-            System.out.println("Hospital ID " + patientHospitalId + " already exists. Please try again.");
-        } 
-        else 
+            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
+            {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com", "12345678"},
+            {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com", "87654321"},
+            {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com", "45678912"},
+            {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com", "98765432"},
+            {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com", "65432198"},
+        };
+
+        for (int i = 0; i < patientData.length; i++) 
         {
-            User patient = new User(patientHospitalId, "password", "Patient");
-            users.put(patientHospitalId, patient);
-            System.out.println("User with Hospital ID " + patientHospitalId + " added successfully.");
+            Object[] data = patientData[i];
+            String hospitalId = (String) data[0];
+            String password = (String) data[1];
+            String patientId = (String) data[2];
+            String name = (String) data[3];
+            String dob = (String) data[4];
+            String gender = (String) data[5];
+            String bloodGroup = (String) data[6];
+            String email = (String) data[7];
+            String contactNumber = (String) data[8];
+
+            if (users.containsKey(hospitalId)) 
+            {
+                System.out.println("Hospital ID " + hospitalId + " already exists. Please try again.");
+            }
+            else
+            {
+                // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
+                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
+                users.put(hospitalId, patient);
+                System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
+            }
+            // This for testing purposes
+            // String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions
+            MedicalRecord medicalRecord = new MedicalRecord(patientId, name, dob, gender, bloodGroup, contactNumber, email);
+            medicalRecordManagement.addMedicalRecord(medicalRecord);
+
+            // // Add users to adminMenu
+            // adminMenu.addUser(hospitalId, password, patient
         }
-    
     }
 
     private static void login(AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement, PrescriptionManagement prescriptionManagement, StaffManagement staffManagement)
@@ -103,7 +151,7 @@ public class Main
 
         User user = users.get(hospitalId);
 
-        if (user != null && user.getPassword().equals(password)) 
+        if (user != null && user.checkPassword(password)) 
         {
             System.out.println("Login successful!");
             if (password.equals("password")) 
@@ -111,7 +159,11 @@ public class Main
                 System.out.println("You are using the default password. Please change your password.");
                 changePassword(user);
             }
-            navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
+            else
+            {
+                navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
+            }
+            
         } 
         else 
         {
@@ -129,24 +181,25 @@ public class Main
 
     private static void navigateToMenu(User user, AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement ,PrescriptionManagement prescriptionManagement ,StaffManagement staffManagement) 
     {
-       
+        prescriptionManagement = new PrescriptionManagement(appointmentManagement); // This is to ensure that prescriptionManagement has the latest appointment data.
+
         switch (user.getRole()) 
         {
-            case "Administrator":
+            case "administrator":
                 AdministratorMenu adminMenu = new AdministratorMenu(inventoryManagement, staffManagement, appointmentManagement, users);
                 adminMenu.displayMenu();
                 break;
-            case "Doctor":
+            case "doctor":
                 DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement);
-                // doctorMenu.displayMenu();
+                doctorMenu.displayMenu();
                 break;
-            case "Pharmacist":
+            case "pharmacist":
                 PharmacistMenu pharmacistMenu = new PharmacistMenu(prescriptionManagement, inventoryManagement);
-                // pharmacistMenu.displayMenu();
+                pharmacistMenu.displayMenu();
                 break;
-            case "Patient":
+            case "patient":
                 PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement);
-                // patientMenu.displayMenu();
+                patientMenu.displayMenu();
                 break;
             default:
                 System.out.println("Invalid role. Access denied.");

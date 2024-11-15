@@ -1,3 +1,4 @@
+package hospitalManagement;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -20,7 +21,7 @@ public class StaffManagement
     {
         for (Staff staff : staffs) 
         {
-            if (staff.getStaffId() == staffId) 
+            if (staff.getStaffId().equalsIgnoreCase(staffId)) 
             {
                 return true;
             }
@@ -28,14 +29,36 @@ public class StaffManagement
         return false;
     }
     // check if hospital ID already exists
-    boolean isHospitalIdMatched(String hospitalId) {
-        for (Staff staff : staffs) {
-            if (staff.getHospitalId().equals(hospitalId)) 
+    boolean isHospitalIdMatched(String hospitalId) 
+    {
+        for (Staff staff : staffs) 
+        {
+            if (staff.getHospitalId().equalsIgnoreCase(hospitalId)) 
             {
                 return true;
             }
         }
         return false;
+    }
+
+    private String capitalizeName(String name) 
+    {
+        String[] words = name.split("\\s");
+        StringBuilder formattedName = new StringBuilder();
+    
+        for (String word : words) 
+        {
+            if (word.length() > 0) 
+            {
+                String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                if (formattedName.length() > 0) {
+                    formattedName.append(" ");
+                }
+                formattedName.append(capitalizedWord);
+            }
+        }
+    
+        return formattedName.toString();
     }
 
       // Method to view staff with filtering options
@@ -80,13 +103,14 @@ public class StaffManagement
 
     }
 
-    private List<Staff> filterByGender(List<Staff> staffList) {
+    private List<Staff> filterByGender(List<Staff> staffList) 
+    {
         System.out.print("Enter Gender to filter by (Male/Female): ");
-        String gender = sc.nextLine().toLowerCase();
-        if(gender == "male" || gender == "female")
+        String gender = sc.nextLine().trim().toLowerCase();
+        if(gender.equals("male") || gender.equals("female") || gender.equals("m") || gender.equals("f"))
         {
             return staffList.stream()
-                    .filter(staff -> staff.getGender().equalsIgnoreCase(gender))
+                    .filter(staff -> staff.getGender().equals(gender))
                     .collect(Collectors.toList());
         }
         // Wrong input by the user
@@ -172,7 +196,7 @@ public class StaffManagement
         }
         for (Staff staff : staffList)
         {
-            System.out.println("Staff ID: " + staff.getStaffId().toUpperCase() + "," + " Name: " + staff.getName().toUpperCase() + "," + " Role: " + staff.getRole().toUpperCase() + "," + " Gender: " + staff.getGender().toUpperCase() + "," + " Age: " + staff.getAge());
+            System.out.println("Staff ID: " + staff.getStaffId().toUpperCase() + "," + " Name: " + capitalizeName(staff.getName()) + "," + " Role: " + capitalizeName(staff.getRole()) + "," + " Gender: " + capitalizeName(staff.getGender()) + "," + " Age: " + staff.getAge());
         }
         System.out.print("\n");
 
@@ -180,18 +204,6 @@ public class StaffManagement
 
     public void addStaff(String hospitalID, String password, String staffId, String name, String role, String gender, int age)
     {
-        // validate staffId
-        if(isStaffIdMatched(staffId))
-        {
-            System.out.println("Staff ID already exists. Please try again.");
-            return;
-        }
-        // validate hospital ID
-        if(isHospitalIdMatched(hospitalID))
-        {
-            System.out.println("Hospital ID already exists. Please try again.");
-            return;
-        }
         Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);
         staffs.add(newStaff);
         System.out.println("Staff with ID " + staffId + " added successfully.");
@@ -202,28 +214,52 @@ public class StaffManagement
     {
         for (Staff staff : staffs)
         {
-            if (staff.getStaffId() == staffId)
+            if (staff.getStaffId().equals(staffId))
             {
                 staffs.remove(staff);
-                System.out.println("Staff with ID " + staffId.toUpperCase() + " removed successfully.");
+                System.out.println("Staff with ID " + capitalizeName(staffId) + " removed successfully.");
                 return;
             }
-            System.out.println("Staff with ID " + staffId.toUpperCase() + " not found.");
-            return;
         }
+        System.out.println("Staff with ID " + capitalizeName(staffId) + " not found.");
+        return;
     }
 
-    public void updateStaffDetails(String staffId, String name, String role, String gender, int age)
+    public void updateStaffDetails(String oldStaffId, String newStaffId, String name, String role, String gender, Integer age)
     {
-        for (Staff staff : staffs)
-        {
-            if (staff.getStaffId() == staffId)
+        for (Staff staff : staffs) {
+            if (staff.getStaffId().equalsIgnoreCase(oldStaffId)) 
             {
-                staff.updateName(name);
-                staff.updateRole(role);
-                staff.updateGender(gender);
-                staff.updateAge(age);
+                if (newStaffId != null && !newStaffId.isEmpty()) 
+                {
+                    // Check if newStaffId already exists
+                    if (isStaffIdMatched(newStaffId)) 
+                    {
+                        System.out.println("Staff ID already exists. Please try again.");
+                        return;
+                    }
+                    staff.updateStaffId(newStaffId);
+                }
+                if (name != null && !name.isEmpty()) 
+                {
+                    staff.updateName(name);
+                }
+                if (role != null && !role.isEmpty()) 
+                {
+                    staff.updateRole(role);
+                }
+                if (gender != null && !gender.isEmpty()) 
+                {
+                    staff.updateGender(gender);
+                }
+                if (age != null) 
+                {
+                    staff.updateAge(age);
+                }
+                System.out.println("Staff details updated successfully.");
+                return;
             }
         }
+        System.out.println("Staff with ID " + oldStaffId + " not found.");
     }
 }

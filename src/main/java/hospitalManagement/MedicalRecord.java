@@ -1,3 +1,4 @@
+package hospitalManagement;
 import java.util.ArrayList;
 import java.util.List;
 public class MedicalRecord
@@ -25,11 +26,13 @@ public class MedicalRecord
         this.bloodType = bloodType;
         this.contactNumber = contactNumber;
         this.email = email;
+
         this.pastDiagnosis = pastDiagnosis;
         this.pastTreatments = pastTreatments;
         this.currentDiagnosis = currentDiagnosis;
         this.currentTreatments = currentTreatments;
         this.prescriptions = prescriptions;
+        
     }
 
 
@@ -100,7 +103,7 @@ public class MedicalRecord
         return pastDiagnosis;
     }
     
-    protected List<String>  getPastTreatments()
+    protected List<String> getPastTreatments()
     {
         return pastTreatments;
     }
@@ -120,6 +123,18 @@ public class MedicalRecord
         System.out.println("Past Treatments: ");
         for (int i = 0; i < pastTreatments.size(); i++) {
             System.out.println(pastTreatments.get(i));
+        }
+        System.out.println("Current Diagnoses: ");
+        for (int i = 0; i < currentDiagnosis.size(); i++) {
+            System.out.println(currentDiagnosis.get(i));
+        }
+        System.out.println("Current Treatments: ");
+        for (int i = 0; i < currentTreatments.size(); i++) {
+            System.out.println(currentTreatments.get(i));
+        }
+        System.out.println("Prescriptions: ");
+        for (int i = 0; i < prescriptions.size(); i++) {
+            System.out.println(prescriptions.get(i));
         }
     }
 }

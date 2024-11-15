@@ -1,9 +1,9 @@
+package hospitalManagement;
 enum Status
 {
     PENDING,
-    SCHEDULED,
-    CANCELLED,
     CONFIRMED,
+    CANCELLED,
     COMPLETED,
     REJECTED
 }

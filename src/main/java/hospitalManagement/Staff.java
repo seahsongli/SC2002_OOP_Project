@@ -1,3 +1,4 @@
+package hospitalManagement;
 public class Staff extends User 
 {
     
@@ -10,9 +11,8 @@ public class Staff extends User
 
     //static int staffCount = 0;
     // Every user is a staff except a patient
-    public Staff(String hospitalID, String password, String staffId,  String name, String role, String gender, int age) 
+    public Staff(String hospitalID, String password, String staffId, String name, String role, String gender, int age) 
     {
-
         super(hospitalID, password, role);
         this.staffId = staffId;
         this.name = name;
@@ -47,8 +47,7 @@ public class Staff extends User
     }
 
     public void updateName(String name) 
-    {
-        
+    {      
         if (name == null) 
         {
             System.out.println("Name cannot be null.");
@@ -68,7 +67,6 @@ public class Staff extends User
 
     public void updateRole(String role) 
     {
-        
         if (role == null) 
         {
             System.out.println("role cannot be null.");
@@ -88,7 +86,6 @@ public class Staff extends User
 
     public void updateGender(String gender)
     {
-        
         if (gender == null) 
         {
             System.out.println("Gender cannot be null.");
@@ -122,10 +119,5 @@ public class Staff extends User
     public void updateStaffId(String staffId) 
     {
         this.staffId = staffId;
-    }
-    
-    public static void main(String[] args) 
-    {
-       
     }
 }
