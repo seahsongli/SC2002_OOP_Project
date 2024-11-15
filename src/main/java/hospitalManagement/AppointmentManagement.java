@@ -27,7 +27,7 @@ public class AppointmentManagement
     {
         for (Appointment appointment : appointments)
         {
-            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.SCHEDULED)
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED)
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
@@ -42,14 +42,15 @@ public class AppointmentManagement
     {
         LocalDate today = LocalDate.now();
         LocalDate sevenDaysFromNow = today.plusDays(7);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         
         for (Appointment appointment : appointments)
         {
             LocalDate appointmentDate = LocalDate.parse(appointment.getDate(), formatter);
-            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.SCHEDULED && (appointmentDate.isAfter(today) || appointmentDate.isEqual(today)) && appointmentDate.isBefore(sevenDaysFromNow))
+            if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED && (appointmentDate.isAfter(today) || appointmentDate.isEqual(today)) && appointmentDate.isBefore(sevenDaysFromNow))
             {
                 System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Patient: " + appointment.getPatientName());
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
             }
@@ -103,8 +104,11 @@ public class AppointmentManagement
             if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName) && record.getAppointment().getDoctorName().equals(doctorName) && record.getAppointment().getDate().equals(date) && record.getAppointment().getTime().equals(time))
             {
                 record.setPrescriptionStatus(prescriptionStatus);
+                System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
+                return;
             }
         }
+        System.out.println("No matching appointment found for patient " + patientName + " with ID " + patientId);
     }
 
     // Implement updateConsultationNotes() method to update the consultation notes for a specific appointment
@@ -321,9 +325,12 @@ public class AppointmentManagement
                 appointment.getTime().equals(oldTime)) {
 
                 // Set the old appointment status to canceled or just remove it
-                appointment.setStatus(Status.CANCELLED);  // Assuming you have a CANCELLED status
+                appointment.setStatus(Status.CANCELLED);
                 appointments.remove(appointment);
                 System.out.println("Old appointment canceled for " + patientName + " with Dr. " + doctorName + " on " + oldDate + " at " + oldTime);
+
+                // Schedule the new appointment
+                scheduleAppointment(patientId, patientName, doctorName, newDate, newTime);
                 break;
             }
         }
@@ -331,13 +338,22 @@ public class AppointmentManagement
 
     public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
-        appointments.removeIf(appointment -> 
+        boolean removed = appointments.removeIf(appointment -> 
             appointment.getPatientId().equals(patientId) && 
             appointment.getPatientName().equals(patientName) && 
             appointment.getDoctorName().equals(doctorName) && 
             appointment.getDate().equals(date) && 
             appointment.getTime().equals(time)
         );
+    
+        if (removed) 
+        {
+            System.out.println("Appointment canceled for patient " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time + ".");
+        } 
+        else 
+        {
+            System.out.println("No matching appointment found to cancel for patient " + patientName + ".");
+        }
     }
 
     public void displayScheduledAppointments(String patientId, String patientName)

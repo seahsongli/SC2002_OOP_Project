@@ -136,6 +136,9 @@ public class Main
             // String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions
             MedicalRecord medicalRecord = new MedicalRecord(patientId, name, dob, gender, bloodGroup, contactNumber, email);
             medicalRecordManagement.addMedicalRecord(medicalRecord);
+
+            // // Add users to adminMenu
+            // adminMenu.addUser(hospitalId, password, patient
         }
     }
 

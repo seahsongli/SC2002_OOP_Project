@@ -124,7 +124,6 @@ public class PharmacistMenu
         
             // Assuming Appointment has a method to set prescription status
             prescriptionManagement.updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time, prescriptionStatus);
-            System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
     }
 
     public void viewInventory()

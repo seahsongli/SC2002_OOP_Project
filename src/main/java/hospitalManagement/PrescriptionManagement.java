@@ -25,6 +25,5 @@ public class PrescriptionManagement
     public void updatePrescriptionStatus(String patientId, String patientName, String staffId, String doctorName, String date, String time, Status prescriptionStatus)
     {
         appointmentManagement.updatePrescriptionStatus(patientId, patientName, staffId, doctorName, date, time, prescriptionStatus);
-        System.out.println("Prescription status updated for patient " + patientName + " with ID " + patientId + " to " + prescriptionStatus);
     }
 }

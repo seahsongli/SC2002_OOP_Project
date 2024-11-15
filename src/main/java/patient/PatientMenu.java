@@ -21,12 +21,12 @@ public class PatientMenu
             System.out.println("Patient Menu:");
             System.out.println("1. View Personal Medical Record"); // done
             System.out.println("2. Schedule Appointment"); // done
-            System.out.println("3. Reschedule Appointment"); 
-            System.out.println("4. Cancel Appointment");
-            System.out.println("5. View Scheduled Appointments");
-            System.out.println("6. Update Personal Information");
+            System.out.println("3. Reschedule Appointment"); // done
+            System.out.println("4. Cancel Appointment"); // done
+            System.out.println("5. View Scheduled Appointments"); // done
+            System.out.println("6. Update Personal Information"); // done
             System.out.println("7. View available appointment slots"); // done
-            System.out.println("8. View Past Appointment Outcome Records");
+            System.out.println("8. View Past Appointment Outcome Records"); // done
             System.out.println("9. Logout"); // keep
             int choice = sc.nextInt();
             sc.nextLine(); // Consume newline
@@ -85,7 +85,6 @@ public class PatientMenu
                 case 5:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine();
-                    sc.nextLine(); // Consume newline
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine();
                     displayScheduledAppointments(patientId, patientName);
