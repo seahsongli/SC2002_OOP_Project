@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.List;
 
 import hospitalManagement.AdministratorMenu;
 import hospitalManagement.AppointmentManagement;
@@ -45,6 +47,7 @@ public class Main
             } 
             else if (choice == 2) 
             {
+                saveContext(medicalRecordManagement, staffManagement, inventoryManagement, prescriptionManagement);
                 System.out.println("Exiting the system. Goodbye!");
                 break;
             } 
@@ -136,7 +139,7 @@ public class Main
             else
             {
                 // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
-                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
+                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email, contactNumber);
                 users.put(hospitalId, patient);
                 System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
             }
@@ -179,6 +182,30 @@ public class Main
         }
     }
 
+    private static void saveContext(MedicalRecordManagement medicalRecordManagement, StaffManagement staffManagement, InventoryManagement inventoryManagement, PrescriptionManagement prescriptionManagement)
+    {
+       // Prepare lists to hold staff and patient data
+        List<Staff> staffList = new ArrayList<>();
+        List<Patient> patientList = new ArrayList<>();
+        for (User user : users.values()) {
+            // Check if the user is an instance of Patient or Staff
+            if (user instanceof Patient) {
+                Patient patient = (Patient) user; // Cast to Patient
+                // Add to the patient list
+                patientList.add(patient);
+            } 
+            else if (user instanceof Staff) 
+            {
+                Staff staff = (Staff) user; // Cast to Staff
+                // Add to the staff list
+                staffList.add(staff);
+            }
+        }
+
+        ExcelWriter.writeExcelData("src/main/resources/Staff_List.xlsx", staffList);
+        ExcelWriter.writeExcelData("src/main/resources/Patient_List.xlsx", patientList);
+
+    }
     private static void changePassword(User user) 
     {
         System.out.println("Enter new password: ");

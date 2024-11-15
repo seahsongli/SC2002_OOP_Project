@@ -13,11 +13,12 @@ public class Patient extends User
     private String gender;
     private String bloodGroup;
     private String email;
+    private String phoneNumber;
 
     // Define a DateTimeFormatter for yyyy-MM-dd format
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email) 
+    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email, String phoneNumber) 
     {
         super(hospitalID, password, "patient");
         this.patientId = patientId;
@@ -26,6 +27,7 @@ public class Patient extends User
         this.gender = gender;
         this.bloodGroup = bloodGroup;
         this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getId() 
@@ -36,6 +38,31 @@ public class Patient extends User
     public String getName() 
     {
         return name;
+    }
+
+    public LocalDate getDob() 
+    {
+        return dob;
+    }
+
+    public String getGender() 
+    {
+        return gender;
+    }
+
+    public String getBloodType() 
+    {
+        return bloodGroup;
+    }
+
+    public String getEmail() 
+    {
+        return email;
+    }
+
+    public String getContactNumber()
+    {
+        return phoneNumber;
     }
     
     public void setContactNumber(PatientMenu patientMenu, String phoneNumber)
