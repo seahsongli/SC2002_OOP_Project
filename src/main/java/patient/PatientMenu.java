@@ -70,6 +70,7 @@ public class PatientMenu
                     cancelAppointment(doctorName, date, time);
                     break;
                 case 5:
+                    System.out.println("The appointment details for you are as follows: \n");
                     displayScheduledAppointments();
                     break;
                 case 6: // Update personal information

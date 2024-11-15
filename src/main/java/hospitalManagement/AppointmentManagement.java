@@ -363,9 +363,11 @@ public class AppointmentManagement
         {
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName))
             {
+
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
+                System.err.println();
                 found = true; // Set flag to true
             }
 
