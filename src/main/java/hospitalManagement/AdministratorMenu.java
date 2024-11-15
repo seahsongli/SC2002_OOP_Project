@@ -147,7 +147,7 @@ public class AdministratorMenu
         try 
         {
             System.out.print("Enter Patient ID: ");
-            String patientId = sc.nextLine().trim().toLowerCase();
+            String patientId = sc.nextLine().trim();
             
             System.out.print("Enter Patient Name: ");
             String patientName = sc.nextLine().trim();
