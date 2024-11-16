@@ -32,7 +32,7 @@ public class Patient extends User
     }
 
     // Getters
-    public String getId() 
+    public String getHospitalId() 
     {
         return patientId;
     }

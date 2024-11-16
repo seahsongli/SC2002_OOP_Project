@@ -59,7 +59,7 @@ public class ExcelWriter {
                     Patient patient = (Patient) obj;
                     row.createCell(0).setCellValue(patient.getName());
                     row.createCell(1).setCellValue(patient.getPassword());
-                    row.createCell(2).setCellValue(patient.getId());
+                    row.createCell(2).setCellValue(patient.getHospitalId());
                     row.createCell(3).setCellValue(patient.getName());
                     row.createCell(4).setCellValue(patient.getDob());
                     row.createCell(5).setCellValue(patient.getGender());
