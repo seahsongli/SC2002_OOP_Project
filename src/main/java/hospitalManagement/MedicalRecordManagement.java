@@ -100,6 +100,7 @@ public class MedicalRecordManagement
                 return;
             }
         }
+        System.out.println("Patient " + patientName + " with ID " + patientId + " not found.");
     }
 
     protected void setPatientTreatmentPlan(String patientId, String patientName, String treatmentPlan)
