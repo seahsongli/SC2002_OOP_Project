@@ -110,63 +110,63 @@ public class PatientMenu
 
     public void updateContactNumber(String contactNumber)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         medicalRecordManagement.updateContactNumber(patientId, patientName, contactNumber);
     }
 
     public void updateEmail(String email)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         medicalRecordManagement.updateEmail(patientId, patientName, email);
     }
 
     public void viewPersonalMedicalRecord()
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         medicalRecordManagement.viewPersonalMedicalRecord(patientId, patientName);
     }
 
     public void viewAvailableAppointmentSlots(String doctorName, String date)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.viewAvailableAppointmentSlots(patientId, patientName, doctorName, date);
     }
 
     public void scheduleAppointment(String doctorName, String date, String time)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.scheduleAppointment(patientId, patientName, doctorName, date, time);
     }
 
     public void rescheduleAppointment(String doctorName, String oldDate, String oldTime, String newDate, String newTime)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.rescheduleAppointment(patientId, patientName, doctorName, oldDate, oldTime, newDate, newTime);
     }
 
     public void cancelAppointment(String doctorName, String date, String time)
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.cancelAppointment(patientId, patientName, doctorName, date, time);
     }
 
     public void displayScheduledAppointments()
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.displayScheduledAppointments(patientId, patientName);
     }
 
     public void displayPastAppointmentRecords()
     {
-        String patientId = loggedInPatient.getId();
+        String patientId = loggedInPatient.getHospitalId();
         String patientName = loggedInPatient.getName();
         appointmentManagement.displayPastAppointmentRecords(patientId, patientName);
     }

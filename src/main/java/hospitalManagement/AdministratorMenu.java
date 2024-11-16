@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import com.sun.security.auth.module.UnixSystem;
+
 import patient.Patient;
 
 public class AdministratorMenu
@@ -591,12 +595,13 @@ private void approveReplenishmentRequests()
 private boolean patientExists(String patientId) 
 {
     String patientIdStr = String.valueOf(patientId);
+
     for (User user : users.values()) 
     {
         if (user instanceof Patient && user.getHospitalId().equals(patientIdStr)) 
         {
             Patient patient = (Patient) user;
-            if (patient.getId().equalsIgnoreCase(patientId)) 
+            if (patient.getHospitalId().equalsIgnoreCase(patientId)) 
             {
                 return true;
             }

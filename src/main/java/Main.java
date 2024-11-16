@@ -82,8 +82,8 @@ public class Main
             Object[] data = staffData[i];
             String hospitalId = (String) data[0];
             String password = (String) data[1];
-            String staffId = (String) data[2];
-            String name = (String) data[3];
+            String staffId = ((String) data[2]).trim().toLowerCase();
+            String name = ((String) data[3]).trim().toLowerCase();
             String role = (String) data[4];
             String gender = (String) data[5];
             int age = (data[6] instanceof Double) ? ((Double) data[6]).intValue() : Integer.parseInt(data[6].toString());
@@ -124,8 +124,8 @@ public class Main
             Object[] data = patientData[i];
             String hospitalId = (String) data[0];
             String password = (String) data[1];
-            String patientId = (String) data[2];
-            String name = (String) data[3];
+            String patientId = ((String) data[2]).trim().toLowerCase();
+            String name = ((String) data[3]).trim().toLowerCase();
             String dob = (String) data[4];
             String gender = (String) data[5];
             String bloodGroup = (String) data[6];
