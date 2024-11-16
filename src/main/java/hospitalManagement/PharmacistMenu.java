@@ -1,5 +1,9 @@
 package hospitalManagement;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class PharmacistMenu
@@ -46,10 +50,8 @@ public class PharmacistMenu
                     String doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    String date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    String time = sc.nextLine();
+                    String date = getDateFromUser();
+                    String time = getTimeFromUser();
                     System.out.println("Enter prescription status: ");
                     Status status = getStatusFromUser();
                     if (status != null) {
@@ -80,9 +82,9 @@ public class PharmacistMenu
             }
         }
     }
-
-
-       private Status getStatusFromUser() {
+    
+    
+    private Status getStatusFromUser() {
         System.out.println("Select prescription status:");
         System.out.println("1. PENDING");
         System.out.println("2. COMPLETED");
@@ -100,7 +102,39 @@ public class PharmacistMenu
             default:
                 System.out.println("Invalid choice. Please try again.");
                 return null;
+            }
+    }
+
+    private String getTimeFromUser() {
+        String timeInput;
+        while (true) {
+            System.out.println("Enter time (HH:mm): ");
+            timeInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalTime.parse(timeInput, DateTimeFormatter.ofPattern("HH:mm"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid time format. Please try again (e.g., 14:30).");
+            }
         }
+        return timeInput;
+    }
+
+    private String getDateFromUser() {
+        String dateInput;
+        while (true) {
+            System.out.println("Enter date (yyyy-mm-dd): ");
+            dateInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please try again (e.g., 2024-11-16).");
+            }
+        }
+        return dateInput;
     }
 
     public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
@@ -112,12 +146,6 @@ public class PharmacistMenu
     {
         prescriptionManagement.setPrescription(patientId, patientName, prescription);
     }
-
-    // consider using the entire appointment to check if its the correct appointment, and update accordingly
-    // public void updatePrescriptionStatus(int patientId, String patientName, String status)
-    // {
-    //     prescriptionManagement.updatePrescriptionStatus(patientId, patientName, status);
-    // }
 
     public void updatePrescriptionStatus(String patientId, String patientName, String doctorId, String doctorName, String date, String time, Status prescriptionStatus) {
         // Logic to find the correct appointment and update the prescription status

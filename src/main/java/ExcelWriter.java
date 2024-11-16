@@ -63,7 +63,7 @@ public class ExcelWriter {
                     row.createCell(3).setCellValue(patient.getName());
                     row.createCell(4).setCellValue(patient.getDob());
                     row.createCell(5).setCellValue(patient.getGender());
-                    row.createCell(6).setCellValue(patient.getBloodType());
+                    row.createCell(6).setCellValue(patient.getBloodGroup());
                     row.createCell(7).setCellValue(patient.getEmail());
                     row.createCell(8).setCellValue(patient.getContactNumber());
                 }

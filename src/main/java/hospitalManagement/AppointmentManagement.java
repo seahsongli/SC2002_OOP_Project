@@ -59,6 +59,7 @@ public class AppointmentManagement
 
     public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
     {
+        boolean found = false;
         for(AppointmentOutcomeRecord appointmentOutcomeRecord : appointmentOutcomeRecords)
         {
             if (appointmentOutcomeRecord.getAppointment().getPatientId().equals(patientId) && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
@@ -70,7 +71,12 @@ public class AppointmentManagement
                 System.out.println("Medications Prescribed: " + appointmentOutcomeRecord.getMedicationsPrescribed());
                 System.out.println("Prescription Status: " + appointmentOutcomeRecord.getPrescriptionStatus());
                 System.out.println("Consultation Notes: " + appointmentOutcomeRecord.getConsultationNotes());
+                found = true;
             }
+        }
+        if (!found)
+        {
+            System.out.println("No appointment outcome record found for patient " + patientName + " with ID " + patientId + " with doctor " + doctorName);
         }
     }
     // Implement updateTypeOfService() method to update the type of service for a specific appointment
@@ -108,7 +114,7 @@ public class AppointmentManagement
                 return;
             }
         }
-        System.out.println("No matching appointment found for patient " + patientName + " with ID " + patientId);
+        System.out.println("No matching appointment found for patient " + patientName + " with ID " + patientId  + " with doctor " + doctorName + " on " + date + " at " + time);
     }
 
     // Implement updateConsultationNotes() method to update the consultation notes for a specific appointment
@@ -298,6 +304,17 @@ public class AppointmentManagement
         }
     }
 
+    public boolean isDuplicateAppointment(String patientId, String patientName, String doctorName, String date, String time)
+    {
+        for (Appointment appointment : appointments)
+        {
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
         // Check if the doctor has availability for the given time slot
@@ -309,6 +326,11 @@ public class AppointmentManagement
             return; // Reject the appointment if the slot is not available
         }
 
+        if (isDuplicateAppointment(patientId, patientName, doctorName, date, time))
+        {
+            System.out.println("Appointment Requests already exists for patient " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
+            return;
+        }
         // If the slot is available, schedule the appointment
         appointments.add(new Appointment(patientId, patientName, doctorName, date, time));
         System.out.println("Appointment scheduled for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);

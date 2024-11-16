@@ -1,4 +1,8 @@
 package hospitalManagement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class DoctorMenu {
@@ -112,10 +116,8 @@ public class DoctorMenu {
                     patientId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    String date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    String time = sc.nextLine();
+                    String date = getDateFromUser();
+                    String time = getTimeFromUser();
                     System.out.println("Enter service: ");
                     String service = sc.nextLine();
                     editService(patientId, doctorName, date, time, service);
@@ -127,10 +129,8 @@ public class DoctorMenu {
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
                     System.out.println("Enter prescription status: ");
@@ -144,10 +144,8 @@ public class DoctorMenu {
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     System.out.println("Enter consultation notes: ");
                     String consultationNotes = sc.nextLine();
                     editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
@@ -158,10 +156,8 @@ public class DoctorMenu {
                     doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     setAvailability(doctorId,doctorName,date,time);
                     break;
 
@@ -170,10 +166,8 @@ public class DoctorMenu {
                     doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     cancelAvailability(doctorId,doctorName,date,time);
                     break;
 
@@ -194,10 +188,8 @@ public class DoctorMenu {
                     doctorId = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
                     break;
 
@@ -208,10 +200,8 @@ public class DoctorMenu {
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     rejectAppointment(patientId, patientName,doctorName, date, time);
                     break;
 
@@ -223,10 +213,8 @@ public class DoctorMenu {
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     System.out.println("Enter service: ");
                     service = sc.nextLine();
                     System.out.println("Enter prescription: ");
@@ -235,7 +223,6 @@ public class DoctorMenu {
                     consultationNotes = sc.nextLine();
                     System.out.println("Enter prescription status (e.g.PENDING): ");
                     Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
-
                     recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
                     break;
 
@@ -322,5 +309,38 @@ public class DoctorMenu {
 
     public void editConsultationNotes(String patientId, String patientName, String doctorName, String date, String time, String consultationNotes) {
         appointmentManagement.editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
+    }
+
+    // private methods
+        private String getTimeFromUser() {
+        String timeInput;
+        while (true) {
+            System.out.println("Enter time (HH:mm): ");
+            timeInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalTime.parse(timeInput, DateTimeFormatter.ofPattern("HH:mm"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid time format. Please try again (e.g., 14:30).");
+            }
+        }
+        return timeInput;
+    }
+
+    private String getDateFromUser() {
+        String dateInput;
+        while (true) {
+            System.out.println("Enter date (yyyy-mm-dd): ");
+            dateInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please try again (e.g., 2024-11-16).");
+            }
+        }
+        return dateInput;
     }
 }

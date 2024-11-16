@@ -12,6 +12,7 @@ public class Patient extends User
     private LocalDate dob; // Date of Birth
     private String gender;
     private String bloodGroup;
+    private String email;
     private String contactNumber;
 
     // Define a DateTimeFormatter for yyyy-MM-dd format
