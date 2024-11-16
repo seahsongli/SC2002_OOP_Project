@@ -350,8 +350,6 @@ public class AdministratorMenu
                        
                    }
                case 3:
-                   
-                   
                    updateStaffDetailsInteractive();
                    break;
                case 4:
@@ -466,7 +464,7 @@ public class AdministratorMenu
             }
             
             inventoryManagement.removeStock(name, quantity);
-            System.out.println("Medicine removed successfully.");
+            // System.out.println("Medicine removed successfully.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Quantity must be an integer.");
         } catch (Exception e) {

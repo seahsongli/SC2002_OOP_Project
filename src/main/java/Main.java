@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.List;
 
 import hospitalManagement.AdministratorMenu;
 import hospitalManagement.AppointmentManagement;
@@ -202,8 +202,8 @@ public class Main
             }
         }
 
-        ExcelWriter.writeExcelData("src/main/resources/Staff_List.xlsx", staffList);
-        ExcelWriter.writeExcelData("src/main/resources/Patient_List.xlsx", patientList);
+        // ExcelWriter.writeExcelData("src/main/resources/Staff_List.xlsx", staffList);
+        // ExcelWriter.writeExcelData("src/main/resources/Patient_List.xlsx", patientList);
 
     }
     private static void changePassword(User user) 

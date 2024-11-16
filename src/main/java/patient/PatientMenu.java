@@ -1,6 +1,9 @@
 package patient;
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import hospitalManagement.AppointmentManagement;
 import hospitalManagement.MedicalRecordManagement;
 public class PatientMenu
@@ -46,10 +49,8 @@ public class PatientMenu
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     String doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    String date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    String time = sc.nextLine();
+                    String date = getDateFromUser();
+                    String time = getTimeFromUser();
                     scheduleAppointment(patientId, patientName, doctorName, date, time);
                     break;
                 case 3:
@@ -59,14 +60,12 @@ public class PatientMenu
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter old date (yyyy-mm-dd): ");
-                    String oldDate = sc.nextLine();
-                    System.out.println("Enter old time (HH:mm): ");
-                    String oldTime = sc.nextLine();
-                    System.out.println("Enter new date (yyyy-mm-dd): ");
-                    String newDate = sc.nextLine();
-                    System.out.println("Enter new time (HH:mm): ");
-                    String newTime = sc.nextLine();
+                    System.out.println("Requesting user to enter old date and time for rescheduling....");
+                    String oldDate = getDateFromUser();
+                    String oldTime = getTimeFromUser();
+                    System.out.println("Requesting user to enter new date and time for rescheduling....");
+                    String newDate = getDateFromUser();
+                    String newTime = getTimeFromUser();
                     rescheduleAppointment(patientId, patientName, doctorName, oldDate, oldTime, newDate, newTime);
                     break;
                 case 4:
@@ -76,10 +75,8 @@ public class PatientMenu
                     patientName = sc.nextLine();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine();
-                    System.out.println("Enter date (yyyy-mm-dd): ");
-                    date = sc.nextLine();
-                    System.out.println("Enter time (HH:mm): ");
-                    time = sc.nextLine();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     cancelAppointment(patientId, patientName, doctorName, date, time);
                     break;
                 case 5:
@@ -187,4 +184,36 @@ public class PatientMenu
         appointmentManagement.displayPastAppointmentRecords(patientId, patientName);
     }
 
+    // private methods
+    private String getTimeFromUser() {
+        String timeInput;
+        while (true) {
+            System.out.println("Enter time (HH:mm): ");
+            timeInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalTime.parse(timeInput, DateTimeFormatter.ofPattern("HH:mm"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid time format. Please try again (e.g., 14:30).");
+            }
+        }
+        return timeInput;
+    }
+
+    private String getDateFromUser() {
+        String dateInput;
+        while (true) {
+            System.out.println("Enter date (yyyy-mm-dd): ");
+            dateInput = sc.nextLine();
+            try {
+                // Parse input to ensure it's valid
+                LocalDate.parse(dateInput, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                break; // Exit loop if the input is valid
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please try again (e.g., 2024-11-16).");
+            }
+        }
+        return dateInput;
+    }
 }
