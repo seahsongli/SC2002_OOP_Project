@@ -64,7 +64,9 @@ public class InventoryManagement
                 currentStockLevels.remove(medicine);
                 System.out.println(name + " has been removed from the inventory as its quantity reached zero.");
             }
-        } else {
+        } 
+        else 
+        {
             System.out.println("Medicine " + name + " not found in the inventory.");
         }
     }

@@ -38,8 +38,21 @@ public class Main
             System.out.println("Welcome to the Hospital Management System");
             System.out.println("1. Login");
             System.out.println("2. Exit");
-            int choice = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            int choice = -1; // Default invalid choice
+            while (choice == -1) 
+            {
+                System.out.print("Enter your choice: ");
+                if (sc.hasNextInt()) 
+                {
+                    choice = sc.nextInt();
+                    sc.nextLine();
+                } 
+                else 
+                {
+                    System.out.println("Invalid input. Please enter a valid number (1 or 2).");
+                    sc.nextLine(); // Clear the invalid input
+                }
+            }
 
             if (choice == 1) 
             {

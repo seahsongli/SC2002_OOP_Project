@@ -81,8 +81,17 @@ public class PatientMenu
                             break;
                         case 2:
                             System.out.println("Enter new email: ");
-                            String email = sc.nextLine().trim().toLowerCase();
-                            updateEmail(email);
+                            while (true) {
+                                String email = sc.nextLine().trim().toLowerCase();
+                                if (isValidEmail(email)) {
+                                    updateEmail(email);
+                                    System.out.println("Email updated successfully.");
+                                    break;
+                                } 
+                                else {
+                                    System.out.println("Invalid email format. Please enter a valid email address:");
+                                }
+                            }
                             break;
                         default:
                             System.out.println("Invalid choice. Please try again.");
@@ -106,6 +115,11 @@ public class PatientMenu
                     break;
             }
         }
+    }
+
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(emailRegex);
     }
 
     public void updateContactNumber(String contactNumber)
