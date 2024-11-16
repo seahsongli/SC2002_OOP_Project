@@ -11,7 +11,8 @@ public class AppointmentManagement
 {
     private List<Appointment> appointments;
     private List<AppointmentOutcomeRecord> appointmentOutcomeRecords;
-    private Map<String, List<String>> doctorAvailability; // Key: "doctorId_date", Value: List of available times   
+    private Map<String, List<String>> doctorAvailability; // Key: "doctorId_date", Value: List of available times  
+     
 
     public AppointmentManagement()
     {
@@ -29,7 +30,7 @@ public class AppointmentManagement
         {
             if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED)
             {
-                System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Doctor: " + capitalizeName(appointment.getDoctorName()));
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
             }
@@ -43,18 +44,46 @@ public class AppointmentManagement
         LocalDate today = LocalDate.now();
         LocalDate sevenDaysFromNow = today.plusDays(7);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        
+        boolean found = false;
         for (Appointment appointment : appointments)
         {
             LocalDate appointmentDate = LocalDate.parse(appointment.getDate(), formatter);
             if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.CONFIRMED && (appointmentDate.isAfter(today) || appointmentDate.isEqual(today)) && appointmentDate.isBefore(sevenDaysFromNow))
             {
-                System.out.println("Doctor: " + appointment.getDoctorName());
-                System.out.println("Patient: " + appointment.getPatientName());
+                System.out.println("Your upcoming appointmets in the next 7 days are as follows: \n");
+                System.out.println("Doctor: " + capitalizeName(appointment.getDoctorName()));
+                System.out.println("Patient: " + capitalizeName(appointment.getPatientName()));
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
+                System.out.println();
+                found = true;
             }
         }
+        if(!found)
+        {
+            System.out.println("No confirmed appointments are available within seven days from today");
+            System.out.println();
+        }
+    }
+
+    public String capitalizeName(String name) 
+    {
+        String[] words = name.split("\\s");
+        StringBuilder formattedName = new StringBuilder();
+    
+        for (String word : words) 
+        {
+            if (word.length() > 0) 
+            {
+                String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                if (formattedName.length() > 0) {
+                    formattedName.append(" ");
+                }
+                formattedName.append(capitalizedWord);
+            }
+        }
+    
+        return formattedName.toString();
     }
 
     public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
@@ -63,7 +92,7 @@ public class AppointmentManagement
         {
             if (appointmentOutcomeRecord.getAppointment().getPatientId().equals(patientId) && appointmentOutcomeRecord.getAppointment().getPatientName().equals(patientName) && appointmentOutcomeRecord.getAppointment().getDoctorName().equals(doctorName))
             {
-                System.out.println("Doctor: " + appointmentOutcomeRecord.getAppointment().getDoctorName());
+                System.out.println("Doctor: " + capitalizeName(appointmentOutcomeRecord.getAppointment().getDoctorName()));
                 System.out.println("Date: " + appointmentOutcomeRecord.getAppointment().getDate());
                 System.out.println("Time: " + appointmentOutcomeRecord.getAppointment().getTime());
                 System.out.println("Type of Service: " + appointmentOutcomeRecord.getTypeOfService());
@@ -231,13 +260,13 @@ public class AppointmentManagement
         // Check if the time slot is already in the list
         if (doctorAvailability.get(key).contains(time)) 
         {
-            System.out.println("Time slot already set for " + doctorName + " on " + date + " at " + time);
+            System.out.println("Time slot already set for " + capitalizeName(doctorName) + " on " + date + " at " + time);
             return;
         }
 
         // Add the time slot to the doctor's availability list
         doctorAvailability.get(key).add(time);
-        System.out.println("Availability set for " + doctorName + " on " + date + " at " + time);
+        System.out.println("Availability set for " + capitalizeName(doctorName) + " on " + date + " at " + time);
     }
 
     // Cancel availability for a doctor
@@ -259,61 +288,89 @@ public class AppointmentManagement
     // View all requests for a specific doctor
     protected void viewAppointmentRequests(String doctorName)
     {
+        boolean found = false;
         for (Appointment appointment : appointments)
         {
             if (appointment.getDoctorName().equals(doctorName) && appointment.getStatus() == Status.PENDING)
             {
-                System.out.println("Patient: " + appointment.getPatientName());
+                System.out.println("The request detalis are as follows: \n");
+                System.out.println("PatientID: " + capitalizeName(appointment.getPatientId()));
+                System.out.println("Patient: " + capitalizeName(appointment.getPatientName()));
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
+                System.out.println();
+                found = true;
             }
+        }
+        if(!found)
+        {
+            System.out.println("No appointment requests at the moment");
+            System.out.println();
         }
     }
 
-    // Accept an appointment
+    // Accept an appointment by a doctor
     protected void acceptAppointment(String patientId, String patientName, String staffId, String doctorName, String date, String time)
     {
+        boolean found = false;
         for (Appointment appointment : appointments)
         {
-            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
+            if (appointment.getPatientId().equals(patientId) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
             {
                 appointment.setStatus(Status.CONFIRMED);
                 cancelAvailability(staffId, doctorName, date, time); // Remove the time slot from availability
-                System.out.println("Appointment confirmed for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
+                System.out.println("Appointment confirmed for " + capitalizeName(patientName) + " with Dr. " + capitalizeName(doctorName) + " on " + date + " at " + time);
+                System.out.println();
+                found = true;
                 break;
             }
         }
-    }
-
-    // Reject an appointment
-    protected void rejectAppointment(String patientId, String patientName, String doctorName, String date, String time)
-    {
-        for (Appointment appointment : appointments)
+        if(!found)
         {
-            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time))
-            {
-                appointment.setStatus(Status.REJECTED);
-                break;
-            }
+            System.out.println("No appointment requests are available to accept");
         }
     }
 
-    public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time) 
+    // Reject an appointment by the doctor
+    protected void rejectAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
-        // Check if the doctor has availability for the given time slot
-        String key = doctorName + "_" + date; // Use doctor name and date as key
-
-        // Check if the doctor is available at the requested time
+        boolean found = false;
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().toLowerCase().equals(patientName) && appointment.getDoctorName().equals(doctorName) && appointment.getDate().equals(date) && appointment.getTime().equals(time)) {
+                appointment.setStatus(Status.REJECTED);
+                // Add the time slot back to availability
+                String key = doctorName + "_" + date;
+                doctorAvailability.putIfAbsent(key, new ArrayList<>());
+                doctorAvailability.get(key).add(time);
+                System.out.println("Appointment request rejected for " + capitalizeName(patientName) + " with Dr. " + capitalizeName(doctorName) + " on " + date + " at " + time);
+                System.out.println();
+                found = true;
+                break;
+            }
+        }
+        if(!found)
+        {
+            System.out.println("There are no appointments available for you to reject");
+        }
+    }
+    public void scheduleAppointment(String patientId, String patientName, String doctorName, String date, String time) {
+        String key = doctorName + "_" + date;
+    
+        // Check availability
         if (!doctorAvailability.containsKey(key) || !doctorAvailability.get(key).contains(time)) {
             System.out.println("The doctor is not available at " + time + " on " + date + ". Please choose another time.");
-            return; // Reject the appointment if the slot is not available
+            return;
         }
 
-        // If the slot is available, schedule the appointment
-        appointments.add(new Appointment(patientId, patientName, doctorName, date, time));
-        System.out.println("Appointment scheduled for " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time);
+        // Schedule the appointment
+        Appointment newAppointment = new Appointment(patientId, patientName, doctorName, date, time);
+        newAppointment.setStatus(Status.PENDING);
+        appointments.add(newAppointment);
+        System.out.println("Appointment request submitted for " + capitalizeName(patientName) + " with Dr. " + capitalizeName(doctorName) + " on " + date + " at " + time);
+        System.out.println();
     }
 
+    // The patient reschedule appointment 
     public void rescheduleAppointment(String patientId, String patientName, String doctorName, String oldDate, String oldTime, String newDate, String newTime) 
     {
         // Cancel the old appointment first
@@ -327,15 +384,22 @@ public class AppointmentManagement
                 // Set the old appointment status to canceled or just remove it
                 appointment.setStatus(Status.CANCELLED);
                 appointments.remove(appointment);
-                System.out.println("Old appointment canceled for " + patientName + " with Dr. " + doctorName + " on " + oldDate + " at " + oldTime);
+                System.out.println("Old appointment canceled for " + capitalizeName(patientName) + " with Dr. " + capitalizeName(doctorName) + " on " + oldDate + " at " + oldTime);
+                System.out.println();
 
                 // Schedule the new appointment
                 scheduleAppointment(patientId, patientName, doctorName, newDate, newTime);
                 break;
             }
+            else
+            {
+                System.out.println("No appointment scheduled for the details entered");
+                System.out.println();
+                break;
+            }
         }
     }
-
+    // The patient cancel appointment
     public void cancelAppointment(String patientId, String patientName, String doctorName, String date, String time) 
     {
         boolean removed = appointments.removeIf(appointment -> 
@@ -348,14 +412,14 @@ public class AppointmentManagement
     
         if (removed) 
         {
-            System.out.println("Appointment canceled for patient " + patientName + " with Dr. " + doctorName + " on " + date + " at " + time + ".");
+            System.out.println("Appointment canceled for patient " + capitalizeName(patientName) + " with Dr. " + capitalizeName(doctorName) + " on " + date + " at " + time + ".");
         } 
         else 
         {
-            System.out.println("No matching appointment found to cancel for patient " + patientName + ".");
+            System.out.println("No matching appointment found to cancel for patient " + capitalizeName(patientName) + ".");
         }
     }
-
+    // The patient view scheduled appointments
     public void displayScheduledAppointments(String patientId, String patientName)
     {
         boolean found = false; // Flag to check if any appointments are found for the patient
@@ -364,10 +428,11 @@ public class AppointmentManagement
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName))
             {
 
-                System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Doctor: " + capitalizeName(appointment.getDoctorName()));
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
-                System.err.println();
+                System.out.println("Status: " + appointment.getStatus());
+                System.out.println();
                 found = true; // Set flag to true
             }
 
@@ -385,7 +450,7 @@ public class AppointmentManagement
         {
             if (record.getAppointment().getPatientId().equals(patientId) && record.getAppointment().getPatientName().equals(patientName))
             {
-                System.out.println("Doctor: " + record.getAppointment().getDoctorName());
+                System.out.println("Doctor: " + capitalizeName(record.getAppointment().getDoctorName()));
                 System.out.println("Date: " + record.getAppointment().getDate());
                 System.out.println("Time: " + record.getAppointment().getTime());
                 System.out.println("Type of Service: " + record.getTypeOfService());
@@ -401,15 +466,17 @@ public class AppointmentManagement
         String key = doctorName + "_" + date;
         if (doctorAvailability.containsKey(key))
         {
-            System.out.println("Available slots for Dr. " + doctorName + " on " + date + ":");
+            System.out.println("Available slots for Dr. " + capitalizeName(doctorName) + " on " + date + "are as follows: ");
             for (String time : doctorAvailability.get(key))
             {
                 System.out.println(time);
             }
+            System.out.println();
         }
         else
         {
-            System.out.println("No available slots for Dr. " + doctorName + " on " + date);
+            System.out.println("No available slots for Dr. " + capitalizeName(doctorName) + " on " + date);
+            System.out.println();
         }
     }
 
@@ -420,7 +487,7 @@ public class AppointmentManagement
         {
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
             {
-                System.out.println("Doctor: " + appointment.getDoctorName());
+                System.out.println("Doctor: " + capitalizeName(appointment.getDoctorName()));
                 System.out.println("Doctor ID: " + staffId);
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());

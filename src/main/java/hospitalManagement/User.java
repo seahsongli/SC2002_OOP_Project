@@ -6,7 +6,10 @@ public class User
     private String hospitalId;
     private String hashedPassword;
     private String role;
+    private String staffId; 
+    private String patientId;
 
+    // constructor for general user
     public User(String hospitalId, String password, String role) 
     {
         this.hospitalId = hospitalId;

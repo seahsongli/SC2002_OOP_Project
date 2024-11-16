@@ -5,10 +5,12 @@ public class DoctorMenu {
     private MedicalRecordManagement medicalRecordManagement;
     private AppointmentManagement appointmentManagement;
     private Scanner sc = new Scanner(System.in);
+    private Staff loggedInDoctor;
 
-    public DoctorMenu(MedicalRecordManagement medicalRecordManagement, AppointmentManagement appointmentManagement) {
+    public DoctorMenu(MedicalRecordManagement medicalRecordManagement, AppointmentManagement appointmentManagement, Staff loggedInDoctor) {
         this.medicalRecordManagement = medicalRecordManagement;
         this.appointmentManagement = appointmentManagement;
+        this.loggedInDoctor = loggedInDoctor;
     }
 
     // public void updateContactNumber(int doctorId, String doctorName, String contactNumber)
@@ -50,185 +52,154 @@ public class DoctorMenu {
             sc.nextLine();
             String patientId;
             String patientName;
-            String doctorName;
-            String doctorId;
             String diagnosis;
             String prescription;
             switch (choice) {
                 case 1:
-                    System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
-                    viewUpcomingAppointments(doctorId, doctorName);
+
+                    viewUpcomingAppointments(loggedInDoctor.getStaffId(), loggedInDoctor.getName());
                     break;
 
 
                 case 2:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     viewPatientMedicalRecord(patientId, patientName);
                     break;
 
                 case 3: // Update Patient Medical Record
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter diagnosis: ");
-                    diagnosis = sc.nextLine();
+                    diagnosis = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
                     setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
                     break;
 
                 case 4:
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
-                    viewPersonalSchedule(doctorName);
+                    viewPersonalSchedule(loggedInDoctor.getName());
                     break;
                 case 5:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter diagnosis: ");
                     diagnosis = sc.nextLine();
                     addNewDiagnosis(patientId, patientName, diagnosis);
                     break;
                 case 6: // add new prescription
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
                     addNewPrescription(patientId, patientName, prescription);
                     break;
                 case 7:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     String date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     String time = sc.nextLine();
                     System.out.println("Enter service: ");
                     String service = sc.nextLine();
-                    editService(patientId, doctorName, date, time, service);
+                    editService(patientId, loggedInDoctor.getName(), date, time, service);
                     break;
                 case 8:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
                     System.out.println("Enter prescription: ");
-                    prescription = sc.nextLine();
+                    prescription = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter prescription status: ");
                     String status = sc.nextLine();
-                    editPrescription(patientId, patientName, doctorName, date, time, prescription, Status.valueOf(status.toUpperCase()));
+                    editPrescription(patientId, patientName, loggedInDoctor.getName(), date, time, prescription, Status.valueOf(status.toUpperCase()));
                     break;
                 case 9:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
                     System.out.println("Enter consultation notes: ");
                     String consultationNotes = sc.nextLine();
-                    editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
+                    editConsultationNotes(patientId, patientName, loggedInDoctor.getName(), date, time, consultationNotes);
                     break;
 
                 case 10:
-                    System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
-                    setAvailability(doctorId,doctorName,date,time);
+                    setAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
                     break;
 
                 case 11:
-                    System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+        
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
-                    cancelAvailability(doctorId,doctorName,date,time);
+                    cancelAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
                     break;
 
                 case 12: // View Appointment requests
-                    System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
-                    viewAppointmentRequests(doctorName);
+
+                    viewAppointmentRequests(loggedInDoctor.getName());
                     break;
 
                 case 13:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter doctor ID: ");
-                    doctorId = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
-                    acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
+                    acceptAppointment(patientId, patientName, loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
                     break;
 
                 case 14:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
-                    rejectAppointment(patientId, patientName,doctorName, date, time);
+                    rejectAppointment(patientId, patientName,loggedInDoctor.getName(), date, time);
                     break;
 
 
                 case 15:  // New case for recording appointment outcome
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
-                    System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
                     System.out.println("Enter service: ");
-                    service = sc.nextLine();
+                    service = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
                     System.out.println("Enter consultation notes: ");
@@ -236,7 +207,7 @@ public class DoctorMenu {
                     System.out.println("Enter prescription status (e.g.PENDING): ");
                     Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
 
-                    recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
+                    recordAppointmentOutcomeRecords(patientId, patientName, loggedInDoctor.getName(), date, time, service, prescription, consultationNotes, prescriptionStatus);
                     break;
 
                 case 16:

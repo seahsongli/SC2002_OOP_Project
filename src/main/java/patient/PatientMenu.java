@@ -45,6 +45,7 @@ public class PatientMenu
                     String date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     String time = sc.nextLine();
+                    System.out.println();
                     scheduleAppointment(doctorName, date, time);
                     break;
                 case 3:
@@ -58,6 +59,7 @@ public class PatientMenu
                     String newDate = sc.nextLine();
                     System.out.println("Enter new time (HH:mm): ");
                     String newTime = sc.nextLine();
+                    System.out.println();
                     rescheduleAppointment(doctorName, oldDate, oldTime, newDate, newTime);
                     break;
                 case 4:
@@ -67,6 +69,7 @@ public class PatientMenu
                     date = sc.nextLine();
                     System.out.println("Enter time (HH:mm): ");
                     time = sc.nextLine();
+                    System.out.println();
                     cancelAppointment(doctorName, date, time);
                     break;
                 case 5:
@@ -100,6 +103,7 @@ public class PatientMenu
                     doctorName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter date (yyyy-mm-dd): ");
                     date = sc.nextLine();
+                    System.out.println();
                     viewAvailableAppointmentSlots(doctorName, date);
                     break;
                 case 8: // View Past Appointment Outcome Records

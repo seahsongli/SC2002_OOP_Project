@@ -20,9 +20,7 @@ public class AdministratorMenu
         this.inventoryManagement = inventoryManagement;
         this.staffManagement = staffManagement;
         this.appointmentManagement = appointmentManagement;
-
-        // Debugging statement to confirm receipt
-        System.out.println("AdministratorMenu initialized with " + users.size() + " users.");
+        this.users = users;
 
     }
 
@@ -142,27 +140,27 @@ public class AdministratorMenu
     public void viewAppointmentsByEnteringDetails()
     {
         System.out.println("\n--- View Appointment Details ---");
-        System.out.println("Enter the following details to filter appointments. Leave blank to skip a filter.");
+        System.out.println("Enter the following details to filter appointments. Leave blank to skip a filter. \n");
         
         try 
         {
             System.out.print("Enter Patient ID: ");
-            String patientId = sc.nextLine().trim();
+            String patientId = sc.nextLine().trim().toLowerCase();
             
             System.out.print("Enter Patient Name: ");
-            String patientName = sc.nextLine().trim();
+            String patientName = sc.nextLine().trim().toLowerCase();
             // doctor Id and staff Id are the same
             System.out.print("Enter Doctor ID: ");
-            String staffId = sc.nextLine().trim();
+            String staffId = sc.nextLine().trim().toLowerCase();
             
             System.out.print("Enter Doctor Name: ");
-            String doctorName = sc.nextLine().trim();
-            doctorName = doctorName.isEmpty() ? null : doctorName;
+            String doctorName = sc.nextLine().trim().toLowerCase();
 
              // Validate Patient ID
              if (patientId != null && !patientExists(patientId)) 
              {
                 System.out.println("Error: Patient ID " + patientId + " does not exist.");
+                System.out.println();
                 return;
              }
 
@@ -170,9 +168,10 @@ public class AdministratorMenu
             if (staffId != null && !staffManagement.isStaffIdMatched(staffId)) 
             {
                 System.out.println("Error: staff ID " + staffId + " does not exist.");
+                System.out.println();
                 return;
             }
-            
+            System.out.println();
             // Call to view appointments
             adminViewScheduledAppointments(patientId, patientName, doctorName, staffId);
         } 
@@ -280,7 +279,7 @@ public class AdministratorMenu
                    try 
                    {
                        System.out.print("Enter hospital ID: ");
-                       String hospitalID = sc.nextLine();
+                       String hospitalID = sc.nextLine().trim();
                        // validate hospital Id
                        if(staffManagement.isHospitalIdMatched(hospitalID))
                        {
@@ -289,7 +288,7 @@ public class AdministratorMenu
                        }
                        
                        System.out.print("Enter staff ID: ");
-                       String staffId = sc.nextLine().trim().toLowerCase();
+                       String staffId = sc.nextLine();
    
                        // validate staffId
                        if(staffManagement.isStaffIdMatched(staffId))
@@ -299,7 +298,7 @@ public class AdministratorMenu
                        }
                        
                        System.out.print("Enter staff name: ");
-                       String name = sc.nextLine();
+                       String name = sc.nextLine().trim();
                        
                        System.out.print("Enter staff role: ");
                        String role = sc.nextLine();
@@ -312,6 +311,7 @@ public class AdministratorMenu
                        
                        // Add the staff member
                        staffManagement.addStaff(hospitalID, "Password", staffId.toLowerCase(), name.toLowerCase(), role.toLowerCase(), gender.toLowerCase(), age);
+                       System.out.println("Staff with ID " + staffId.toUpperCase() + "and name" + staffManagement.capitalizeName(name) + " added successfully.");
                        break;
                        
                        
@@ -600,7 +600,7 @@ private boolean patientExists(String patientId)
     for (User user : users.values()) 
     {
 
-        if (user instanceof Patient && user.getHospitalId().equals(patientIdStr)) 
+        if (user instanceof Patient && ((Patient)user).getId().equalsIgnoreCase(patientIdStr)) 
         {
             return true;
         }
