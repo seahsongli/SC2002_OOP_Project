@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+
+import com.sun.security.auth.module.UnixSystem;
+
 import patient.Patient;
 
 public class AdministratorMenu
@@ -354,8 +358,6 @@ public class AdministratorMenu
                        
                    }
                case 3:
-                   
-                   
                    updateStaffDetailsInteractive();
                    break;
                case 4:
@@ -470,7 +472,7 @@ public class AdministratorMenu
             }
             
             inventoryManagement.removeStock(name, quantity);
-            System.out.println("Medicine removed successfully.");
+            // System.out.println("Medicine removed successfully.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Quantity must be an integer.");
         } catch (Exception e) {
@@ -597,12 +599,19 @@ private void approveReplenishmentRequests()
 private boolean patientExists(String patientId) 
 {
     String patientIdStr = String.valueOf(patientId);
+
     for (User user : users.values()) 
     {
 
-        if (user instanceof Patient && ((Patient)user).getId().equalsIgnoreCase(patientIdStr)) 
+        if (user instanceof Patient && user.getHospitalId().equalsIgnoreCase(patientIdStr)) 
         {
-            return true;
+
+            Patient patient = (Patient) user;
+            if (patient.getHospitalId().equalsIgnoreCase(patientId)) 
+            {
+                return true;
+            }
+
         }
     }
     return false;

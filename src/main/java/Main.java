@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -46,6 +48,7 @@ public class Main
             } 
             else if (choice == 2) 
             {
+                saveContext(medicalRecordManagement, staffManagement, inventoryManagement, prescriptionManagement);
                 System.out.println("Exiting the system. Goodbye!");
                 break;
             } 
@@ -80,8 +83,8 @@ public class Main
             Object[] data = staffData[i];
             String hospitalId = (String) data[0];
             String password = (String) data[1];
-            String staffId = (String) data[2];
-            String name = (String) data[3];
+            String staffId = ((String) data[2]).trim().toLowerCase();
+            String name = ((String) data[3]).trim().toLowerCase();
             String role = (String) data[4];
             String gender = (String) data[5];
             int age = (data[6] instanceof Double) ? ((Double) data[6]).intValue() : Integer.parseInt(data[6].toString());
@@ -121,8 +124,8 @@ public class Main
             Object[] data = patientData[i];
             String hospitalId = (String) data[0];
             String password = (String) data[1];
-            String patientId = (String) data[2];
-            String name = (String) data[3];
+            String patientId = ((String) data[2]).trim().toLowerCase();
+            String name = ((String) data[3]).trim().toLowerCase();
             String dob = (String) data[4];
             String gender = (String) data[5];
             String bloodGroup = (String) data[6];
@@ -136,7 +139,7 @@ public class Main
             else
             {
                 // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
-                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email);
+                Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email, contactNumber);
                 users.put(hospitalId, patient);
                 
             }
@@ -182,6 +185,30 @@ public class Main
         }
     }
 
+    private static void saveContext(MedicalRecordManagement medicalRecordManagement, StaffManagement staffManagement, InventoryManagement inventoryManagement, PrescriptionManagement prescriptionManagement)
+    {
+       // Prepare lists to hold staff and patient data
+        List<Staff> staffList = new ArrayList<>();
+        List<Patient> patientList = new ArrayList<>();
+        for (User user : users.values()) {
+            // Check if the user is an instance of Patient or Staff
+            if (user instanceof Patient) {
+                Patient patient = (Patient) user; // Cast to Patient
+                // Add to the patient list
+                patientList.add(patient);
+            } 
+            else if (user instanceof Staff) 
+            {
+                Staff staff = (Staff) user; // Cast to Staff
+                // Add to the staff list
+                staffList.add(staff);
+            }
+        }
+
+        // ExcelWriter.writeExcelData("src/main/resources/Staff_List.xlsx", staffList);
+        // ExcelWriter.writeExcelData("src/main/resources/Patient_List.xlsx", patientList);
+
+    }
     private static void changePassword(User user) 
     {
         System.out.println("Enter new password: ");

@@ -201,6 +201,12 @@ public class StaffManagement
         System.out.print("\n");
 
     }
+
+    public List<Staff> getStaffData()
+    {
+        return staffs;
+    }
+
     public void addStaff(String hospitalID, String password, String staffId, String name, String role, String gender, int age)
     {
         Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);

@@ -18,7 +18,7 @@ public class Patient extends User
     // Define a DateTimeFormatter for yyyy-MM-dd format
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email) 
+    public Patient(String hospitalID, String password, String patientId, String name,  String dob, String gender, String bloodGroup, String email, String phoneNumber) 
     {
         super(hospitalID, password, "patient");
         this.patientId = patientId;
@@ -28,10 +28,11 @@ public class Patient extends User
         this.bloodGroup = bloodGroup;
         this.email = email;
         this.contactNumber = ""; // Initialize with empty string or pass it as a parameter
+
     }
 
     // Getters
-    public String getId() 
+    public String getHospitalId() 
     {
         return patientId;
     }
