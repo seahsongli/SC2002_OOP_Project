@@ -60,10 +60,8 @@ public class DoctorMenu {
             String prescription;
             switch (choice) {
                 case 1:
-
                     viewUpcomingAppointments(loggedInDoctor.getStaffId(), loggedInDoctor.getName());
                     break;
-
 
                 case 2:
                     System.out.println("Enter patient ID: ");
@@ -124,9 +122,21 @@ public class DoctorMenu {
                     time = getTimeFromUser();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine().trim().toLowerCase();
-                    System.out.println("Enter prescription status: ");
-                    String status = sc.nextLine();
-                    editPrescription(patientId, patientName, loggedInDoctor.getName(), date, time, prescription, Status.valueOf(status.toUpperCase()));
+                    Status prescriptionStatus = null;
+                    while (true) {
+                        System.out.println("Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
+                        String statusInput = sc.nextLine().toUpperCase();
+                        try {
+                            prescriptionStatus = Status.valueOf(statusInput);
+                            break;  // Exit loop if valid status is entered
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid status entered. Please enter a valid status from the following options:");
+                            for (Status curr_status : Status.values()) {
+                                System.out.println("- " + curr_status);
+                            }
+                        }
+                    }
+                    editPrescription(patientId, patientName, loggedInDoctor.getName(), date, time, prescription, prescriptionStatus);
                     break;
                 case 9:
                     System.out.println("Enter patient ID: ");
@@ -189,8 +199,20 @@ public class DoctorMenu {
                     prescription = sc.nextLine();
                     System.out.println("Enter consultation notes: ");
                     consultationNotes = sc.nextLine();
-                    System.out.println("Enter prescription status (e.g.PENDING): ");
-                    Status prescriptionStatus = Status.valueOf(sc.nextLine().toUpperCase());
+                    prescriptionStatus = null;
+                    while (true) {
+                        System.out.println("Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
+                        String statusInput = sc.nextLine().toUpperCase();
+                        try {
+                            prescriptionStatus = Status.valueOf(statusInput);
+                            break;  // Exit loop if valid status is entered
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid status entered. Please enter a valid status from the following options:");
+                            for (Status curr_status : Status.values()) {
+                                System.out.println("- " + curr_status);
+                            }
+                        }
+                    }
                     recordAppointmentOutcomeRecords(patientId, patientName, loggedInDoctor.getName(), date, time, service, prescription, consultationNotes, prescriptionStatus);
                     break;
                 case 16:
