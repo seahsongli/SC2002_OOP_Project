@@ -16,7 +16,6 @@ import hospitalManagement.Roles;
 import hospitalManagement.Staff;
 import hospitalManagement.StaffManagement;
 import hospitalManagement.User;
-import hospitalManagement.Doctor;
 import patient.Patient;
 import patient.PatientMenu;
 
@@ -109,15 +108,15 @@ public class Main
         }
 
         // Create patient user and add to users map only
-        Object[][] patientData = 
-        {
-            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
-            {"patient1", "password", "pa001", "john doe", "1990-05-22", "male", "O+", "john.doe@example.com", "12345678"},
-            {"patient2", "password", "pa002", "jane smith", "1985-03-14", "female", "A-", "jane.smith@example.com", "87654321"},
-            {"patient3", "password", "pa003", "alice johnson", "1992-07-30", "female", "B+", "alice.johnson@example.com", "45678912"},
-            {"patient4", "password", "pa004", "bob brown", "1980-11-12", "male", "AB-", "bob.brown@example.com", "98765432"},
-            {"patient5", "password", "pa005", "charlie davis", "1995-09-05", "male", "O-", "charlie.davis@example.com", "65432198"},
-        };
+        // Object[][] patientData = 
+        // {
+        //     // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
+        //     {"patient1", "password", "pa001", "john doe", "1990-05-22", "male", "O+", "john.doe@example.com", "12345678"},
+        //     {"patient2", "password", "pa002", "jane smith", "1985-03-14", "female", "A-", "jane.smith@example.com", "87654321"},
+        //     {"patient3", "password", "pa003", "alice johnson", "1992-07-30", "female", "B+", "alice.johnson@example.com", "45678912"},
+        //     {"patient4", "password", "pa004", "bob brown", "1980-11-12", "male", "AB-", "bob.brown@example.com", "98765432"},
+        //     {"patient5", "password", "pa005", "charlie davis", "1995-09-05", "male", "O-", "charlie.davis@example.com", "65432198"},
+        // };
 
         for (int i = 0; i < patientData.length; i++) 
         {

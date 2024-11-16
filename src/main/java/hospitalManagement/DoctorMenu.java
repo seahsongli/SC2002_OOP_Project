@@ -39,7 +39,7 @@ public class DoctorMenu {
             System.out.println("1. View Upcoming Appointments"); // Done
             System.out.println("2. View Patient medical records"); // Done
             System.out.println("3. Update Patient medical records"); // Done
-            System.out.println("4. View Personal schedule records"); // Done
+            System.out.println("4. View Personal schedule"); // Done
             System.out.println("5. Add New Diagnosis"); // For medicalRecords Done
             System.out.println("6. Add New Prescription"); // For medicalRecords Done
             System.out.println("7. Edit Service"); // For AppointmentOutcomeRecord Done
@@ -108,7 +108,6 @@ public class DoctorMenu {
                     break;
                 case 7:
                     System.out.println("Enter patient ID: ");
-
                     patientId = sc.nextLine().trim().toLowerCase();
                     String date = getDateFromUser();
                     String time = getTimeFromUser();
