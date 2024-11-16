@@ -17,7 +17,6 @@ public class PatientMenu
         this.appointmentManagement = appointmentManagement;
         this.loggedInPatient = loggedInPatient;
     }
-
     public void displayMenu() {
         while (true) {
             System.out.println("Patient Menu:");
@@ -35,7 +34,6 @@ public class PatientMenu
 
             switch (choice) {
                 case 1:
-                    
                     viewPersonalMedicalRecord();
                     break;
                 case 2:
@@ -74,7 +72,6 @@ public class PatientMenu
                     displayScheduledAppointments();
                     break;
                 case 6: // Update personal information
-    
                     System.out.println("1. Update contact number");
                     System.out.println("2. Update email");
                     int updateChoice = sc.nextInt();

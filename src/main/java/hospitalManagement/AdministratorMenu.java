@@ -20,6 +20,7 @@ public class AdministratorMenu
         this.inventoryManagement = inventoryManagement;
         this.staffManagement = staffManagement;
         this.appointmentManagement = appointmentManagement;
+        this.users = users;
 
         // Debugging statement to confirm receipt
         System.out.println("AdministratorMenu initialized with " + users.size() + " users.");
@@ -126,12 +127,6 @@ public class AdministratorMenu
     {
         inventoryManagement.approveReplenishmentRequest(requestId);
     }
-    
-    
-    // public void displayScheduledAppointments(int patientId, String patientName, String doctorName, String doctorId)
-    // {
-        //     appointmentManagement.adminViewScheduledAppointments(patientId, patientName, doctorName, doctorId);
-        // }
         
     public void adminViewScheduledAppointments(String patientId, String patientName, String doctorName, String staffId)
     {
@@ -158,6 +153,7 @@ public class AdministratorMenu
             System.out.print("Enter Doctor Name: ");
             String doctorName = sc.nextLine().trim();
             doctorName = doctorName.isEmpty() ? null : doctorName;
+            System.out.print("\n");
 
              // Validate Patient ID
              if (patientId != null && !patientExists(patientId)) 
@@ -599,10 +595,13 @@ private boolean patientExists(String patientId)
     String patientIdStr = String.valueOf(patientId);
     for (User user : users.values()) 
     {
-
         if (user instanceof Patient && user.getHospitalId().equals(patientIdStr)) 
         {
-            return true;
+            Patient patient = (Patient) user;
+            if (patient.getId().equalsIgnoreCase(patientId)) 
+            {
+                return true;
+            }
         }
     }
     return false;

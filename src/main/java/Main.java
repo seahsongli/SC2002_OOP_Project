@@ -57,14 +57,22 @@ public class Main
     // This is to initialize the first few users from the excel file
     private static void initializeUsers(StaffManagement staffManagement) 
     {
-        // Staff data: hospitalId, password, staffId, name, role, gender, age
-        Object[][] staffData = 
-        {
-            {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
-            {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
-            {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
-            {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40},
-        };
+        String staffExcelPath = "src/main/resources/Staff_List.xlsx"; 
+        String patientExcelPath = "src/main/resources/Patient_List.xlsx";
+        
+         // Staff data: hospitalId, password, staffId, name, role, gender, age
+        Object[][] staffData = ExcelReader.readExcelData(staffExcelPath);
+
+        // Patient data: username, password, patientId, name, dob, gender, bloodtype, email, phoneNumber
+        Object[][] patientData = ExcelReader.readExcelData(patientExcelPath);
+       
+        // Object[][] staffData = 
+        // {
+        //     {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
+        //     {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
+        //     {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
+        //     {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40},
+        // };
 
         for (int i = 0; i < staffData.length; i++) 
         {
@@ -75,7 +83,7 @@ public class Main
             String name = (String) data[3];
             String role = (String) data[4];
             String gender = (String) data[5];
-            int age = (int) data[6];
+            int age = (data[6] instanceof Double) ? ((Double) data[6]).intValue() : Integer.parseInt(data[6].toString());
 
             if (!Roles.ALLOWED_ROLES.contains(role)) 
             {
@@ -98,15 +106,15 @@ public class Main
         }
 
         // Create patient user and add to users map only
-        Object[][] patientData = 
-        {
-            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
-            {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com", "12345678"},
-            {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com", "87654321"},
-            {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com", "45678912"},
-            {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com", "98765432"},
-            {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com", "65432198"},
-        };
+        // Object[][] patientData = 
+        // {
+        //     // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
+        //     {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com", "12345678"},
+        //     {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com", "87654321"},
+        //     {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com", "45678912"},
+        //     {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com", "98765432"},
+        //     {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com", "65432198"},
+        // };
 
         for (int i = 0; i < patientData.length; i++) 
         {
@@ -119,7 +127,7 @@ public class Main
             String gender = (String) data[5];
             String bloodGroup = (String) data[6];
             String email = (String) data[7];
-            String contactNumber = (String) data[8];
+            String contactNumber = String.valueOf(data[8]);
 
             if (users.containsKey(hospitalId)) 
             {
@@ -164,7 +172,6 @@ public class Main
             {
                 navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
             }
-            
         } 
         else 
         {
