@@ -495,7 +495,6 @@ public class AppointmentManagement
                 System.out.print("\n");
                 found = true;
             }
-    
         }
         if (!found)
         {
