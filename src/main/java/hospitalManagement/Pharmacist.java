@@ -1,7 +1,7 @@
 package hospitalManagement;
 import java.util.Scanner;
 
-class Pharmacist extends Staff
+public class Pharmacist extends Staff
 {
     Scanner sc = new Scanner(System.in);
     public Pharmacist()

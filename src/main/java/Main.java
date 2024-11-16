@@ -16,6 +16,7 @@ import hospitalManagement.Roles;
 import hospitalManagement.Staff;
 import hospitalManagement.StaffManagement;
 import hospitalManagement.User;
+import hospitalManagement.Doctor;
 import patient.Patient;
 import patient.PatientMenu;
 
@@ -96,7 +97,6 @@ public class Main
             {
                 Staff staff = new Staff(hospitalId, password, staffId, name, role, gender, age);
                 users.put(hospitalId, staff);
-                System.out.println("Staff with Hospital ID " + hospitalId + " and Staff ID " + staffId + " added to users map.");
                 if (role.equals("doctor"))
                 {
                     // Initialize doctor availability
@@ -109,15 +109,15 @@ public class Main
         }
 
         // Create patient user and add to users map only
-        // Object[][] patientData = 
-        // {
-        //     // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
-        //     {"patient1", "password", "p001", "John Doe", "1990-05-22", "Male", "O+", "john.doe@example.com", "12345678"},
-        //     {"patient2", "password", "p002", "Jane Smith", "1985-03-14", "Female", "A-", "jane.smith@example.com", "87654321"},
-        //     {"patient3", "password", "p003", "Alice Johnson", "1992-07-30", "Female", "B+", "alice.johnson@example.com", "45678912"},
-        //     {"patient4", "password", "p004", "Bob Brown", "1980-11-12", "Male", "AB-", "bob.brown@example.com", "98765432"},
-        //     {"patient5", "password", "p005", "Charlie Davis", "1995-09-05", "Male", "O-", "charlie.davis@example.com", "65432198"},
-        // };
+        Object[][] patientData = 
+        {
+            // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email, String contactNumber
+            {"patient1", "password", "pa001", "john doe", "1990-05-22", "male", "O+", "john.doe@example.com", "12345678"},
+            {"patient2", "password", "pa002", "jane smith", "1985-03-14", "female", "A-", "jane.smith@example.com", "87654321"},
+            {"patient3", "password", "pa003", "alice johnson", "1992-07-30", "female", "B+", "alice.johnson@example.com", "45678912"},
+            {"patient4", "password", "pa004", "bob brown", "1980-11-12", "male", "AB-", "bob.brown@example.com", "98765432"},
+            {"patient5", "password", "pa005", "charlie davis", "1995-09-05", "male", "O-", "charlie.davis@example.com", "65432198"},
+        };
 
         for (int i = 0; i < patientData.length; i++) 
         {
@@ -141,7 +141,7 @@ public class Main
                 // String hospitalID, String password, String patientId, String name, String dob, String gender, String bloodGroup, String email
                 Patient patient = new Patient(hospitalId, password, patientId, name, dob, gender, bloodGroup, email, contactNumber);
                 users.put(hospitalId, patient);
-                System.out.println("Patient with Hospital ID " + hospitalId + " and Patient ID " + patientId + " added to users map.");
+                
             }
             // This for testing purposes
             // String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions
@@ -159,6 +159,7 @@ public class Main
         String hospitalId = sc.nextLine();
         System.out.println("Enter your password: ");
         String password = sc.nextLine();
+        System.out.println();
 
         User user = users.get(hospitalId);
 
@@ -168,6 +169,7 @@ public class Main
             if (password.equals("password")) 
             {
                 System.out.println("You are using the default password. Please change your password.");
+                System.out.println();
                 changePassword(user);
                 navigateToMenu(user, appointmentManagement, medicalRecordManagement, inventoryManagement, prescriptionManagement, staffManagement);
             }
@@ -179,6 +181,7 @@ public class Main
         else 
         {
             System.out.println("Invalid hospital ID or password. Please try again.");
+            System.out.println();
         }
     }
 
@@ -212,6 +215,7 @@ public class Main
         String newPassword = sc.nextLine();
         user.setPassword(newPassword);
         System.out.println("Password changed successfully!");
+        System.out.println();
     }
 
     private static void navigateToMenu(User user, AppointmentManagement appointmentManagement, MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement ,PrescriptionManagement prescriptionManagement ,StaffManagement staffManagement) 
@@ -225,7 +229,8 @@ public class Main
                 adminMenu.displayMenu();
                 break;
             case "doctor":
-                DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement);
+                Staff doctor = (Staff) user;
+                DoctorMenu doctorMenu = new DoctorMenu(medicalRecordManagement, appointmentManagement, doctor);
                 doctorMenu.displayMenu();
                 break;
             case "pharmacist":
@@ -242,4 +247,4 @@ public class Main
                 break;
         }
     }
-}
+} 

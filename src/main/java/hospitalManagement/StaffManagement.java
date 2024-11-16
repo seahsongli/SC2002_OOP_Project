@@ -40,8 +40,8 @@ public class StaffManagement
         }
         return false;
     }
-    
-    private String capitalizeName(String name) 
+
+    public String capitalizeName(String name) 
     {
         String[] words = name.split("\\s");
         StringBuilder formattedName = new StringBuilder();
@@ -211,7 +211,6 @@ public class StaffManagement
     {
         Staff newStaff = new Staff(hospitalID, password, staffId, name, role, gender, age);
         staffs.add(newStaff);
-        System.out.println("Staff with ID " + staffId + " added successfully.");
         return;
     }
 
