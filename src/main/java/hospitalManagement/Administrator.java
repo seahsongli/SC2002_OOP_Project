@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Administrator extends Staff{
+public class Administrator extends Staff
+{
     Scanner sc = new Scanner(System.in);
 
     private List<Staff> staffList;

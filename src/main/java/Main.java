@@ -206,7 +206,8 @@ public class Main
                 pharmacistMenu.displayMenu();
                 break;
             case "patient":
-                PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement);
+                Patient patient = (Patient) user;
+                PatientMenu patientMenu = new PatientMenu(medicalRecordManagement, appointmentManagement, patient);
                 patientMenu.displayMenu();
                 break;
             default:
