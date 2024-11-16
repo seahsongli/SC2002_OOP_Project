@@ -590,9 +590,10 @@ private void approveReplenishmentRequests()
 
 private boolean patientExists(String patientId) 
 {
+    String patientIdStr = String.valueOf(patientId);
     for (User user : users.values()) 
     {
-        if (user instanceof Patient) 
+        if (user instanceof Patient && user.getHospitalId().equals(patientIdStr)) 
         {
             Patient patient = (Patient) user;
             if (patient.getId().equalsIgnoreCase(patientId)) 
@@ -605,4 +606,3 @@ private boolean patientExists(String patientId)
 }
 }
         
-

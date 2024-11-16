@@ -13,7 +13,7 @@ public class Patient extends User
     private String gender;
     private String bloodGroup;
     private String email;
-    private String phoneNumber;
+    private String contactNumber;
 
     // Define a DateTimeFormatter for yyyy-MM-dd format
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -27,9 +27,11 @@ public class Patient extends User
         this.gender = gender;
         this.bloodGroup = bloodGroup;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.contactNumber = ""; // Initialize with empty string or pass it as a parameter
+
     }
 
+    // Getters
     public String getId() 
     {
         return patientId;
@@ -40,69 +42,66 @@ public class Patient extends User
         return name;
     }
 
-    public LocalDate getDob() 
-    {
-        return dob;
-    }
-
-    public String getGender() 
+    public String getGender()
     {
         return gender;
     }
 
-    public String getBloodType() 
+    public String getBloodGroup()
     {
         return bloodGroup;
     }
 
-    public String getEmail() 
+    public String getEmail()
     {
         return email;
     }
 
     public String getContactNumber()
     {
-        return phoneNumber;
-    }
-    
-    public void setContactNumber(PatientMenu patientMenu, String phoneNumber)
-    {
-        patientMenu.updateContactNumber(getId(), getName(), phoneNumber);
+        return contactNumber;
     }
 
-    public void setEmail(PatientMenu patientMenu, String email)
+    public LocalDate getDob()
     {
-        patientMenu.updateEmail(getId(), getName(), email);
+        return dob;
     }
-    public void setDob(String dobStr) {
-        try {
+
+    // Setters
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
+    public void setBloodGroup(String bloodGroup)
+    {
+        this.bloodGroup = bloodGroup;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setContactNumber(String contactNumber)
+    {
+        this.contactNumber = contactNumber;
+    }
+
+    public void setDob(String dobStr) 
+    {
+        try 
+        {
             this.dob = LocalDate.parse(dobStr, DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
+        } 
+        catch (DateTimeParseException e) 
+        {
             throw new IllegalArgumentException("Invalid DOB format. Please use yyyy-MM-dd.");
         }
-    }
-    
-    public void viewPersonalMedicalRecord(PatientMenu patientMenu) {
-        patientMenu.viewPersonalMedicalRecord(getId(), getName());
-    }
-
-    public void scheduleAppointment(PatientMenu patientMenu, String doctorName, String date, String time) {
-        patientMenu.scheduleAppointment(getId(), getName(), doctorName, date, time);
-    }
-
-    public void rescheduleAppointment(PatientMenu patientMenu, String doctorName, String oldDate, String oldTime, String newDate, String newTime) {
-        patientMenu.rescheduleAppointment(getId(), getName(), doctorName, oldDate, oldTime, newDate, newTime);
-    }
-
-    public void cancelAppointment(PatientMenu patientMenu, String doctorName, String date, String time) {
-        patientMenu.cancelAppointment(getId(), getName(), doctorName, date, time);
-    }
-
-    public void viewScheduledAppointments(PatientMenu patientMenu) {
-        patientMenu.displayScheduledAppointments(getId(), getName());
-    }
-
-    public void viewPastAppointmentRecords(PatientMenu patientMenu) {
-        patientMenu.displayPastAppointmentRecords(getId(), getName());
     }
 }

@@ -380,6 +380,7 @@ public class AppointmentManagement
 
     public void displayScheduledAppointments(String patientId, String patientName)
     {
+        boolean found = false; // Flag to check if any appointments are found for the patient
         for (Appointment appointment : appointments)
         {
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName))
@@ -387,7 +388,15 @@ public class AppointmentManagement
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
+                System.err.println();
+                found = true; // Set flag to true
             }
+
+        }
+        if (!found)
+        {
+            System.out.println("No scheduled appointments are there for you");
+            System.out.println();
         }
     }
 
@@ -427,23 +436,24 @@ public class AppointmentManagement
 
     public void adminViewScheduledAppointments(String patientId, String patientName, String doctorName, String staffId)
     {
+        boolean found = false; // Flag to check if any appointments are found for the patient
         for (Appointment appointment : appointments)
         {
             if (appointment.getPatientId().equals(patientId) && appointment.getPatientName().equals(patientName) && appointment.getDoctorName().equals(doctorName))
             {
-                System.out.println("The appointment details are as follows: \n");
                 System.out.println("Doctor: " + appointment.getDoctorName());
                 System.out.println("Doctor ID: " + staffId);
                 System.out.println("Date: " + appointment.getDate());
                 System.out.println("Time: " + appointment.getTime());
                 System.out.println("Status: " + appointment.getStatus());
                 System.out.print("\n");
+                found = true;
             }
-            else
-            {
-                System.err.println("No appointments scheduled for the date and time entered");
-                return;
-            }
+        }
+        if (!found)
+        {
+             System.out.println("No scheduled appointments for the patient on the date and time entered");
+             System.out.println();
         }
     }
 }
