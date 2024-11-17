@@ -157,7 +157,7 @@ public class AdministratorMenu
             String doctorName = sc.nextLine().trim().toLowerCase();
 
              // Validate Patient ID
-             if (patientId != null && !patientExists(patientId)) 
+             if (!patientExists(patientId)) 
              {
                 System.out.println("Error: Patient ID " + patientId + " does not exist.");
                 System.out.println();
@@ -165,7 +165,7 @@ public class AdministratorMenu
              }
 
             // Validate Doctor ID
-            if (staffId != null && !staffManagement.isStaffIdMatched(staffId)) 
+            if (!staffManagement.isStaffIdMatched(staffId)) 
             {
                 System.out.println("Error: staff ID " + staffId + " does not exist.");
                 System.out.println();
@@ -242,11 +242,7 @@ public class AdministratorMenu
                     break;
                 case 5:
                     System.out.print("Enter new Age: ");
-                    try {
-                        age = Integer.parseInt(sc.nextLine().trim());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid age input. Skipping age update.");
-                    }
+                    age = Integer.parseInt(sc.nextLine().trim());
                     break;
                 default:
                     System.out.println("Invalid choice: " + choice);
@@ -288,7 +284,7 @@ public class AdministratorMenu
                        }
                        
                        System.out.print("Enter staff ID: ");
-                       String staffId = sc.nextLine();
+                       String staffId = sc.nextLine().trim();
    
                        // validate staffId
                        if(staffManagement.isStaffIdMatched(staffId))
@@ -301,13 +297,14 @@ public class AdministratorMenu
                        String name = sc.nextLine().trim();
                        
                        System.out.print("Enter staff role: ");
-                       String role = sc.nextLine();
+                       String role = sc.nextLine().trim();
                        
                        System.out.print("Enter staff gender: ");
-                       String gender = sc.nextLine();
+                       String gender = sc.nextLine().trim();
                        
                        System.out.print("Enter staff age: ");
-                       int age = Integer.parseInt(sc.nextLine());
+                       // sc.nextInt.trim() is not valid hence Integer.parseInt is used to handle whitespaces in input
+                       int age = Integer.parseInt(sc.nextLine().trim());
                        
                        // Add the staff member
                        staffManagement.addStaff(hospitalID, "Password", staffId.toLowerCase(), name.toLowerCase(), role.toLowerCase(), gender.toLowerCase(), age);
@@ -492,10 +489,11 @@ public class AdministratorMenu
             }
             
             System.out.print("Enter Quantity to Add: ");
-            int quantity = Integer.parseInt(sc.nextLine().trim());
             // Quantity can be negative to decrease stock if needed
-        inventoryManagement.updateStockLevel(name, quantity);
-        System.out.println("Stock level updated successfully.");
+            int quantity = Integer.parseInt(sc.nextLine().trim());
+            
+            inventoryManagement.updateStockLevel(name, quantity);
+            System.out.println("Stock level updated successfully.");
     } catch (NumberFormatException e) 
     {
         System.out.println("Invalid input. Quantity must be an integer.");

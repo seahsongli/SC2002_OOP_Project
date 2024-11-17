@@ -65,16 +65,22 @@ public class AppointmentManagement
             System.out.println();
         }
     }
-
     public String capitalizeName(String name) 
     {
+        // split into array of chars "\\s" matches any spaces, tabs and newlines
+        // if name is john doe , then words becomes ["john", "doe"]
         String[] words = name.split("\\s");
         StringBuilder formattedName = new StringBuilder();
     
         for (String word : words) 
         {
+            // avoid processing empty strings in words
+            // Input: "   mArY    annE   joHNsOn   "
+            // Splitting: ["", "", "", "mArY", "", "", "", "annE", "", "", "joHNsOn", "", "", ""]
             if (word.length() > 0) 
             {
+                // word.substring(0,1).toUpperCase extracts the first character of each string in 'words' and converts it to upper case
+                // word.substring(1).toLowerCase() extracts rest of charcters of each string in 'words' and converts them to lower case
                 String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
                 if (formattedName.length() > 0) {
                     formattedName.append(" ");

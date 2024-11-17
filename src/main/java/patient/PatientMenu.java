@@ -42,6 +42,7 @@ public class PatientMenu
                 case 2:
                     System.out.println("Enter doctor name: ");
                     String doctorName = sc.nextLine().trim().toLowerCase();
+                    
                     String date = getDateFromUser();
                     String time = getTimeFromUser();
                     scheduleAppointment(doctorName, date, time);

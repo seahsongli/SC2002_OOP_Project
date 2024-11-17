@@ -43,13 +43,20 @@ public class StaffManagement
 
     public String capitalizeName(String name) 
     {
+        // split into array of chars "\\s" matches any spaces, tabs and newlines
+        // if name is john doe , then words becomes ["john", "doe"]
         String[] words = name.split("\\s");
         StringBuilder formattedName = new StringBuilder();
     
         for (String word : words) 
         {
+            // avoid processing empty strings in words
+            // Input: "   mArY    annE   joHNsOn   "
+            // Splitting: ["", "", "", "mArY", "", "", "", "annE", "", "", "joHNsOn", "", "", ""]
             if (word.length() > 0) 
             {
+                // word.substring(0,1).toUpperCase extracts the first character of each string in 'words' and converts it to upper case
+                // word.substring(1).toLowerCase() extracts rest of charcters of each string in 'words' and converts them to lower case
                 String capitalizedWord = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
                 if (formattedName.length() > 0) {
                     formattedName.append(" ");
@@ -61,7 +68,8 @@ public class StaffManagement
         return formattedName.toString();
     }
 
-      // Method to view staff with filtering options
+
+    // Method to view staff with filtering options
     public void viewStaffsWithFiltering() 
     {
         System.out.println("Choose filtering options:");
@@ -71,7 +79,7 @@ public class StaffManagement
         System.out.println("4. View All Staff");
         System.out.print("Enter your choice: ");
         int choice = sc.nextInt();
-        sc.nextLine(); // Consume newline
+        sc.nextLine(); 
 
         List<Staff> filteredStaffs = new ArrayList<>(staffs);
 
@@ -107,6 +115,7 @@ public class StaffManagement
     {
         System.out.print("Enter Gender to filter by (Male/Female): ");
         String gender = sc.nextLine().trim().toLowerCase();
+        // validate gender
         if(gender.equals("male") || gender.equals("female") || gender.equals("m") || gender.equals("f"))
         {
             return staffList.stream()
@@ -138,7 +147,8 @@ public class StaffManagement
         // wrong input by the user
         else
         {
-            System.out.println("Invalid role entered. Valid roles are: " + String.join(", ", Roles.ALLOWED_ROLES));
+            // String.join(", ", Roles.ALLOWED_ROLES) extracts the valid roles from Roles.java seperated by comma and space
+            System.out.println("Invalid role entered. Valid roles are: " + capitalizeName(String.join(", ", Roles.ALLOWED_ROLES)));
             System.out.print("\n");
             return null;
         }
@@ -152,20 +162,21 @@ public class StaffManagement
             int minAge = sc.nextInt();
             System.out.print("Enter Maximum Age: ");
             int maxAge = sc.nextInt();
-            sc.nextLine(); // Consume newline
+            sc.nextLine(); 
 
-            // Logical Validation: minAge should not be greater than maxAge
+            // minAge should not be greater than maxAge
             if (minAge > maxAge) 
             {
-                System.out.println("Minimum age cannot be greater than maximum age. Aborting view staff operation.");
-                return null; // Indicate invalid input
+                System.out.println("Minimum age cannot be greater than maximum age.");
+                return null; 
             }
 
-            // Boundary Checks: Ensure ages are within a realistic range
-            if (minAge < 0 || maxAge > 120) 
+            // Ensure ages are within a realistic range
+            // The oldest doctor on earth is 104 years old
+            if (minAge < 0 || maxAge > 107) 
             {
-                System.out.println("Age must be between 0 and 120. Aborting view staff operation.");
-                return null; // Indicate invalid input
+                System.out.println("Age must be between 0 and 120.");
+                return null; 
             }
 
             List<Staff> filteredList = staffList.stream()
@@ -182,9 +193,9 @@ public class StaffManagement
 
         } catch (InputMismatchException e) 
         {
-            System.out.println("Invalid input. Please enter numerical values for ages. Aborting view staff operation.");
-            sc.nextLine(); // Clear the scanner buffer
-            return null; // Indicate invalid input
+            System.out.println("Invalid input. Please enter numerical values for ages.");
+            System.out.println();
+            return null; 
         }
     }
 

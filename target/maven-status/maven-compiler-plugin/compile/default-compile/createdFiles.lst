@@ -1,3 +1,4 @@
+ExcelReader$1.class
 hospitalManagement/serviceType.class
 hospitalManagement/Doctor.class
 hospitalManagement/InventoryManagement.class
@@ -7,6 +8,7 @@ hospitalManagement/MedicalRecord.class
 hospitalManagement/Administrator.class
 hospitalManagement/AppointmentManagement.class
 hospitalManagement/Staff.class
+ExcelWriter.class
 Main.class
 hospitalManagement/Appointment.class
 hospitalManagement/PharmacistMenu.class
@@ -19,6 +21,7 @@ hospitalManagement/AppointmentOutcomeRecord.class
 hospitalManagement/MedicalRecordManagement.class
 hospitalManagement/Roles.class
 hospitalManagement/StaffManagement.class
+ExcelReader.class
 hospitalManagement/User.class
 hospitalManagement/Status.class
 patient/Patient.class
