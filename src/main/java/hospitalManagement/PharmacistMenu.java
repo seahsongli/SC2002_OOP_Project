@@ -33,23 +33,23 @@ public class PharmacistMenu
             switch (choice) {
                 case 1:
                     System.out.println("Enter patient ID: ");
-                    String patientId = sc.nextLine();
+                    String patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    String patientName = sc.nextLine();
+                    String patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter doctor name: ");
-                    String doctorName = sc.nextLine();
+                    String doctorName = sc.nextLine().trim().toLowerCase();
                     viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
                     break;
                
                 case 2:
                     System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine();
+                    patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine();
+                    patientName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter doctor id: "); 
-                    String doctorId = sc.nextLine();
+                    String doctorId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter doctor name: ");
-                    doctorName = sc.nextLine();
+                    doctorName = sc.nextLine().trim().toLowerCase();
                     String date = getDateFromUser();
                     String time = getTimeFromUser();
                     System.out.println("Enter prescription status: ");
@@ -65,7 +65,7 @@ public class PharmacistMenu
 
                 case 4:
                     System.out.println("Enter medication name ");
-                    String medicationName = sc.nextLine();
+                    String medicationName = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter quantity to restock: ");
                     int quantity = sc.nextInt();
                     sc.nextLine();

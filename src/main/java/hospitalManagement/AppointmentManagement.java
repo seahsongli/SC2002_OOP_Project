@@ -169,8 +169,10 @@ public class AppointmentManagement
             {
                 appointment.setStatus(Status.COMPLETED);
                 appointmentOutcomeRecords.add(new AppointmentOutcomeRecord(appointment, typeOfService, medicationsPrescribed, prescriptionStatus, consultationNotes));
+                return;
             }
         }
+        System.out.println("No matching appointment found for patient " + patientName + " with ID " + patientId + " with doctor " + doctorName + " on " + date + " at " + time);
     }
 
     protected void editService(String patientId, String doctorName, String date, String time, String service)
