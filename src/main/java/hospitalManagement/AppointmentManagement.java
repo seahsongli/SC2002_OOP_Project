@@ -490,7 +490,7 @@ public class AppointmentManagement
         String key = doctorName + "_" + date;
         if (doctorAvailability.containsKey(key))
         {
-            System.out.println("Available slots for Dr. " + capitalizeName(doctorName) + " on " + date + "are as follows: ");
+            System.out.println("Available slots for Dr. " + capitalizeName(doctorName) + " on " + date + " are as follows: ");
             for (String time : doctorAvailability.get(key))
             {
                 System.out.println(time);
