@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
-import com.sun.security.auth.module.UnixSystem;
-
 import patient.Patient;
 
 public class AdministratorMenu
@@ -534,7 +530,7 @@ private void setLowStockAlertLevel()
         }
         
         inventoryManagement.setLowStockAlertLevel(name, alertLevel);
-        System.out.println("Low stock alert level set successfully.");
+        // System.out.println("Low stock alert level set successfully.");
     } catch (NumberFormatException e) {
         System.out.println("Invalid input. Alert level must be an integer.");
     } catch (Exception e) {
