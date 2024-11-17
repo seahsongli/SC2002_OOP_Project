@@ -1,12 +1,11 @@
 package hospitalManagement;
+
 import java.util.Scanner;
 
-public class Doctor extends Staff
-{
+public class Doctor extends Staff {
     private Scanner sc = new Scanner(System.in); // Define the Scanner object
-    
-    public Doctor() 
-    {
+
+    public Doctor() {
         super("", "", "", "", "", "", 0); // super() has to be at the first statement of constructor.
 
         System.out.println("Enter doctor name: ");
@@ -25,9 +24,7 @@ public class Doctor extends Staff
         super.updateRole("Doctor");
     }
 
-    
-    public void addNewDiagnosis(DoctorMenu doctorMenu)
-    {
+    public void addNewDiagnosis(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine();
         sc.nextLine(); // Consume the newline character
@@ -42,8 +39,7 @@ public class Doctor extends Staff
         doctorMenu.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription, treatmentPlan);
     }
 
-    public void addNewPrescription(DoctorMenu doctorMenu)
-    {
+    public void addNewPrescription(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine();
         sc.nextLine(); // Consume the newline character
@@ -51,12 +47,13 @@ public class Doctor extends Staff
         String patientName = sc.nextLine();
         System.out.println("Enter prescription: ");
         String prescription = sc.nextLine();
-        // public void editPrescription(int patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus
+        // public void editPrescription(int patientId, String patientName, String
+        // doctorName, String date, String time, String prescription, Status
+        // prescriptionStatus
         doctorMenu.addNewPrescription(patientId, patientName, prescription);
     }
 
-    public void addTreatmentPlans(DoctorMenu doctorMenu)
-    {
+    public void addTreatmentPlans(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
@@ -67,8 +64,7 @@ public class Doctor extends Staff
         doctorMenu.addTreatmentPlan(patientId, patientName, treatmentPlan);
     }
 
-    public void viewPatientMedicalRecord(DoctorMenu doctorMenu)
-    {
+    public void viewPatientMedicalRecord(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
@@ -77,14 +73,13 @@ public class Doctor extends Staff
         doctorMenu.viewPatientMedicalRecord(patientId, patientName);
     }
 
-    public void viewPersonalSchedule(DoctorMenu doctorMenu)
-    {
+    public void viewPersonalSchedule(DoctorMenu doctorMenu) {
         doctorMenu.viewPersonalSchedule(super.getName());
     }
 
-    //  public void acceptAppointment(int patientId, String patientName, int doctorId, String doctorName, String date, String time)
-    public void acceptAppointment(DoctorMenu doctorMenu)
-    {
+    // public void acceptAppointment(int patientId, String patientName, int
+    // doctorId, String doctorName, String date, String time)
+    public void acceptAppointment(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
@@ -97,8 +92,7 @@ public class Doctor extends Staff
         doctorMenu.acceptAppointment(patientId, patientName, super.getStaffId(), super.getName(), date, time);
     }
 
-    public void rejectAppointment(DoctorMenu doctorMenu)
-    {
+    public void rejectAppointment(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
         sc.nextLine(); // Consume the newline character
@@ -111,8 +105,7 @@ public class Doctor extends Staff
         doctorMenu.rejectAppointment(patientId, patientName, super.getName(), date, time);
     }
 
-    public void viewUpcomingAppointments(DoctorMenu doctorMenu)
-    {
+    public void viewUpcomingAppointments(DoctorMenu doctorMenu) {
         doctorMenu.viewUpcomingAppointments(super.getStaffId(), super.getName());
     }
 }

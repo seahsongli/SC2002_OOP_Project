@@ -1,70 +1,60 @@
 package hospitalManagement;
-enum serviceType
-{
+
+enum serviceType {
     CONSULTATION,
     XRAY,
     BLOODTEST
 }
 
-public class AppointmentOutcomeRecord
-{
+public class AppointmentOutcomeRecord {
     private Appointment appointment;
     private String typeOfService;
     private String medicationsPrescribed;
     private Status prescriptionStatus;
     private String consultationNotes;
-    
-    public AppointmentOutcomeRecord(Appointment appointment, String typeOfService, String medicationsPrescribed, Status prescriptionStatus, String consultationNotes)
-    {
+
+    public AppointmentOutcomeRecord(Appointment appointment, String typeOfService, String medicationsPrescribed,
+            Status prescriptionStatus, String consultationNotes) {
         this.appointment = appointment;
         this.typeOfService = typeOfService;
         this.medicationsPrescribed = medicationsPrescribed;
         this.prescriptionStatus = prescriptionStatus;
         this.consultationNotes = consultationNotes;
     }
-    
-    public Appointment getAppointment()
-    {
+
+    public Appointment getAppointment() {
         return appointment;
     }
 
-    public String getTypeOfService()
-    {
+    public String getTypeOfService() {
         return typeOfService;
     }
 
-    public String getMedicationsPrescribed()
-    {
+    public String getMedicationsPrescribed() {
         return medicationsPrescribed;
     }
 
-    public Status getPrescriptionStatus()
-    {
+    public Status getPrescriptionStatus() {
         return prescriptionStatus;
     }
 
-    public String getConsultationNotes()
-    {
+    public String getConsultationNotes() {
         return consultationNotes;
     }
 
-    public void setTypeOfService(String typeOfService)
-    {
+    public void setTypeOfService(String typeOfService) {
         this.typeOfService = typeOfService;
     }
 
-    public void setMedicationsPrescribed(String medicationsPrescribed)
-    {
+    public void setMedicationsPrescribed(String medicationsPrescribed) {
         this.medicationsPrescribed = medicationsPrescribed;
     }
 
-    public void setPrescriptionStatus(Status prescriptionStatus)
-    {
+    public void setPrescriptionStatus(Status prescriptionStatus) {
         this.prescriptionStatus = prescriptionStatus;
     }
 
-    public void setConsultationNotes(String consultationNotes)
-    {
+    public void setConsultationNotes(String consultationNotes) {
         this.consultationNotes = consultationNotes;
     }
 }

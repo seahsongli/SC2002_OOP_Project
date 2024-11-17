@@ -6,19 +6,17 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class PharmacistMenu
-{
+public class PharmacistMenu {
     private PrescriptionManagement prescriptionManagement;
     private InventoryManagement inventoryManagement;
 
     private Scanner sc = new Scanner(System.in);
-    public PharmacistMenu(PrescriptionManagement prescriptionManagement, InventoryManagement inventoryManagement)
-    {
+
+    public PharmacistMenu(PrescriptionManagement prescriptionManagement, InventoryManagement inventoryManagement) {
         this.prescriptionManagement = prescriptionManagement;
         this.inventoryManagement = inventoryManagement;
     }
-    
-    
+
     public void displayMenu() {
         while (true) {
             System.out.println("Pharmacist Menu:");
@@ -40,13 +38,13 @@ public class PharmacistMenu
                     String doctorName = sc.nextLine().trim().toLowerCase();
                     viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
                     break;
-               
+
                 case 2:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
                     patientName = sc.nextLine().trim().toLowerCase();
-                    System.out.println("Enter doctor id: "); 
+                    System.out.println("Enter doctor id: ");
                     String doctorId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter doctor name: ");
                     doctorName = sc.nextLine().trim().toLowerCase();
@@ -82,8 +80,7 @@ public class PharmacistMenu
             }
         }
     }
-    
-    
+
     private Status getStatusFromUser() {
         System.out.println("Select prescription status:");
         System.out.println("1. PENDING");
@@ -102,7 +99,7 @@ public class PharmacistMenu
             default:
                 System.out.println("Invalid choice. Please try again.");
                 return null;
-            }
+        }
     }
 
     private String getTimeFromUser() {
@@ -137,35 +134,32 @@ public class PharmacistMenu
         return dateInput;
     }
 
-    public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName)
-    {
+    public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName) {
         prescriptionManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
     }
 
-    public void setPrescription(String patientId, String patientName, String prescription)
-    {
+    public void setPrescription(String patientId, String patientName, String prescription) {
         prescriptionManagement.setPrescription(patientId, patientName, prescription);
     }
 
-    public void updatePrescriptionStatus(String patientId, String patientName, String doctorId, String doctorName, String date, String time, Status prescriptionStatus) {
+    public void updatePrescriptionStatus(String patientId, String patientName, String doctorId, String doctorName,
+            String date, String time, Status prescriptionStatus) {
         // Logic to find the correct appointment and update the prescription status
-        
-            // Assuming Appointment has a method to set prescription status
-            prescriptionManagement.updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time, prescriptionStatus);
+
+        // Assuming Appointment has a method to set prescription status
+        prescriptionManagement.updatePrescriptionStatus(patientId, patientName, doctorId, doctorName, date, time,
+                prescriptionStatus);
     }
 
-    public void viewInventory()
-    {
+    public void viewInventory() {
         inventoryManagement.displayInventory();
     }
 
-    public void updateStockLevel(String medicationName, int quantity)
-    {
+    public void updateStockLevel(String medicationName, int quantity) {
         inventoryManagement.updateStockLevel(medicationName, quantity);
     }
 
-    public void submitReplenishmentRequest(String medicationName, int quantity)
-    {
+    public void submitReplenishmentRequest(String medicationName, int quantity) {
         inventoryManagement.submitReplenishmentRequest(medicationName, quantity);
     }
 }

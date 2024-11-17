@@ -17,7 +17,8 @@ public class ExcelWriter {
             Sheet sheet = workbook.createSheet("Data");
 
             // If the list is empty, no data to write
-            if (dataList.isEmpty()) return;
+            if (dataList.isEmpty())
+                return;
 
             // Create the header row at the first row
             Row headerRow = sheet.createRow(0);
@@ -45,7 +46,7 @@ public class ExcelWriter {
             int rowNum = 1;
             for (Object obj : dataList) {
                 Row row = sheet.createRow(rowNum++);
-                
+
                 if (obj instanceof Staff) {
                     Staff staff = (Staff) obj;
                     row.createCell(0).setCellValue(staff.getName());

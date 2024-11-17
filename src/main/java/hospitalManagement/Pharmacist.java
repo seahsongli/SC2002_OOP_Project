@@ -1,11 +1,11 @@
 package hospitalManagement;
+
 import java.util.Scanner;
 
-public class Pharmacist extends Staff
-{
+public class Pharmacist extends Staff {
     Scanner sc = new Scanner(System.in);
-    public Pharmacist()
-    {
+
+    public Pharmacist() {
         super("", "", "", "", "", "", 0); // super() has to be at the first statement of constructor.
         super.updateRole("Pharmacist");
 

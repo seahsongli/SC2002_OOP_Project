@@ -1,8 +1,9 @@
 package hospitalManagement;
+
 import java.util.ArrayList;
 import java.util.List;
-public class MedicalRecord
-{
+
+public class MedicalRecord {
     private String patientId;
     private String patientName;
     private String dateOfBirth;
@@ -16,9 +17,9 @@ public class MedicalRecord
     private List<String> currentTreatments;
     private List<String> prescriptions;
 
-
-    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email,  List<String> pastDiagnosis, List<String> pastTreatments, List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions)
-    {
+    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType,
+            String contactNumber, String email, List<String> pastDiagnosis, List<String> pastTreatments,
+            List<String> currentDiagnosis, List<String> currentTreatments, List<String> prescriptions) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.dateOfBirth = dateOfBirth;
@@ -32,88 +33,79 @@ public class MedicalRecord
         this.currentDiagnosis = currentDiagnosis;
         this.currentTreatments = currentTreatments;
         this.prescriptions = prescriptions;
-        
+
     }
 
-
-    // Overload the MedicalRecord constructor to allow for creation of a MedicalRecord object without any past diagnoses, past treatments, current diagnoses, current treatments, or prescriptions.
-    // This is useful when creating a new MedicalRecord object for a new patient, especially when the new patient has no medical history.
-    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType, String contactNumber, String email) {
-        this(patientId, patientName, dateOfBirth, gender, bloodType, contactNumber, email, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    // Overload the MedicalRecord constructor to allow for creation of a
+    // MedicalRecord object without any past diagnoses, past treatments, current
+    // diagnoses, current treatments, or prescriptions.
+    // This is useful when creating a new MedicalRecord object for a new patient,
+    // especially when the new patient has no medical history.
+    public MedicalRecord(String patientId, String patientName, String dateOfBirth, String gender, String bloodType,
+            String contactNumber, String email) {
+        this(patientId, patientName, dateOfBirth, gender, bloodType, contactNumber, email, new ArrayList<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-    public String getPatientId()
-    {
+    public String getPatientId() {
         return patientId;
     }
-    
-    public String getPatientName()
-    {
+
+    public String getPatientName() {
         return patientName;
     }
-    
-    public String getContactNumber()
-    {
+
+    public String getContactNumber() {
         return contactNumber;
     }
-    
-    public String getEmail()
-    {
+
+    public String getEmail() {
         return email;
     }
-    
-    public void setContactNumber(String contactNumber)
-    {
+
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
-    
-    public void setEmail(String email)
-    {
+
+    public void setEmail(String email) {
         this.email = email;
     }
-    
-    // The following protected methods are used for doctor class to update the medical record
-    protected void addPastDiagnoses(String diagnosis)
-    {
+
+    // The following protected methods are used for doctor class to update the
+    // medical record
+    protected void addPastDiagnoses(String diagnosis) {
         this.pastDiagnosis.add(diagnosis);
     }
-    protected void addPastTreatments(String treatment)
-    {
+
+    protected void addPastTreatments(String treatment) {
         this.pastTreatments.add(treatment);
     }
-    
-    protected void removePastDiagnosis(String diagnosis)
-    {
+
+    protected void removePastDiagnosis(String diagnosis) {
         this.pastDiagnosis.remove(diagnosis);
     }
 
-    protected void removePastTreatment(String treatment)
-    {
+    protected void removePastTreatment(String treatment) {
         this.pastTreatments.remove(treatment);
     }
 
-    protected void addCurrentTreatment(String treatment)
-    {
+    protected void addCurrentTreatment(String treatment) {
         this.currentTreatments.add(treatment);
     }
 
-    protected void addCurrentDiagnosis(String diagnosis)
-    {
+    protected void addCurrentDiagnosis(String diagnosis) {
         this.currentDiagnosis.add(diagnosis);
     }
 
-    protected void addPrescription(String prescription)
-    {
+    protected void addPrescription(String prescription) {
         this.prescriptions.add(prescription);
     }
-    
-    protected List<String> getPastDiagnoses()
-    {
+
+    protected List<String> getPastDiagnoses() {
         return pastDiagnosis;
     }
-    
-    protected List<String> getPastTreatments()
-    {
+
+    protected List<String> getPastTreatments() {
         return pastTreatments;
     }
 

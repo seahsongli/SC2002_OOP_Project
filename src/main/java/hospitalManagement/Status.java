@@ -1,6 +1,6 @@
 package hospitalManagement;
-enum Status
-{
+
+enum Status {
     PENDING,
     CONFIRMED,
     CANCELLED,

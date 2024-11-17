@@ -13,14 +13,14 @@ public class ExcelReader {
 
     public static Object[][] readExcelData(String excelFilePath) {
         try (FileInputStream fileInputStream = new FileInputStream(new File(excelFilePath));
-             Workbook workbook = new XSSFWorkbook(fileInputStream)) {
-    
+                Workbook workbook = new XSSFWorkbook(fileInputStream)) {
+
             Sheet sheet = workbook.getSheetAt(0);
             int rows = sheet.getLastRowNum(); // Exclude the header row
             int columns = sheet.getRow(0).getLastCellNum();
-    
+
             Object[][] data = new Object[rows][columns];
-    
+
             // Start reading from the second row (index 1)
             for (int i = 1; i <= rows; i++) {
                 Row row = sheet.getRow(i);
@@ -50,10 +50,10 @@ public class ExcelReader {
                 }
             }
             return data;
-    
+
         } catch (IOException e) {
             e.printStackTrace();
             return new Object[0][0]; // Return empty array if an error occurs
         }
-    }    
+    }
 }

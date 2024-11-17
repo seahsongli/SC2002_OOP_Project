@@ -1,4 +1,5 @@
 package hospitalManagement;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,27 +12,12 @@ public class DoctorMenu {
     private Scanner sc = new Scanner(System.in);
     private Staff loggedInDoctor;
 
-    public DoctorMenu(MedicalRecordManagement medicalRecordManagement, AppointmentManagement appointmentManagement, Staff loggedInDoctor) {
+    public DoctorMenu(MedicalRecordManagement medicalRecordManagement, AppointmentManagement appointmentManagement,
+            Staff loggedInDoctor) {
         this.medicalRecordManagement = medicalRecordManagement;
         this.appointmentManagement = appointmentManagement;
         this.loggedInDoctor = loggedInDoctor;
     }
-
-    // public void updateContactNumber(int doctorId, String doctorName, String contactNumber)
-    // {
-
-    //     medicalRecordManagement.updateContactNumber(doctorId, doctorName, contactNumber);
-    // }
-
-    // public void updateEmail(int doctorId, String doctorName, String email)
-    // {
-    //     medicalRecordManagement.updateEmail(doctorId, doctorName, email);
-    // }
-
-    // public void viewPersonalMedicalRecord(int doctorId, String doctorName)
-    // {
-    //     medicalRecordManagement.viewPersonalMedicalRecord(doctorId, doctorName);
-    // }
 
     public void displayMenu() {
         while (true) {
@@ -127,19 +113,22 @@ public class DoctorMenu {
                     prescription = sc.nextLine().trim().toLowerCase();
                     Status prescriptionStatus = null;
                     while (true) {
-                        System.out.println("Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
+                        System.out.println(
+                                "Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
                         String statusInput = sc.nextLine().toUpperCase();
                         try {
                             prescriptionStatus = Status.valueOf(statusInput);
-                            break;  // Exit loop if valid status is entered
+                            break; // Exit loop if valid status is entered
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid status entered. Please enter a valid status from the following options:");
+                            System.out.println(
+                                    "Invalid status entered. Please enter a valid status from the following options:");
                             for (Status curr_status : Status.values()) {
                                 System.out.println("- " + curr_status);
                             }
                         }
                     }
-                    editPrescription(patientId, patientName, loggedInDoctor.getName(), date, time, prescription, prescriptionStatus);
+                    editPrescription(patientId, patientName, loggedInDoctor.getName(), date, time, prescription,
+                            prescriptionStatus);
                     break;
                 case 9:
                     System.out.println("Enter patient ID: ");
@@ -150,9 +139,10 @@ public class DoctorMenu {
                     time = getTimeFromUser();
                     System.out.println("Enter consultation notes: ");
                     String consultationNotes = sc.nextLine();
-                    editConsultationNotes(patientId, patientName, loggedInDoctor.getName(), date, time, consultationNotes);
+                    editConsultationNotes(patientId, patientName, loggedInDoctor.getName(), date, time,
+                            consultationNotes);
                     break;
-                
+
                 case 10:
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine().trim().toLowerCase();
@@ -163,13 +153,13 @@ public class DoctorMenu {
                 case 11:
                     date = getDateFromUser();
                     time = getTimeFromUser();
-                    setAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
+                    setAvailability(loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
                     break;
 
                 case 12:
                     date = getDateFromUser();
                     time = getTimeFromUser();
-                    cancelAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
+                    cancelAvailability(loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
                     break;
 
                 case 13: // View Appointment requests
@@ -183,7 +173,8 @@ public class DoctorMenu {
                     patientName = sc.nextLine().trim().toLowerCase();
                     date = getDateFromUser();
                     time = getTimeFromUser();
-                    acceptAppointment(patientId, patientName, loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
+                    acceptAppointment(patientId, patientName, loggedInDoctor.getStaffId(), loggedInDoctor.getName(),
+                            date, time);
                     break;
 
                 case 15:
@@ -193,10 +184,10 @@ public class DoctorMenu {
                     patientName = sc.nextLine().trim().toLowerCase();
                     date = getDateFromUser();
                     time = getTimeFromUser();
-                    rejectAppointment(patientId, patientName,loggedInDoctor.getName(), date, time);
+                    rejectAppointment(patientId, patientName, loggedInDoctor.getName(), date, time);
                     break;
 
-                case 16:  // New case for recording appointment outcome
+                case 16: // New case for recording appointment outcome
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
@@ -211,19 +202,22 @@ public class DoctorMenu {
                     consultationNotes = sc.nextLine();
                     prescriptionStatus = null;
                     while (true) {
-                        System.out.println("Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
+                        System.out.println(
+                                "Enter prescription status (e.g., PENDING, CONFIRMED, CANCELLED, COMPLETED, REJECTED): ");
                         String statusInput = sc.nextLine().toUpperCase();
                         try {
                             prescriptionStatus = Status.valueOf(statusInput);
-                            break;  // Exit loop if valid status is entered
+                            break; // Exit loop if valid status is entered
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Invalid status entered. Please enter a valid status from the following options:");
+                            System.out.println(
+                                    "Invalid status entered. Please enter a valid status from the following options:");
                             for (Status curr_status : Status.values()) {
                                 System.out.println("- " + curr_status);
                             }
                         }
                     }
-                    recordAppointmentOutcomeRecords(patientId, patientName, loggedInDoctor.getName(), date, time, service, prescription, consultationNotes, prescriptionStatus);
+                    recordAppointmentOutcomeRecords(patientId, patientName, loggedInDoctor.getName(), date, time,
+                            service, prescription, consultationNotes, prescriptionStatus);
                     break;
                 case 17:
                     System.out.println("Logging out...");
@@ -239,9 +233,11 @@ public class DoctorMenu {
         medicalRecordManagement.viewPatientMedicalRecord(patientId, patientName);
     }
 
-    // To set the patient's medical record, the doctor must provide the patient's ID, name, diagnosis, and prescription and treatment.
+    // To set the patient's medical record, the doctor must provide the patient's
+    // ID, name, diagnosis, and prescription and treatment.
     // This is to be done after every consultation.
-    public void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription, String treatmentPlan) {
+    public void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription,
+            String treatmentPlan) {
         medicalRecordManagement.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription, treatmentPlan);
     }
 
@@ -262,7 +258,8 @@ public class DoctorMenu {
         appointmentManagement.viewAppointmentRequests(doctorName);
     }
 
-    public void acceptAppointment(String patientId, String patientName, String doctorId, String doctorName, String date, String time) {
+    public void acceptAppointment(String patientId, String patientName, String doctorId, String doctorName, String date,
+            String time) {
         appointmentManagement.acceptAppointment(patientId, patientName, doctorId, doctorName, date, time);
     }
 
@@ -278,8 +275,10 @@ public class DoctorMenu {
         appointmentManagement.viewUpcomingAppointments(doctorId, doctorName);
     }
 
-    public void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date, String time, String service, String prescription, String consultationNotes, Status prescriptionStatus) {
-        appointmentManagement.recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
+    public void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date,
+            String time, String service, String prescription, String consultationNotes, Status prescriptionStatus) {
+        appointmentManagement.recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service,
+                prescription, consultationNotes, prescriptionStatus);
     }
 
     public void editOldMedicalRecord(String patientId, String patientName) {
@@ -294,28 +293,34 @@ public class DoctorMenu {
         medicalRecordManagement.addNewMedicalDiagnosis(patientId, patientName, diagnosis);
     }
 
-    // Consider whether other doctors should be able to addNewPrescription on behalf of another doctor.
+    // Consider whether other doctors should be able to addNewPrescription on behalf
+    // of another doctor.
     // Remove the doctorName from parameter if this isn't the case.
     public void addNewPrescription(String patientId, String patientName, String prescription) {
         medicalRecordManagement.addNewMedicalPrescription(patientId, patientName, prescription);
     }
 
-    // Individual functions to edit specific fields so that the doctor can edit the appointment outcome in case of errata.
+    // Individual functions to edit specific fields so that the doctor can edit the
+    // appointment outcome in case of errata.
     public void editService(String patientId, String doctorName, String date, String time, String service) {
         appointmentManagement.editService(patientId, doctorName, date, time, service);
     }
 
-    // Consider whether other doctors should be able to editPrescription on behalf of another doctor.
-    public void editPrescription(String patientId, String patientName, String doctorName, String date, String time, String prescription, Status prescriptionStatus) {
-        appointmentManagement.editPrescription(patientId, patientName, doctorName, date, time, prescription, prescriptionStatus);
+    // Consider whether other doctors should be able to editPrescription on behalf
+    // of another doctor.
+    public void editPrescription(String patientId, String patientName, String doctorName, String date, String time,
+            String prescription, Status prescriptionStatus) {
+        appointmentManagement.editPrescription(patientId, patientName, doctorName, date, time, prescription,
+                prescriptionStatus);
     }
 
-    public void editConsultationNotes(String patientId, String patientName, String doctorName, String date, String time, String consultationNotes) {
+    public void editConsultationNotes(String patientId, String patientName, String doctorName, String date, String time,
+            String consultationNotes) {
         appointmentManagement.editConsultationNotes(patientId, patientName, doctorName, date, time, consultationNotes);
     }
 
     // private methods
-        private String getTimeFromUser() {
+    private String getTimeFromUser() {
         String timeInput;
         while (true) {
             System.out.println("Enter time (HH:mm): ");
