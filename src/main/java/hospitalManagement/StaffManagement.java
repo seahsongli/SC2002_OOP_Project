@@ -46,6 +46,7 @@ public class StaffManagement
         // split into array of chars "\\s" matches any spaces, tabs and newlines
         // if name is john doe , then words becomes ["john", "doe"]
         String[] words = name.split("\\s");
+        // StringBuilder allows in-place modifications, meaning no new objects are created, which saves memory and improves performance.   
         StringBuilder formattedName = new StringBuilder();
     
         for (String word : words) 
