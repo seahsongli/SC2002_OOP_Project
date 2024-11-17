@@ -106,12 +106,13 @@ public class StaffManagement {
         }
 
     }
-
+    // all the filtering technique to use was suggested by GAI
     private List<Staff> filterByGender(List<Staff> staffList) {
         System.out.print("Enter Gender to filter by (Male/Female): ");
         String gender = sc.nextLine().trim().toLowerCase();
         // validate gender
         if (gender.equals("male") || gender.equals("female") || gender.equals("m") || gender.equals("f")) {
+            // This returns a list that we can work with
             return staffList.stream()
                     .filter(staff -> staff.getGender().equals(gender))
                     .collect(Collectors.toList());
