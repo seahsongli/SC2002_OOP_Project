@@ -142,7 +142,7 @@ public class Main
             String gender = (String) data[5];
             String bloodGroup = (String) data[6];
             String email = (String) data[7];
-            String contactNumber = String.valueOf(data[8]);
+            String contactNumber = String.valueOf((long) Double.parseDouble(data[8].toString()));
 
             if (users.containsKey(hospitalId)) 
             {
