@@ -9,7 +9,6 @@ public class Staff extends User {
     private String gender;
     private int age;
 
-    // static int staffCount = 0;
     // Every user is a staff except a patient
     public Staff(String hospitalID, String password, String staffId, String name, String role, String gender, int age) {
         super(hospitalID, password, role);

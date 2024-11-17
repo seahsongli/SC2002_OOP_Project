@@ -179,8 +179,6 @@ public class AppointmentManagement {
         }
     }
 
-    // Need to implement displayAvailableSlots() method
-
     // This function is called after every consultation is completed. It records the
     // outcome of the appointment.
     protected void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date,
@@ -477,7 +475,7 @@ public class AppointmentManagement {
                 System.out.println("Time: " + appointment.getTime());
                 System.out.println("Status: " + appointment.getStatus());
                 System.out.println();
-                found = true; // Set flag to true
+                found = true; 
             }
 
         }

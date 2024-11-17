@@ -18,7 +18,7 @@ public class Doctor extends Staff {
 
         System.out.println("Enter age: ");
         int age = sc.nextInt();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine();
         super.updateAge(age);
 
         super.updateRole("Doctor");
@@ -27,7 +27,7 @@ public class Doctor extends Staff {
     public void addNewDiagnosis(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
         System.out.println("Enter diagnosis: ");
@@ -42,7 +42,7 @@ public class Doctor extends Staff {
     public void addNewPrescription(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
         System.out.println("Enter prescription: ");
@@ -56,7 +56,7 @@ public class Doctor extends Staff {
     public void addTreatmentPlans(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine().trim();
         System.out.println("Enter treatment plan: ");
@@ -67,7 +67,7 @@ public class Doctor extends Staff {
     public void viewPatientMedicalRecord(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine().trim();
         doctorMenu.viewPatientMedicalRecord(patientId, patientName);
@@ -82,7 +82,7 @@ public class Doctor extends Staff {
     public void acceptAppointment(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
         System.out.println("Enter date: ");
@@ -95,7 +95,7 @@ public class Doctor extends Staff {
     public void rejectAppointment(DoctorMenu doctorMenu) {
         System.out.println("Enter patient ID: ");
         String patientId = sc.nextLine().trim();
-        sc.nextLine(); // Consume the newline character
+        sc.nextLine(); 
         System.out.println("Enter patient name: ");
         String patientName = sc.nextLine();
         System.out.println("Enter date: ");

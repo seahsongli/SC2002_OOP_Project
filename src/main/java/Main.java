@@ -73,14 +73,6 @@ public class Main {
         // email, phoneNumber
         Object[][] patientData = ExcelReader.readExcelData(patientExcelPath);
 
-        // Object[][] staffData =
-        // {
-        // {"doctor1", "password", "d001", "john smith", "doctor", "male", 45},
-        // {"doctor2", "password", "d002", "emily clarke", "doctor", "female", 38},
-        // {"pharmacist1", "password", "p001", "mark Lee", "pharmacist", "male", 29},
-        // {"admin1", "password", "a001", "sarah lee", "administrator", "female", 40},
-        // };
-
         for (int i = 0; i < staffData.length; i++) {
             Object[] data = staffData[i];
             String hospitalId = (String) data[0];
@@ -107,22 +99,6 @@ public class Main {
 
         }
 
-        // Create patient user and add to users map only
-        // Object[][] patientData =
-        // {
-        // // String hospitalID, String password, String patientId, String name, String
-        // dob, String gender, String bloodGroup, String email, String contactNumber
-        // {"patient1", "password", "pa001", "john doe", "1990-05-22", "male", "O+",
-        // "john.doe@example.com", "12345678"},
-        // {"patient2", "password", "pa002", "jane smith", "1985-03-14", "female", "A-",
-        // "jane.smith@example.com", "87654321"},
-        // {"patient3", "password", "pa003", "alice johnson", "1992-07-30", "female",
-        // "B+", "alice.johnson@example.com", "45678912"},
-        // {"patient4", "password", "pa004", "bob brown", "1980-11-12", "male", "AB-",
-        // "bob.brown@example.com", "98765432"},
-        // {"patient5", "password", "pa005", "charlie davis", "1995-09-05", "male",
-        // "O-", "charlie.davis@example.com", "65432198"},
-        // };
 
         for (int i = 0; i < patientData.length; i++) {
             Object[] data = patientData[i];
@@ -155,8 +131,6 @@ public class Main {
                     email);
             medicalRecordManagement.addMedicalRecord(medicalRecord);
 
-            // // Add users to adminMenu
-            // adminMenu.addUser(hospitalId, password, patient
         }
     }
 
@@ -207,10 +181,6 @@ public class Main {
             }
         }
 
-        // ExcelWriter.writeExcelData("src/main/resources/Staff_List.xlsx", staffList);
-        // ExcelWriter.writeExcelData("src/main/resources/Patient_List.xlsx",
-        // patientList);
-
     }
 
     private static void changePassword(User user) {
@@ -224,6 +194,7 @@ public class Main {
     private static void navigateToMenu(User user, AppointmentManagement appointmentManagement,
             MedicalRecordManagement medicalRecordManagement, InventoryManagement inventoryManagement,
             PrescriptionManagement prescriptionManagement, StaffManagement staffManagement) {
+
         prescriptionManagement = new PrescriptionManagement(appointmentManagement); // This is to ensure that
                                                                                     // prescriptionManagement has the
                                                                                     // latest appointment data.

@@ -11,8 +11,7 @@ public class PrescriptionManagement {
     // doctor is selected
     public void viewAppointmentOutcomeRecord(String patientId, String patientName, String doctorName) {
         appointmentManagement.viewAppointmentOutcomeRecord(patientId, patientName, doctorName);
-        // System.out.println("Prescription for patient " + patientName + " with ID " +
-        // patientId + " is: ");
+    
 
     }
 

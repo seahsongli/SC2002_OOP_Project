@@ -23,9 +23,9 @@ public class InventoryManagement {
         for (Medicine medicine : currentStockLevels) {
             if (medicine.getQuantity() < medicine.getLowStockAlertLevel()) {
                 System.out.println(
-                        "Medicine: " + medicine.getName() + " Quantity: " + medicine.getQuantity() + " (LOW STOCK)");
+                        "Medicine: " + medicine.getName() + "," + " Quantity: " + medicine.getQuantity() + " (LOW STOCK)");
             } else {
-                System.out.println("Medicine: " + medicine.getName() + " Quantity: " + medicine.getQuantity());
+                System.out.println("Medicine: " + medicine.getName() + "," + " Quantity: " + medicine.getQuantity());
             }
         }
     }

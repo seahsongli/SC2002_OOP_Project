@@ -145,6 +145,7 @@ public class AdministratorMenu {
 
             System.out.print("Enter Doctor Name: ");
             String doctorName = sc.nextLine().trim().toLowerCase();
+            System.out.println();
 
             // Validate Patient ID
             if (!patientExists(patientId)) {
@@ -290,7 +291,7 @@ public class AdministratorMenu {
                         // Add the staff member
                         staffManagement.addStaff(hospitalID, "Password", staffId.toLowerCase(), name.toLowerCase(),
                                 role.toLowerCase(), gender.toLowerCase(), age);
-                        System.out.println("Staff with ID " + staffId.toUpperCase() + "and name"
+                        System.out.println("Staff with ID " + staffId.toUpperCase() + " and name"
                                 + staffManagement.capitalizeName(name) + " added successfully.");
                         break;
 
