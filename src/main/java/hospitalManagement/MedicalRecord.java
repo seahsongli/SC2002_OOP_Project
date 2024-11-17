@@ -73,16 +73,25 @@ public class MedicalRecord
     }
     
     // The following protected methods are used for doctor class to update the medical record
-    protected void setPastDiagnoses(List<String> pastDiagnosis)
+    protected void addPastDiagnoses(String diagnosis)
     {
-        this.pastDiagnosis = pastDiagnosis;
+        this.pastDiagnosis.add(diagnosis);
+    }
+    protected void addPastTreatments(String treatment)
+    {
+        this.pastTreatments.add(treatment);
     }
     
-    protected void setPastTreatments(List<String> pastTreatments)
+    protected void removePastDiagnosis(String diagnosis)
     {
-        this.pastTreatments = pastTreatments;
+        this.pastDiagnosis.remove(diagnosis);
     }
-    
+
+    protected void removePastTreatment(String treatment)
+    {
+        this.pastTreatments.remove(treatment);
+    }
+
     protected void addCurrentTreatment(String treatment)
     {
         this.currentTreatments.add(treatment);

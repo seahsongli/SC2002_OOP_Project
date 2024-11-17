@@ -37,7 +37,9 @@ public class Doctor extends Staff
         String diagnosis = sc.nextLine();
         System.out.println("Enter prescription: ");
         String prescription = sc.nextLine();
-        doctorMenu.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
+        System.out.println("Enter treatment plan: ");
+        String treatmentPlan = sc.nextLine();
+        doctorMenu.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription, treatmentPlan);
     }
 
     public void addNewPrescription(DoctorMenu doctorMenu)

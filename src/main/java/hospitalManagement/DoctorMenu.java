@@ -45,13 +45,14 @@ public class DoctorMenu {
             System.out.println("7. Edit Service"); // For AppointmentOutcomeRecord Done
             System.out.println("8. Edit Prescription"); // For AppointmentOutcomeRecord Done
             System.out.println("9. Edit Consultation Notes"); // For AppointmentOutcomeRecord Done
-            System.out.println("10. Set availability for Appointment"); // Done
-            System.out.println("11. Cancel availability for Appointment"); // Done
-            System.out.println("12. View Appointment requests"); // Done
-            System.out.println("13. Accept Appointment requests"); // Done
-            System.out.println("14. Decline Appointment requests"); // Done
-            System.out.println("15. Record Appointment Outcome"); // Done
-            System.out.println("16. Logout");
+            System.out.println("10. Edit patient's past medical records"); // Done
+            System.out.println("11. Set availability for Appointment"); // Done
+            System.out.println("12. Cancel availability for Appointment"); // Done
+            System.out.println("13. View Appointment requests"); // Done
+            System.out.println("14. Accept Appointment requests"); // Done
+            System.out.println("15. Decline Appointment requests"); // Done
+            System.out.println("16. Record Appointment Outcome"); // Done
+            System.out.println("17. Logout");
             int choice = sc.nextInt();
             sc.nextLine();
             String patientId;
@@ -80,7 +81,9 @@ public class DoctorMenu {
                     diagnosis = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter prescription: ");
                     prescription = sc.nextLine();
-                    setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
+                    System.out.println("Enter current treatment plan: ");
+                    String treatmentPlan = sc.nextLine();
+                    setPatientMedicalrecord(patientId, patientName, diagnosis, prescription, treatmentPlan);
                     break;
 
                 case 4:
@@ -149,31 +152,28 @@ public class DoctorMenu {
                     String consultationNotes = sc.nextLine();
                     editConsultationNotes(patientId, patientName, loggedInDoctor.getName(), date, time, consultationNotes);
                     break;
-
+                
                 case 10:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextLine().trim().toLowerCase();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine().trim().toLowerCase();
+                    editOldMedicalRecord(patientId, patientName);
+                    break;
+                case 11:
                     date = getDateFromUser();
                     time = getTimeFromUser();
                     setAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
                     break;
 
-                case 11:
+                case 12:
                     date = getDateFromUser();
                     time = getTimeFromUser();
                     cancelAvailability(loggedInDoctor.getStaffId(),loggedInDoctor.getName(),date,time);
                     break;
 
-                case 12: // View Appointment requests
+                case 13: // View Appointment requests
                     viewAppointmentRequests(loggedInDoctor.getName());
-                    break;
-
-                case 13:
-                    System.out.println("Enter patient ID: ");
-                    patientId = sc.nextLine().trim().toLowerCase();
-                    System.out.println("Enter patient name: ");
-                    patientName = sc.nextLine().trim().toLowerCase();
-                    date = getDateFromUser();
-                    time = getTimeFromUser();
-                    acceptAppointment(patientId, patientName, loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
                     break;
 
                 case 14:
@@ -183,10 +183,20 @@ public class DoctorMenu {
                     patientName = sc.nextLine().trim().toLowerCase();
                     date = getDateFromUser();
                     time = getTimeFromUser();
+                    acceptAppointment(patientId, patientName, loggedInDoctor.getStaffId(), loggedInDoctor.getName(), date, time);
+                    break;
+
+                case 15:
+                    System.out.println("Enter patient ID: ");
+                    patientId = sc.nextLine().trim().toLowerCase();
+                    System.out.println("Enter patient name: ");
+                    patientName = sc.nextLine().trim().toLowerCase();
+                    date = getDateFromUser();
+                    time = getTimeFromUser();
                     rejectAppointment(patientId, patientName,loggedInDoctor.getName(), date, time);
                     break;
 
-                case 15:  // New case for recording appointment outcome
+                case 16:  // New case for recording appointment outcome
                     System.out.println("Enter patient ID: ");
                     patientId = sc.nextLine().trim().toLowerCase();
                     System.out.println("Enter patient name: ");
@@ -215,7 +225,7 @@ public class DoctorMenu {
                     }
                     recordAppointmentOutcomeRecords(patientId, patientName, loggedInDoctor.getName(), date, time, service, prescription, consultationNotes, prescriptionStatus);
                     break;
-                case 16:
+                case 17:
                     System.out.println("Logging out...");
                     return;
                 default:
@@ -229,10 +239,10 @@ public class DoctorMenu {
         medicalRecordManagement.viewPatientMedicalRecord(patientId, patientName);
     }
 
-    // To set the patient's medical record, the doctor must provide the patient's ID, name, diagnosis, and prescription.
+    // To set the patient's medical record, the doctor must provide the patient's ID, name, diagnosis, and prescription and treatment.
     // This is to be done after every consultation.
-    public void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription) {
-        medicalRecordManagement.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription);
+    public void setPatientMedicalrecord(String patientId, String patientName, String diagnosis, String prescription, String treatmentPlan) {
+        medicalRecordManagement.setPatientMedicalrecord(patientId, patientName, diagnosis, prescription, treatmentPlan);
     }
 
     // Consider adding doctorId to extract personal schedule too.
@@ -270,6 +280,10 @@ public class DoctorMenu {
 
     public void recordAppointmentOutcomeRecords(String patientId, String patientName, String doctorName, String date, String time, String service, String prescription, String consultationNotes, Status prescriptionStatus) {
         appointmentManagement.recordAppointmentOutcomeRecords(patientId, patientName, doctorName, date, time, service, prescription, consultationNotes, prescriptionStatus);
+    }
+
+    public void editOldMedicalRecord(String patientId, String patientName) {
+        medicalRecordManagement.setOldPatientRecords(patientId, patientName);
     }
 
     public void addTreatmentPlan(String patientId, String patientName, String treatmentPlan) {
