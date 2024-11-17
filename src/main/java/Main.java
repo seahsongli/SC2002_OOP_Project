@@ -98,7 +98,7 @@ public class Main
             String staffId = ((String) data[2]).trim().toLowerCase();
             String name = ((String) data[3]).trim().toLowerCase();
             String role = (String) data[4];
-            String gender = (String) data[5];
+            String gender = ((String) data[5]).trim().toLowerCase();
             int age = (data[6] instanceof Double) ? ((Double) data[6]).intValue() : Integer.parseInt(data[6].toString());
 
             if (!Roles.ALLOWED_ROLES.contains(role)) 
@@ -139,7 +139,7 @@ public class Main
             String patientId = ((String) data[2]).trim().toLowerCase();
             String name = ((String) data[3]).trim().toLowerCase();
             String dob = (String) data[4];
-            String gender = (String) data[5];
+            String gender = ((String) data[5]).trim().toLowerCase();
             String bloodGroup = (String) data[6];
             String email = (String) data[7];
             String contactNumber = String.valueOf((long) Double.parseDouble(data[8].toString()));
